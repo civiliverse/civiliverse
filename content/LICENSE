@@ -1,0 +1,11 @@
+Civiliverse content (everything under content/ and the project-authored parts
+of assets/) is licensed under the Creative Commons Attribution 4.0
+International License (CC BY 4.0), unless a file states otherwise.
+
+You should have received attribution requirements with this work. To view a
+copy of this license, visit https://creativecommons.org/licenses/by/4.0/
+
+Third-party images and icons keep their original licenses, recorded per file
+in the accompanying attribution metadata (see the data pipeline's attribution
+outputs). Code in this repository is licensed separately under MIT (see the
+repository root LICENSE).
