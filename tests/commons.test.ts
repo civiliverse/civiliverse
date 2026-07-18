@@ -14,6 +14,8 @@ describe("Wikimedia Commons tooling", () => {
     expect(normalizeCommonsLicense("CC BY-SA 4.0")).toBe("CC BY-SA 4.0");
     expect(normalizeCommonsLicense("Creative Commons Attribution 3.0")).toBe("CC BY 3.0");
     expect(normalizeCommonsLicense("Public domain")).toBe("Public Domain");
+    expect(normalizeCommonsLicense("PD-old")).toBe("Public Domain");
+    expect(normalizeCommonsLicense("CC-BY-3.0")).toBe("CC BY 3.0");
     expect(normalizeCommonsLicense("CC BY-NC 4.0")).toBeUndefined();
     expect(normalizeCommonsLicense("All rights reserved")).toBeUndefined();
   });

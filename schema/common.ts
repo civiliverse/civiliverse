@@ -1,8 +1,21 @@
 import { z } from "zod";
 
-import { IMAGE_LICENSES } from "./constants.js";
+import { ICON_SOURCES, ICON_STATUSES, IMAGE_LICENSES } from "./constants.js";
 
 export const nonBlankStringSchema = z.string().trim().min(1, "must not be blank");
+
+export const kebabIdSchema = z
+  .string()
+  .min(2)
+  .max(100)
+  .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "use a lowercase kebab-case id");
+
+export const fullIconIdSchema = z
+  .string()
+  .regex(
+    /^[a-z0-9]+(?:-[a-z0-9]+)*\/[a-z0-9]+(?:-[a-z0-9]+)*$/,
+    "use the full lowercase `author/slug` icon id",
+  );
 
 export const bilingualTextSchema = z
   .object({
@@ -31,9 +44,8 @@ export const historicalEraSchema = z
 export const referenceSchema = z
   .object({
     title: nonBlankStringSchema,
-    url: z.string().url(),
+    url: z.string().url().optional(),
     author: nonBlankStringSchema.optional(),
-    accessed: z.string().date().optional(),
   })
   .strict();
 
@@ -41,14 +53,11 @@ export const imageLicenseSchema = z.enum(IMAGE_LICENSES);
 
 export const iconSchema = z
   .object({
-    source: nonBlankStringSchema,
-    id: z.string().regex(
-      /^[a-z0-9]+(?:-[a-z0-9]+)*(?:\/[a-z0-9]+(?:-[a-z0-9]+)*)?$/,
-      "use a lowercase source-local icon id",
-    ),
+    source: z.enum(ICON_SOURCES),
+    id: fullIconIdSchema.optional(),
     license: imageLicenseSchema,
-    creator: nonBlankStringSchema.optional(),
-    source_url: z.string().url().optional(),
+    status: z.enum(ICON_STATUSES),
+    fallback: fullIconIdSchema.optional(),
   })
   .strict()
   .superRefine((icon, context) => {
@@ -59,11 +68,11 @@ export const iconSchema = z
         message: "game-icons assets must use the CC BY 3.0 license",
       });
     }
-    if (icon.source === "game-icons" && !icon.id.includes("/")) {
+    if (icon.status !== "needs-ai" && !icon.id) {
       context.addIssue({
         code: z.ZodIssueCode.custom,
         path: ["id"],
-        message: "game-icons ids must include the author directory, for example `lorc/gear-hammer`",
+        message: "id is required unless icon status is needs-ai",
       });
     }
   });

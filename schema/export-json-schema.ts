@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 
 import { zodToJsonSchema } from "zod-to-json-schema";
 
+import { contextSchema } from "./context.js";
 import { edgeFileSchema, edgeSchema } from "./edge.js";
 import { nodeSchema } from "./node.js";
 
@@ -14,6 +15,7 @@ const schemas = [
   ["node.schema.json", nodeSchema, "CiviliverseNode"],
   ["edge.schema.json", edgeSchema, "CiviliverseEdge"],
   ["edge-file.schema.json", edgeFileSchema, "CiviliverseEdgeFile"],
+  ["context.schema.json", contextSchema, "CiviliverseContext"],
 ] as const;
 
 await mkdir(outputDirectory, { recursive: true });

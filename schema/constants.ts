@@ -16,24 +16,41 @@ export const EDGE_TYPES = [
 ] as const;
 export type EdgeType = (typeof EDGE_TYPES)[number];
 
-/**
- * PROVISIONAL: the brief fixes the count at 11 but did not include the labels.
- * Keep this list centralized so the coordinator can freeze it in one edit.
- */
 export const CULTURES = [
-  "east_asia",
-  "south_asia",
-  "southeast_asia",
-  "central_asia",
-  "west_asia_north_africa",
-  "europe",
-  "sub_saharan_africa",
-  "north_america",
-  "latin_america_caribbean",
-  "oceania",
-  "global_cross_cultural",
+  "sinic",
+  "indic",
+  "islamic",
+  "western",
+  "greco-roman",
+  "ancient-near-east",
+  "americas",
+  "africa",
+  "steppe",
+  "sea-oceania",
+  "trans",
 ] as const;
 export type Culture = (typeof CULTURES)[number];
+
+export const CULTURE_LABELS: Readonly<Record<Culture, { readonly zh: string; readonly en: string }>> = {
+  sinic: { zh: "中华", en: "Sinic" },
+  indic: { zh: "印度—南亚", en: "Indic" },
+  islamic: { zh: "伊斯兰世界", en: "Islamic" },
+  western: { zh: "欧洲—西方", en: "Western" },
+  "greco-roman": { zh: "希腊—罗马", en: "Greco-Roman" },
+  "ancient-near-east": { zh: "古代近东", en: "Ancient Near East" },
+  americas: { zh: "美洲原住民", en: "Americas" },
+  africa: { zh: "撒哈拉以南非洲", en: "Africa" },
+  steppe: { zh: "中亚—草原", en: "Steppe" },
+  "sea-oceania": { zh: "东南亚—大洋洲", en: "SE Asia & Oceania" },
+  trans: { zh: "跨文明", en: "Transcultural" },
+};
+
+export const NODE_TIERS = ["major", "minor"] as const;
+export const NODE_STATUSES = ["draft", "ai-reviewed", "editor-approved"] as const;
+export const ICON_SOURCES = ["game-icons", "ai", "custom"] as const;
+export const ICON_STATUSES = ["final", "needs-ai", "tentative"] as const;
+export const CONFIDENCE_LEVELS = ["high", "medium", "low"] as const;
+export const DISASTER_SUBTYPES = ["env", "famine", "accident"] as const;
 
 export const IMAGE_LICENSES = [
   "Public Domain",
@@ -59,35 +76,30 @@ export interface EndpointRule {
 
 const all = NODE_TYPES;
 
-/**
- * PROVISIONAL except for `parallels` being undirected and `causes` targeting a
- * disaster. The table is deliberately data, not validator control flow, so a
- * frozen coordinator decision is straightforward to review and replace.
- */
 export const ENDPOINT_RULES: Readonly<Record<EdgeType, EndpointRule>> = {
   enables: {
-    source: ["tech", "idea", "person"],
+    source: ["tech", "idea", "person", "wonder"],
     target: ["tech", "idea", "wonder"],
     directed: true,
   },
   derives: {
-    source: ["tech", "idea"],
-    target: ["tech", "idea"],
+    source: ["tech", "idea", "wonder"],
+    target: ["tech", "idea", "wonder"],
     directed: true,
   },
   applies: {
-    source: ["tech", "idea"],
+    source: ["idea"],
     target: ["tech", "wonder"],
     directed: true,
   },
   informs: {
-    source: all,
-    target: ["tech", "idea", "person"],
+    source: ["tech", "wonder"],
+    target: ["idea"],
     directed: true,
   },
   inspires: {
     source: all,
-    target: ["tech", "idea", "person", "wonder"],
+    target: ["idea", "person", "wonder"],
     directed: true,
   },
   contributed: {
@@ -97,11 +109,11 @@ export const ENDPOINT_RULES: Readonly<Record<EdgeType, EndpointRule>> = {
   },
   patronized: {
     source: ["person"],
-    target: ["person", "tech", "wonder"],
+    target: ["person", "tech", "idea", "wonder"],
     directed: true,
   },
   parallels: { source: all, target: all, directed: false },
-  causes: { source: all, target: ["disaster"], directed: true },
+  causes: { source: ["tech", "idea", "wonder"], target: ["disaster"], directed: true },
 };
 
 export function isEndpointCombinationAllowed(

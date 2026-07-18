@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "domains": [
+    { "slug": "information-communication", "zh": "信息与传播", "en": "Information & Communication" },
+    { "slug": "math-computing", "zh": "数学与计算", "en": "Mathematics & Computing" },
+    { "slug": "science-method", "zh": "自然哲学与科学方法", "en": "Natural Philosophy & Scientific Method" },
+    { "slug": "astronomy-navigation", "zh": "天文·地理·航海", "en": "Astronomy, Geography & Navigation" },
+    { "slug": "medicine-life", "zh": "医学与生命", "en": "Medicine & Life Sciences" },
+    { "slug": "agriculture-food", "zh": "农业与食物", "en": "Agriculture & Food" },
+    { "slug": "energy-power", "zh": "能量与动力", "en": "Energy & Power" },
+    { "slug": "materials-chemistry", "zh": "材料·化学·制造", "en": "Materials, Chemistry & Manufacturing" },
+    { "slug": "construction-civil", "zh": "建筑与土木工程", "en": "Architecture & Civil Engineering" },
+    { "slug": "transport", "zh": "交通与运输", "en": "Transport" },
+    { "slug": "military", "zh": "军事与武器", "en": "Military & Weapons" },
+    { "slug": "economy-governance", "zh": "经济·制度·治理", "en": "Economy, Institutions & Governance" }
+  ]
+}

@@ -10,14 +10,14 @@ pnpm check
 `pnpm check` runs static type checking, all tests, JSON Schema export, and the
 repository validator. CI runs the same quality gate on every pull request.
 
-## Validate nodes and edges
+## Validate nodes, edges, and contexts
 
-The default locations are `content/nodes/**/*.md` and
-`data/edges/**/*.{yaml,yml}`.
+The default locations are `content/nodes/**/*.md`, `content/edges/**/*.{yaml,yml}`,
+and `content/contexts/**/*.{yaml,yml}`.
 
 ```console
 pnpm start validate
-pnpm start validate content/nodes data/edges
+pnpm start validate content/nodes content/edges content/contexts
 pnpm start validate --format json
 ```
 
@@ -41,12 +41,19 @@ summary:
 era:
   start_year: 1440
   circa: true
-culture: europe
+culture: western
+tier: major
+domains:
+  - information-communication
 icon:
   source: game-icons
   id: lorc/book-cover
   license: CC BY 3.0
+  status: final
 images: []
+refs:
+  - title: A history of printing
+status: draft
 ---
 ```
 
@@ -62,6 +69,42 @@ note:
   zh: 活字排版使机械化的重复印刷成为可能。
   en: Movable type made mechanized repeat printing possible.
 disputed: false
+```
+
+Context file:
+
+```yaml
+schema_version: 1
+id: song-dynasty
+title:
+  zh: 宋朝
+  en: Song dynasty
+culture: sinic
+era:
+  start_year: 960
+  end_year: 1279
+parent: imperial-china
+summary:
+  zh: 造纸、印刷与城市文化高度发展的时代背景。
+  en: A context of intensive growth in papermaking, printing, and urban culture.
+```
+
+The validator checks context ids, parent references, eras, cultures, node file
+locations, reversed duplicates of undirected `parallels` edges, the controlled
+12-domain slug list, and bilingual terminology. Strict label mismatches are
+errors; preferred-name mismatches are warnings for content review.
+
+The machine-readable vocabulary files are `schema/data/domains.json` and
+`schema/data/glossary.json`. They are the single source of truth; updates must
+arrive through a coordinated content-review PR.
+
+## Normalize legacy licenses
+
+Strict schemas accept canonical license strings only. For one-time migrations:
+
+```console
+pnpm start licenses aliases
+pnpm start licenses normalize PD-old CC-BY-3.0
 ```
 
 ## Game Icons

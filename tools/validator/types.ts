@@ -1,4 +1,8 @@
-import type { CiviliverseEdge, CiviliverseNode } from "../../schema/index.js";
+import type {
+  CiviliverseContext,
+  CiviliverseEdge,
+  CiviliverseNode,
+} from "../../schema/index.js";
 
 export type DiagnosticSeverity = "error" | "warning";
 
@@ -28,9 +32,16 @@ export interface LoadedEdge {
   locate(path: Array<string | number>): SourcePosition;
 }
 
+export interface LoadedContext {
+  value: CiviliverseContext;
+  file: string;
+  locate(path: Array<string | number>): SourcePosition;
+}
+
 export interface ValidationResult {
   diagnostics: Diagnostic[];
   nodes: LoadedNode[];
   edges: LoadedEdge[];
+  contexts: LoadedContext[];
   filesChecked: number;
 }
