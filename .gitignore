@@ -141,3 +141,10 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+# Data-pipeline build and caches
+node_modules/
+dist/
+coverage/
+.cache/
+reports/
+schema/generated/*.schema.json
