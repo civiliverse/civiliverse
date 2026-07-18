@@ -1,0 +1,29 @@
+name: Web build
+
+on:
+  pull_request:
+    paths: ["web/**", "pipeline/**", "pnpm-workspace.yaml", "pnpm-lock.yaml"]
+  push:
+    branches: [main]
+    paths: ["web/**", "pipeline/**", "pnpm-workspace.yaml", "pnpm-lock.yaml"]
+
+permissions:
+  contents: read
+
+jobs:
+  build-web:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.9.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: node pipeline/bake.mjs --check
+      - run: node pipeline/palette-check.mjs
+      - run: pnpm --filter @civiliverse/web build

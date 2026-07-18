@@ -1,0 +1,275 @@
+{
+ "meta": {
+  "slice": "knowledge-replication",
+  "seed": 20260717,
+  "ticks": 400,
+  "generator": "bake v1"
+ },
+ "positions": {
+  "disaster/alexandria-fires": [
+   205.75,
+   -34.37,
+   -79.64
+  ],
+  "disaster/burning-books": [
+   181.75,
+   -29.41,
+   -96.94
+  ],
+  "disaster/literary-inquisition": [
+   564,
+   -30.16,
+   -34.05
+  ],
+  "disaster/nazi-book-burning": [
+   744.13,
+   -32.55,
+   -84.88
+  ],
+  "disaster/radio-genocide": [
+   837,
+   21.56,
+   81.13
+  ],
+  "idea/axiomatic-method": [
+   169.09,
+   53.33,
+   14.72
+  ],
+  "idea/censorship-index": [
+   523.6,
+   -21.21,
+   -29.63
+  ],
+  "idea/confucian-canon": [
+   192.95,
+   -21.55,
+   -27.29
+  ],
+  "idea/copyright": [
+   584,
+   -19.93,
+   -17.13
+  ],
+  "idea/hypertext": [
+   755.33,
+   40,
+   46.94
+  ],
+  "idea/information-theory": [
+   758.13,
+   66.5,
+   33.16
+  ],
+  "idea/manuscript-culture": [
+   270.91,
+   -1.2,
+   86.27
+  ],
+  "idea/mass-literacy": [
+   605.2,
+   -6.1,
+   -52.65
+  ],
+  "idea/printing-revolution": [
+   810.75,
+   -59.42,
+   -15.78
+  ],
+  "idea/reformation": [
+   506.8,
+   -49.92,
+   -12.59
+  ],
+  "idea/republic-of-letters": [
+   560,
+   -18.12,
+   -54.43
+  ],
+  "idea/translation-movement": [
+   346,
+   -9.99,
+   -86.1
+  ],
+  "person/al-mamun": [
+   337.2,
+   -43.74,
+   -95.04
+  ],
+  "person/alexander": [
+   160.95,
+   -13.04,
+   -82.83
+  ],
+  "person/berners-lee": [
+   768.75,
+   58.29,
+   66.57
+  ],
+  "person/bi-sheng": [
+   378,
+   19.75,
+   75.92
+  ],
+  "person/cai-lun": [
+   221.89,
+   16.62,
+   102.57
+  ],
+  "person/eisenstein": [
+   734.8,
+   -74.6,
+   -39.09
+  ],
+  "person/euclid": [
+   165.45,
+   90.67,
+   28.87
+  ],
+  "person/gutenberg": [
+   460,
+   -9.03,
+   98.93
+  ],
+  "person/ptolemy-i": [
+   159.35,
+   -37.72,
+   -99.79
+  ],
+  "person/ptolemy-ii": [
+   167.93,
+   -41.77,
+   -77.75
+  ],
+  "tech/alphabet": [
+   114.33,
+   12.38,
+   71.35
+  ],
+  "tech/clay-movable-type": [
+   389,
+   -6.46,
+   98.01
+  ],
+  "tech/codex": [
+   227.27,
+   -12.86,
+   104.06
+  ],
+  "tech/computer": [
+   756.27,
+   3.87,
+   91.29
+  ],
+  "tech/cuneiform": [
+   14,
+   -3.59,
+   91.09
+  ],
+  "tech/gutenberg-press": [
+   480,
+   -6.08,
+   66.8
+  ],
+  "tech/internet": [
+   793.25,
+   9.32,
+   84.08
+  ],
+  "tech/korean-metal-type": [
+   426.8,
+   -7.15,
+   99.53
+  ],
+  "tech/oracle-bone": [
+   105,
+   -14.75,
+   93.1
+  ],
+  "tech/paper-money": [
+   384.6,
+   -11.79,
+   68.82
+  ],
+  "tech/papermaking": [
+   228,
+   -5.64,
+   74.95
+  ],
+  "tech/papyrus": [
+   28,
+   -6.63,
+   46.4
+  ],
+  "tech/parchment": [
+   183.64,
+   -1.02,
+   86.66
+  ],
+  "tech/radio": [
+   732,
+   11.57,
+   75.42
+  ],
+  "tech/rotary-press": [
+   660.13,
+   -7.63,
+   69.01
+  ],
+  "tech/samarkand-paper": [
+   330.2,
+   -7.15,
+   50.76
+  ],
+  "tech/telegraph": [
+   654.53,
+   21.31,
+   74.58
+  ],
+  "tech/wangzhen-typecase": [
+   439.6,
+   12.48,
+   94.36
+  ],
+  "tech/woodblock": [
+   320,
+   -4.95,
+   78.89
+  ],
+  "tech/www": [
+   828.25,
+   -12.09,
+   90.46
+  ],
+  "wonder/encyclopedie": [
+   600.4,
+   -35.49,
+   -49.03
+  ],
+  "wonder/house-of-wisdom": [
+   346,
+   -27.07,
+   -54.17
+  ],
+  "wonder/library-alexandria": [
+   169.82,
+   -18.42,
+   -48.35
+  ],
+  "wonder/tripitaka-koreana": [
+   430.2,
+   -0.72,
+   76.66
+  ],
+  "wonder/wikipedia": [
+   849.25,
+   -12.22,
+   42.5
+  ],
+  "wonder/yongle-dadian": [
+   463.2,
+   -32.54,
+   -79.05
+  ]
+ }
+}

@@ -148,3 +148,6 @@ coverage/
 .cache/
 reports/
 schema/generated/*.schema.json
+
+# web build output
+web/dist/
