@@ -179,9 +179,10 @@ describe("machine-readable controlled vocabularies", () => {
 
   it("loads every frozen strict and check-level glossary entry", () => {
     expect(GLOSSARY.version).toBe(1);
-    expect(GLOSSARY.strict).toHaveLength(17);
+    expect(GLOSSARY.strict).toHaveLength(18);
     expect(GLOSSARY.check).toHaveLength(39);
     expect(GLOSSARY.strict).toContainEqual({ zh: "引发", en: "causes" });
+    expect(GLOSSARY.strict).toContainEqual({ zh: "管制", en: "regulates" });
     expect(GLOSSARY.check).toContainEqual({
       zh: "活字印刷",
       en: "movable-type printing",
@@ -226,7 +227,26 @@ describe("frozen endpoint table", () => {
         target: ["disaster"],
         directed: true,
       },
+      regulates: {
+        source: ["idea"],
+        target: ["tech", "wonder"],
+        directed: true,
+      },
     });
+  });
+
+  it("accepts atrocity and rejects values outside the r1 disaster subtype enum", () => {
+    const accepted = validNode("atrocity-example", "disaster");
+    accepted.subtype = "atrocity";
+    expect(nodeSchema.safeParse(accepted).success).toBe(true);
+
+    const rejected = structuredClone(accepted);
+    rejected.subtype = "war-crime";
+    const result = nodeSchema.safeParse(rejected);
+    expect(result.success).toBe(false);
+    if (!result.success) {
+      expect(result.error.issues.some((issue) => issue.path.join(".") === "subtype")).toBe(true);
+    }
   });
 });
 
@@ -328,6 +348,35 @@ describe("context and repository validation", () => {
       );
       expect(strict).toMatchObject({ severity: "error", path: ["title", "en"] });
       expect(check).toMatchObject({ severity: "warning", path: ["summary", "en"] });
+    } finally {
+      await rm(root, { recursive: true, force: true });
+    }
+  });
+
+  it("rejects regulates unless the endpoints are idea to tech or wonder", async () => {
+    const root = await mkdtemp(resolve(tmpdir(), "civiliverse-regulates-"));
+    try {
+      await writeNode(root, "source-tech", "tech");
+      await writeNode(root, "target-tech", "tech");
+      const edgesDirectory = resolve(root, "content/edges");
+      await mkdir(edgesDirectory, { recursive: true });
+      await writeFile(
+        resolve(edgesDirectory, "illegal-regulates.yaml"),
+        stringifyYaml({
+          schema_version: 1,
+          source: "source-tech",
+          target: "target-tech",
+          type: "regulates",
+          importance: "major",
+          note: { zh: "技术不作管制边的源。", en: "A technology may not source regulates." },
+        }),
+        "utf8",
+      );
+
+      const result = await validateRepository({ cwd: root });
+      expect(result.diagnostics).toContainEqual(
+        expect.objectContaining({ code: "graph.illegal-endpoints", path: ["type"] }),
+      );
     } finally {
       await rm(root, { recursive: true, force: true });
     }

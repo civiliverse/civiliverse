@@ -8,7 +8,7 @@ artifacts and are not committed.
 
 - Node types: `tech`, `idea`, `person`, `wonder`, `disaster`.
 - Edge types: `enables`, `derives`, `applies`, `informs`, `inspires`,
-  `contributed`, `patronized`, `parallels`, `causes`.
+  `contributed`, `patronized`, `parallels`, `causes`, `regulates`.
 - Node files live at `content/nodes/{type}/{id}.md`; frontmatter ids are bare
   kebab-case and globally unique.
 - Cultures are the 11 slugs and bilingual labels in `constants.ts`.
@@ -18,6 +18,8 @@ artifacts and are not committed.
 - `parallels` is undirected, and A-B duplicates B-A.
 - `causes` accepts only `tech`, `idea`, or `wonder` as its source and requires a
   `disaster` target.
+- `regulates` accepts only an `idea` source and a `tech` or `wonder` target.
+- Disaster subtypes are `env`, `famine`, `accident`, and `atrocity`.
 - Edge importance is `major` or `minor`.
 - Edges live at `content/edges/*.yaml`.
 - Historical contexts live at `content/contexts/*.yaml`; parent references are

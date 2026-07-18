@@ -13,6 +13,7 @@ export const EDGE_TYPES = [
   "patronized",
   "parallels",
   "causes",
+  "regulates",
 ] as const;
 export type EdgeType = (typeof EDGE_TYPES)[number];
 
@@ -50,7 +51,7 @@ export const NODE_STATUSES = ["draft", "ai-reviewed", "editor-approved"] as cons
 export const ICON_SOURCES = ["game-icons", "ai", "custom"] as const;
 export const ICON_STATUSES = ["final", "needs-ai", "tentative"] as const;
 export const CONFIDENCE_LEVELS = ["high", "medium", "low"] as const;
-export const DISASTER_SUBTYPES = ["env", "famine", "accident"] as const;
+export const DISASTER_SUBTYPES = ["env", "famine", "accident", "atrocity"] as const;
 
 export const IMAGE_LICENSES = [
   "Public Domain",
@@ -114,6 +115,7 @@ export const ENDPOINT_RULES: Readonly<Record<EdgeType, EndpointRule>> = {
   },
   parallels: { source: all, target: all, directed: false },
   causes: { source: ["tech", "idea", "wonder"], target: ["disaster"], directed: true },
+  regulates: { source: ["idea"], target: ["tech", "wonder"], directed: true },
 };
 
 export function isEndpointCombinationAllowed(
