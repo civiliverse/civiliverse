@@ -1,0 +1,16 @@
+{
+  "name": "@civiliverse/pipeline",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Civiliverse build-time pipeline: deterministic 3D layout bake and visual-spec checks.",
+  "license": "MIT",
+  "scripts": {
+    "bake": "node bake.mjs",
+    "bake:check": "node bake.mjs --check",
+    "palette": "node palette-check.mjs"
+  },
+  "dependencies": {
+    "d3-force-3d": "^3.0.6"
+  }
+}

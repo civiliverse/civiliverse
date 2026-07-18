@@ -1,0 +1,1756 @@
+{
+ "meta": {
+  "slice": "knowledge-replication",
+  "title": {
+   "zh": "知识的复制与传播",
+   "en": "The Replication and Spread of Knowledge"
+  },
+  "version": "p0-v1",
+  "status": "draft — 演示样稿，节点与边均待总编辑审定",
+  "seed": 20260717,
+  "ticks": 400,
+  "breaks": [
+   [
+    -3500,
+    0
+   ],
+   [
+    -500,
+    140
+   ],
+   [
+    600,
+    300
+   ],
+   [
+    1400,
+    460
+   ],
+   [
+    1800,
+    620
+   ],
+   [
+    1950,
+    760
+   ],
+   [
+    2030,
+    900
+   ]
+  ]
+ },
+ "nodes": [
+  {
+   "id": "tech/cuneiform",
+   "type": "tech",
+   "title": {
+    "zh": "楔形文字",
+    "en": "Cuneiform"
+   },
+   "era": {
+    "from": -3200,
+    "circa": true
+   },
+   "culture": "ancient-near-east",
+   "domains": [
+    "信息与传播"
+   ],
+   "tier": "major",
+   "summary": {
+    "zh": "两河泥板上的最早成体系书写",
+    "en": "The earliest systematic writing, pressed into Mesopotamian clay."
+   }
+  },
+  {
+   "id": "tech/papyrus",
+   "type": "tech",
+   "title": {
+    "zh": "莎草纸",
+    "en": "Papyrus"
+   },
+   "era": {
+    "from": -2900,
+    "circa": true
+   },
+   "culture": "ancient-near-east",
+   "domains": [
+    "信息与传播"
+   ],
+   "tier": "minor",
+   "summary": {
+    "zh": "尼罗河的书写材料，古典地中海的知识载体",
+    "en": "Egypt’s writing surface, carrier of Mediterranean learning."
+   }
+  },
+  {
+   "id": "tech/oracle-bone",
+   "type": "tech",
+   "title": {
+    "zh": "甲骨文",
+    "en": "Oracle Bone Script"
+   },
+   "era": {
+    "from": -1250,
+    "circa": true
+   },
+   "culture": "sinic",
+   "domains": [
+    "信息与传播"
+   ],
+   "tier": "major",
+   "summary": {
+    "zh": "殷商占卜刻辞，汉字谱系的起点",
+    "en": "Shang divination inscriptions, the root of the Chinese script."
+   }
+  },
+  {
+   "id": "tech/alphabet",
+   "type": "tech",
+   "title": {
+    "zh": "字母文字",
+    "en": "The Alphabet"
+   },
+   "era": {
+    "from": -1050,
+    "circa": true
+   },
+   "culture": "ancient-near-east",
+   "domains": [
+    "信息与传播"
+   ],
+   "tier": "major",
+   "summary": {
+    "zh": "腓尼基商路上的书写简化革命",
+    "en": "A radical simplification of writing, spread along Phoenician trade routes."
+   }
+  },
+  {
+   "id": "tech/parchment",
+   "type": "tech",
+   "title": {
+    "zh": "羊皮纸",
+    "en": "Parchment"
+   },
+   "era": {
+    "from": -200,
+    "circa": true
+   },
+   "culture": "greco-roman",
+   "domains": [
+    "信息与传播"
+   ],
+   "tier": "minor",
+   "summary": {
+    "zh": "帕加马的替代材料，耐久而昂贵",
+    "en": "Pergamon’s durable, costly alternative to papyrus."
+   }
+  },
+  {
+   "id": "tech/codex",
+   "type": "tech",
+   "title": {
+    "zh": "册子本",
+    "en": "The Codex"
+   },
+   "era": {
+    "from": 100,
+    "circa": true
+   },
+   "culture": "greco-roman",
+   "domains": [
+    "信息与传播"
+   ],
+   "tier": "minor",
+   "summary": {
+    "zh": "从卷轴到翻页：检索方式的革命",
+    "en": "From scroll to page-turning: a revolution in retrieval."
+   }
+  },
+  {
+   "id": "tech/papermaking",
+   "type": "tech",
+   "title": {
+    "zh": "造纸术",
+    "en": "Papermaking"
+   },
+   "era": {
+    "from": 105
+   },
+   "culture": "sinic",
+   "domains": [
+    "信息与传播"
+   ],
+   "tier": "major",
+   "summary": {
+    "zh": "蔡伦改进的廉价书写载体，改变一切复制成本",
+    "en": "Cai Lun’s cheap writing medium reset the cost of every copy."
+   }
+  },
+  {
+   "id": "tech/samarkand-paper",
+   "type": "tech",
+   "title": {
+    "zh": "造纸术西传",
+    "en": "Paper Goes West"
+   },
+   "era": {
+    "from": 751,
+    "circa": true
+   },
+   "culture": "islamic",
+   "domains": [
+    "信息与传播"
+   ],
+   "tier": "minor",
+   "summary": {
+    "zh": "撒马尔罕纸坊：中国工艺进入伊斯兰世界",
+    "en": "Samarkand mills carry a Chinese craft into the Islamic world."
+   }
+  },
+  {
+   "id": "tech/woodblock",
+   "type": "tech",
+   "title": {
+    "zh": "雕版印刷",
+    "en": "Woodblock Printing"
+   },
+   "era": {
+    "from": 700,
+    "circa": true
+   },
+   "culture": "sinic",
+   "domains": [
+    "信息与传播"
+   ],
+   "tier": "major",
+   "summary": {
+    "zh": "整版复制：东亚印刷文明的主干技术",
+    "en": "Whole-page replication, the mainstay of East Asian print culture."
+   }
+  },
+  {
+   "id": "tech/clay-movable-type",
+   "type": "tech",
+   "title": {
+    "zh": "活字印刷（毕昇泥活字）",
+    "en": "Clay Movable Type"
+   },
+   "era": {
+    "from": 1045,
+    "circa": true
+   },
+   "culture": "sinic",
+   "domains": [
+    "信息与传播"
+   ],
+   "tier": "major",
+   "summary": {
+    "zh": "布衣毕昇的活字构想，比古腾堡早四百年",
+    "en": "Bi Sheng’s movable type, four centuries before Gutenberg."
+   }
+  },
+  {
+   "id": "tech/wangzhen-typecase",
+   "type": "tech",
+   "title": {
+    "zh": "转轮排字盘",
+    "en": "Revolving Typecase"
+   },
+   "era": {
+    "from": 1298
+   },
+   "culture": "sinic",
+   "domains": [
+    "信息与传播"
+   ],
+   "tier": "minor",
+   "summary": {
+    "zh": "王祯的木活字与检字工程学",
+    "en": "Wang Zhen’s wooden type and the ergonomics of typesetting."
+   }
+  },
+  {
+   "id": "tech/korean-metal-type",
+   "type": "tech",
+   "title": {
+    "zh": "金属活字（高丽）",
+    "en": "Metal Movable Type (Korea)"
+   },
+   "era": {
+    "from": 1234,
+    "circa": true
+   },
+   "culture": "sinic",
+   "domains": [
+    "信息与传播"
+   ],
+   "tier": "minor",
+   "summary": {
+    "zh": "现存最早金属活字印本诞生于高丽",
+    "en": "The earliest extant metal-type imprints come from Goryeo."
+   }
+  },
+  {
+   "id": "tech/paper-money",
+   "type": "tech",
+   "title": {
+    "zh": "交子与纸币",
+    "en": "Paper Money"
+   },
+   "era": {
+    "from": 1023
+   },
+   "culture": "sinic",
+   "domains": [
+    "信息与传播",
+    "经济"
+   ],
+   "tier": "minor",
+   "summary": {
+    "zh": "印刷技术的金融应用：信用被批量复制",
+    "en": "Printing applied to finance: credit, mass-produced."
+   }
+  },
+  {
+   "id": "tech/gutenberg-press",
+   "type": "tech",
+   "title": {
+    "zh": "古腾堡印刷机",
+    "en": "Gutenberg’s Press"
+   },
+   "era": {
+    "from": 1450,
+    "circa": true
+   },
+   "culture": "western",
+   "domains": [
+    "信息与传播"
+   ],
+   "tier": "major",
+   "summary": {
+    "zh": "金属活字+压印机+油墨：欧洲的复制引擎",
+    "en": "Metal type, press and ink: Europe’s replication engine."
+   }
+  },
+  {
+   "id": "tech/rotary-press",
+   "type": "tech",
+   "title": {
+    "zh": "轮转印刷机",
+    "en": "Rotary Press"
+   },
+   "era": {
+    "from": 1843
+   },
+   "culture": "western",
+   "domains": [
+    "信息与传播"
+   ],
+   "tier": "minor",
+   "summary": {
+    "zh": "蒸汽驱动的报业机器，大众读者的物质前提",
+    "en": "Steam-driven newspaper machinery, precondition of the mass reader."
+   }
+  },
+  {
+   "id": "tech/telegraph",
+   "type": "tech",
+   "title": {
+    "zh": "电报",
+    "en": "The Telegraph"
+   },
+   "era": {
+    "from": 1837
+   },
+   "culture": "western",
+   "domains": [
+    "信息与传播"
+   ],
+   "tier": "major",
+   "summary": {
+    "zh": "信息第一次跑赢了信使",
+    "en": "The first time information outran the messenger."
+   }
+  },
+  {
+   "id": "tech/radio",
+   "type": "tech",
+   "title": {
+    "zh": "无线电广播",
+    "en": "Radio Broadcasting"
+   },
+   "era": {
+    "from": 1920,
+    "circa": true
+   },
+   "culture": "western",
+   "domains": [
+    "信息与传播"
+   ],
+   "tier": "minor",
+   "summary": {
+    "zh": "一点对亿万人的声音媒介",
+    "en": "One voice to millions, instantly."
+   }
+  },
+  {
+   "id": "tech/computer",
+   "type": "tech",
+   "title": {
+    "zh": "电子计算机",
+    "en": "The Electronic Computer"
+   },
+   "era": {
+    "from": 1946
+   },
+   "culture": "western",
+   "domains": [
+    "信息与传播",
+    "计算"
+   ],
+   "tier": "major",
+   "summary": {
+    "zh": "通用符号机器：一切媒介的最终归宿",
+    "en": "The universal symbol machine into which all media collapse."
+   }
+  },
+  {
+   "id": "tech/internet",
+   "type": "tech",
+   "title": {
+    "zh": "互联网",
+    "en": "The Internet"
+   },
+   "era": {
+    "from": 1969
+   },
+   "culture": "western",
+   "domains": [
+    "信息与传播",
+    "计算"
+   ],
+   "tier": "major",
+   "summary": {
+    "zh": "把复制成本推向零的网络",
+    "en": "The network that drove the cost of copying toward zero."
+   }
+  },
+  {
+   "id": "tech/www",
+   "type": "tech",
+   "title": {
+    "zh": "万维网",
+    "en": "The World Wide Web"
+   },
+   "era": {
+    "from": 1989
+   },
+   "culture": "western",
+   "domains": [
+    "信息与传播",
+    "计算"
+   ],
+   "tier": "major",
+   "summary": {
+    "zh": "超文本落地为普世出版系统",
+    "en": "Hypertext realized as a universal publishing system."
+   }
+  },
+  {
+   "id": "idea/axiomatic-method",
+   "type": "idea",
+   "title": {
+    "zh": "公理化方法",
+    "en": "The Axiomatic Method"
+   },
+   "era": {
+    "from": -300,
+    "circa": true
+   },
+   "culture": "greco-roman",
+   "domains": [
+    "数学与逻辑"
+   ],
+   "tier": "major",
+   "summary": {
+    "zh": "《几何原本》确立的演绎知识范式",
+    "en": "The deductive ideal of knowledge, codified in Euclid’s Elements."
+   }
+  },
+  {
+   "id": "idea/confucian-canon",
+   "type": "idea",
+   "title": {
+    "zh": "经学与科举",
+    "en": "Canon & Examinations"
+   },
+   "era": {
+    "from": -136
+   },
+   "culture": "sinic",
+   "domains": [
+    "制度与教育"
+   ],
+   "tier": "minor",
+   "summary": {
+    "zh": "以经典复制为轴心的文治体制",
+    "en": "A polity organized around replicating a canon."
+   }
+  },
+  {
+   "id": "idea/manuscript-culture",
+   "type": "idea",
+   "title": {
+    "zh": "抄本文化",
+    "en": "Manuscript Culture"
+   },
+   "era": {
+    "from": 400,
+    "circa": true
+   },
+   "culture": "western",
+   "domains": [
+    "信息与传播"
+   ],
+   "tier": "minor",
+   "summary": {
+    "zh": "修道院缮写室维系的知识存续",
+    "en": "Knowledge kept alive in the scriptorium."
+   }
+  },
+  {
+   "id": "idea/translation-movement",
+   "type": "idea",
+   "title": {
+    "zh": "百年翻译运动",
+    "en": "The Translation Movement"
+   },
+   "era": {
+    "from": 830,
+    "circa": true
+   },
+   "culture": "islamic",
+   "domains": [
+    "制度与教育"
+   ],
+   "tier": "major",
+   "summary": {
+    "zh": "希腊、波斯、印度学术汇入阿拉伯语世界",
+    "en": "Greek, Persian and Indian learning poured into Arabic."
+   }
+  },
+  {
+   "id": "idea/reformation",
+   "type": "idea",
+   "title": {
+    "zh": "宗教改革",
+    "en": "The Reformation"
+   },
+   "era": {
+    "from": 1517
+   },
+   "culture": "western",
+   "domains": [
+    "宗教与思想"
+   ],
+   "tier": "major",
+   "summary": {
+    "zh": "一场由印刷机放大的神学争论",
+    "en": "A theological quarrel amplified by the press."
+   }
+  },
+  {
+   "id": "idea/censorship-index",
+   "type": "idea",
+   "title": {
+    "zh": "禁书目录",
+    "en": "Index of Forbidden Books"
+   },
+   "era": {
+    "from": 1559
+   },
+   "culture": "western",
+   "domains": [
+    "制度与教育"
+   ],
+   "tier": "minor",
+   "summary": {
+    "zh": "印刷时代的知识管制建制化",
+    "en": "Knowledge control institutionalized for the age of print."
+   }
+  },
+  {
+   "id": "idea/republic-of-letters",
+   "type": "idea",
+   "title": {
+    "zh": "文人共和国",
+    "en": "Republic of Letters"
+   },
+   "era": {
+    "from": 1650,
+    "circa": true
+   },
+   "culture": "western",
+   "domains": [
+    "制度与教育"
+   ],
+   "tier": "minor",
+   "summary": {
+    "zh": "跨国界的书信与出版共同体",
+    "en": "A transnational commonwealth of correspondence and print."
+   }
+  },
+  {
+   "id": "idea/copyright",
+   "type": "idea",
+   "title": {
+    "zh": "版权",
+    "en": "Copyright"
+   },
+   "era": {
+    "from": 1710
+   },
+   "culture": "western",
+   "domains": [
+    "制度与教育",
+    "经济"
+   ],
+   "tier": "minor",
+   "summary": {
+    "zh": "《安妮法令》：复制权成为财产",
+    "en": "The Statute of Anne turns the right to copy into property."
+   }
+  },
+  {
+   "id": "idea/mass-literacy",
+   "type": "idea",
+   "title": {
+    "zh": "义务教育与识字",
+    "en": "Mass Literacy"
+   },
+   "era": {
+    "from": 1763,
+    "circa": true
+   },
+   "culture": "western",
+   "domains": [
+    "制度与教育"
+   ],
+   "tier": "minor",
+   "summary": {
+    "zh": "国家把阅读变成义务",
+    "en": "The state makes reading a duty."
+   }
+  },
+  {
+   "id": "idea/information-theory",
+   "type": "idea",
+   "title": {
+    "zh": "信息论",
+    "en": "Information Theory"
+   },
+   "era": {
+    "from": 1948
+   },
+   "culture": "western",
+   "domains": [
+    "数学与逻辑",
+    "计算"
+   ],
+   "tier": "major",
+   "summary": {
+    "zh": "香农把\"信息\"变成可度量的量",
+    "en": "Shannon makes “information” a measurable quantity."
+   }
+  },
+  {
+   "id": "idea/hypertext",
+   "type": "idea",
+   "title": {
+    "zh": "超文本",
+    "en": "Hypertext"
+   },
+   "era": {
+    "from": 1945
+   },
+   "culture": "western",
+   "domains": [
+    "计算"
+   ],
+   "tier": "minor",
+   "summary": {
+    "zh": "从Memex到Xanadu：链接式知识的构想",
+    "en": "From Memex to Xanadu: knowledge as links."
+   }
+  },
+  {
+   "id": "idea/printing-revolution",
+   "type": "idea",
+   "title": {
+    "zh": "印刷革命论",
+    "en": "The Printing Revolution (thesis)"
+   },
+   "era": {
+    "from": 1979
+   },
+   "culture": "western",
+   "domains": [
+    "史学"
+   ],
+   "tier": "minor",
+   "summary": {
+    "zh": "爱森斯坦：印刷机作为变革动因——本图谱的自我指涉节点",
+    "en": "Eisenstein’s press as an agent of change — this graph’s self-referential node."
+   }
+  },
+  {
+   "id": "person/alexander",
+   "type": "person",
+   "title": {
+    "zh": "亚历山大大帝",
+    "en": "Alexander the Great"
+   },
+   "era": {
+    "from": -356,
+    "to": -323
+   },
+   "culture": "greco-roman",
+   "domains": [
+    "制度与教育"
+   ],
+   "tier": "major",
+   "summary": {
+    "zh": "征服者，也是希腊化知识世界的开启者",
+    "en": "Conqueror, and opener of the Hellenistic world of learning."
+   }
+  },
+  {
+   "id": "person/ptolemy-i",
+   "type": "person",
+   "title": {
+    "zh": "托勒密一世",
+    "en": "Ptolemy I Soter"
+   },
+   "era": {
+    "from": -367,
+    "to": -282
+   },
+   "culture": "greco-roman",
+   "domains": [
+    "制度与教育"
+   ],
+   "tier": "minor",
+   "summary": {
+    "zh": "把知识收藏当作王朝工程的君主",
+    "en": "The king who made collecting knowledge a dynastic project."
+   }
+  },
+  {
+   "id": "person/ptolemy-ii",
+   "type": "person",
+   "title": {
+    "zh": "托勒密二世",
+    "en": "Ptolemy II Philadelphus"
+   },
+   "era": {
+    "from": -308,
+    "to": -246
+   },
+   "culture": "greco-roman",
+   "domains": [
+    "制度与教育"
+   ],
+   "tier": "minor",
+   "summary": {
+    "zh": "图书馆鼎盛期的赞助人",
+    "en": "Patron of the Library at its height."
+   }
+  },
+  {
+   "id": "person/euclid",
+   "type": "person",
+   "title": {
+    "zh": "欧几里得",
+    "en": "Euclid"
+   },
+   "era": {
+    "from": -325,
+    "to": -265,
+    "circa": true
+   },
+   "culture": "greco-roman",
+   "domains": [
+    "数学与逻辑"
+   ],
+   "tier": "major",
+   "summary": {
+    "zh": "把几何编成演绎体系的亚历山大学者",
+    "en": "The Alexandrian who wove geometry into a deductive system."
+   }
+  },
+  {
+   "id": "person/cai-lun",
+   "type": "person",
+   "title": {
+    "zh": "蔡伦",
+    "en": "Cai Lun"
+   },
+   "era": {
+    "from": 63,
+    "to": 121,
+    "circa": true
+   },
+   "culture": "sinic",
+   "domains": [
+    "信息与传播"
+   ],
+   "tier": "major",
+   "summary": {
+    "zh": "东汉宦官，造纸工艺的改进与奏报者",
+    "en": "Han court eunuch who perfected and reported papermaking."
+   }
+  },
+  {
+   "id": "person/al-mamun",
+   "type": "person",
+   "title": {
+    "zh": "马蒙",
+    "en": "Al-Ma’mūn"
+   },
+   "era": {
+    "from": 786,
+    "to": 833
+   },
+   "culture": "islamic",
+   "domains": [
+    "制度与教育"
+   ],
+   "tier": "major",
+   "summary": {
+    "zh": "以国库供养翻译的哈里发",
+    "en": "The caliph who paid for translation from the treasury."
+   }
+  },
+  {
+   "id": "person/bi-sheng",
+   "type": "person",
+   "title": {
+    "zh": "毕昇",
+    "en": "Bi Sheng"
+   },
+   "era": {
+    "from": 990,
+    "to": 1051,
+    "circa": true
+   },
+   "culture": "sinic",
+   "domains": [
+    "信息与传播"
+   ],
+   "tier": "major",
+   "summary": {
+    "zh": "北宋布衣，活字印刷的发明者",
+    "en": "A Song commoner, inventor of movable type."
+   }
+  },
+  {
+   "id": "person/gutenberg",
+   "type": "person",
+   "title": {
+    "zh": "谷腾堡",
+    "en": "Johannes Gutenberg"
+   },
+   "era": {
+    "from": 1400,
+    "to": 1468,
+    "circa": true
+   },
+   "culture": "western",
+   "domains": [
+    "信息与传播"
+   ],
+   "tier": "major",
+   "summary": {
+    "zh": "美因茨金匠，欧洲活字印刷体系的缔造者",
+    "en": "Mainz goldsmith who built Europe’s printing system."
+   }
+  },
+  {
+   "id": "person/eisenstein",
+   "type": "person",
+   "title": {
+    "zh": "伊丽莎白·爱森斯坦",
+    "en": "Elizabeth Eisenstein"
+   },
+   "era": {
+    "from": 1923,
+    "to": 2016
+   },
+   "culture": "western",
+   "domains": [
+    "史学"
+   ],
+   "tier": "minor",
+   "summary": {
+    "zh": "研究印刷革命的书籍史家",
+    "en": "Historian of the printing revolution."
+   }
+  },
+  {
+   "id": "person/berners-lee",
+   "type": "person",
+   "title": {
+    "zh": "蒂姆·伯纳斯-李",
+    "en": "Tim Berners-Lee"
+   },
+   "era": {
+    "from": 1955
+   },
+   "culture": "western",
+   "domains": [
+    "计算"
+   ],
+   "tier": "major",
+   "summary": {
+    "zh": "万维网的发明者，坚持将其免费开放",
+    "en": "Inventor of the Web, who kept it free."
+   }
+  },
+  {
+   "id": "wonder/library-alexandria",
+   "type": "wonder",
+   "title": {
+    "zh": "亚历山大图书馆",
+    "en": "Library of Alexandria"
+   },
+   "era": {
+    "from": -295,
+    "circa": true
+   },
+   "culture": "greco-roman",
+   "domains": [
+    "制度与教育"
+   ],
+   "tier": "major",
+   "summary": {
+    "zh": "托勒密王朝的知识总汇工程",
+    "en": "The Ptolemies’ project to collect everything."
+   }
+  },
+  {
+   "id": "wonder/house-of-wisdom",
+   "type": "wonder",
+   "title": {
+    "zh": "智慧宫",
+    "en": "House of Wisdom"
+   },
+   "era": {
+    "from": 830,
+    "circa": true
+   },
+   "culture": "islamic",
+   "domains": [
+    "制度与教育"
+   ],
+   "tier": "major",
+   "summary": {
+    "zh": "巴格达的翻译院与天文台建制",
+    "en": "Baghdad’s institute of translation and astronomy."
+   }
+  },
+  {
+   "id": "wonder/tripitaka-koreana",
+   "type": "wonder",
+   "title": {
+    "zh": "高丽大藏经",
+    "en": "Tripitaka Koreana"
+   },
+   "era": {
+    "from": 1251
+   },
+   "culture": "sinic",
+   "domains": [
+    "信息与传播",
+    "宗教与思想"
+   ],
+   "tier": "minor",
+   "summary": {
+    "zh": "八万余块经版：雕版时代的国家级复制工程",
+    "en": "80,000+ blocks: a state replication project of the woodblock age."
+   }
+  },
+  {
+   "id": "wonder/yongle-dadian",
+   "type": "wonder",
+   "title": {
+    "zh": "《永乐大典》",
+    "en": "Yongle Encyclopedia"
+   },
+   "era": {
+    "from": 1408
+   },
+   "culture": "sinic",
+   "domains": [
+    "制度与教育"
+   ],
+   "tier": "minor",
+   "summary": {
+    "zh": "明帝国的知识总汇：两万余卷类书",
+    "en": "The Ming empire’s vast compendium of all writing."
+   }
+  },
+  {
+   "id": "wonder/encyclopedie",
+   "type": "wonder",
+   "title": {
+    "zh": "《百科全书》工程",
+    "en": "The Encyclopédie"
+   },
+   "era": {
+    "from": 1751,
+    "to": 1772
+   },
+   "culture": "western",
+   "domains": [
+    "制度与教育",
+    "宗教与思想"
+   ],
+   "tier": "major",
+   "summary": {
+    "zh": "启蒙运动的集体出版奇观",
+    "en": "The Enlightenment’s collective publishing wonder."
+   }
+  },
+  {
+   "id": "wonder/wikipedia",
+   "type": "wonder",
+   "title": {
+    "zh": "维基百科",
+    "en": "Wikipedia"
+   },
+   "era": {
+    "from": 2001
+   },
+   "culture": "trans",
+   "domains": [
+    "信息与传播",
+    "制度与教育"
+   ],
+   "tier": "major",
+   "summary": {
+    "zh": "志愿者共同书写的当代知识奇观",
+    "en": "A contemporary wonder written by volunteers."
+   }
+  },
+  {
+   "id": "disaster/burning-books",
+   "type": "disaster",
+   "title": {
+    "zh": "焚书",
+    "en": "The Burning of Books"
+   },
+   "era": {
+    "from": -213
+   },
+   "culture": "sinic",
+   "domains": [
+    "制度与教育"
+   ],
+   "tier": "minor",
+   "summary": {
+    "zh": "秦政对思想载体的系统清除",
+    "en": "The Qin state’s systematic destruction of texts."
+   }
+  },
+  {
+   "id": "disaster/alexandria-fires",
+   "type": "disaster",
+   "title": {
+    "zh": "图书馆之毁",
+    "en": "Loss of the Great Library"
+   },
+   "era": {
+    "from": -48,
+    "to": 641,
+    "circa": true
+   },
+   "culture": "greco-roman",
+   "domains": [
+    "制度与教育"
+   ],
+   "tier": "major",
+   "summary": {
+    "zh": "战火与衰败中散佚的古代知识总汇",
+    "en": "The ancient world’s archive, lost to war and neglect."
+   }
+  },
+  {
+   "id": "disaster/literary-inquisition",
+   "type": "disaster",
+   "title": {
+    "zh": "文字狱",
+    "en": "The Literary Inquisition"
+   },
+   "era": {
+    "from": 1660,
+    "to": 1788,
+    "circa": true
+   },
+   "culture": "sinic",
+   "domains": [
+    "制度与教育"
+   ],
+   "tier": "minor",
+   "summary": {
+    "zh": "印刷繁荣时代的思想清剿",
+    "en": "Thought-purges in an age of flourishing print."
+   }
+  },
+  {
+   "id": "disaster/nazi-book-burning",
+   "type": "disaster",
+   "title": {
+    "zh": "纳粹焚书",
+    "en": "Nazi Book Burnings"
+   },
+   "era": {
+    "from": 1933
+   },
+   "culture": "western",
+   "domains": [
+    "制度与教育"
+   ],
+   "tier": "minor",
+   "summary": {
+    "zh": "现代国家对书籍的公开火刑",
+    "en": "A modern state’s public execution of books."
+   }
+  },
+  {
+   "id": "disaster/radio-genocide",
+   "type": "disaster",
+   "title": {
+    "zh": "电台与卢旺达大屠杀",
+    "en": "Radio & the Rwandan Genocide"
+   },
+   "era": {
+    "from": 1994
+   },
+   "culture": "africa",
+   "domains": [
+    "信息与传播"
+   ],
+   "tier": "major",
+   "summary": {
+    "zh": "千丘自由电台：大众媒介被用作屠杀的动员机",
+    "en": "RTLM: mass media weaponized to mobilize a genocide."
+   }
+  }
+ ],
+ "edges": [
+  {
+   "from": "tech/cuneiform",
+   "to": "tech/oracle-bone",
+   "type": "parallels",
+   "strength": "major",
+   "note": {
+    "zh": "两河与殷商各自独立发明成体系文字",
+    "en": "Mesopotamia and Shang China each invented systematic writing independently"
+   }
+  },
+  {
+   "from": "tech/papyrus",
+   "to": "wonder/library-alexandria",
+   "type": "enables",
+   "strength": "major",
+   "note": {
+    "zh": "纸草卷轴是馆藏的物质基础",
+    "en": "Papyrus scrolls were the material base of the collection"
+   }
+  },
+  {
+   "from": "tech/alphabet",
+   "to": "idea/axiomatic-method",
+   "type": "enables",
+   "strength": "minor",
+   "note": {
+    "zh": "希腊字母文本传统承载演绎论证",
+    "en": "The Greek alphabetic text tradition carried deductive argument"
+   }
+  },
+  {
+   "from": "tech/alphabet",
+   "to": "tech/gutenberg-press",
+   "type": "enables",
+   "strength": "major",
+   "note": {
+    "zh": "字母文字令活字字库小而经济",
+    "en": "An alphabet keeps the type case small and economical"
+   }
+  },
+  {
+   "from": "tech/papyrus",
+   "to": "tech/parchment",
+   "type": "parallels",
+   "strength": "minor",
+   "note": {
+    "zh": "帕加马与亚历山大的书写材料之争（替代性并行）",
+    "en": "Pergamum vs Alexandria: rival writing materials in parallel"
+   }
+  },
+  {
+   "from": "tech/parchment",
+   "to": "tech/codex",
+   "type": "enables",
+   "strength": "major",
+   "note": {
+    "zh": "羊皮耐折叠装订，册子本得以取代卷轴",
+    "en": "Durable, foldable parchment let the codex displace the scroll"
+   }
+  },
+  {
+   "from": "tech/codex",
+   "to": "idea/manuscript-culture",
+   "type": "enables",
+   "strength": "minor",
+   "note": {
+    "zh": "修道院缮写室以册子本为标准载体",
+    "en": "Monastic scriptoria standardized on the codex"
+   }
+  },
+  {
+   "from": "tech/parchment",
+   "to": "idea/manuscript-culture",
+   "type": "enables",
+   "strength": "minor",
+   "note": {
+    "zh": "中世纪抄本的主要材料",
+    "en": "The chief material of medieval manuscripts"
+   }
+  },
+  {
+   "from": "tech/oracle-bone",
+   "to": "tech/woodblock",
+   "type": "enables",
+   "strength": "minor",
+   "note": {
+    "zh": "汉字文本传统是雕版的文字前提",
+    "en": "The Chinese text tradition was the precondition for woodblock printing"
+   }
+  },
+  {
+   "from": "person/cai-lun",
+   "to": "tech/papermaking",
+   "type": "contributed",
+   "strength": "major",
+   "note": {
+    "zh": "改进工艺并奏报朝廷，使造纸标准化",
+    "en": "Improved the craft and reported it to the throne, standardizing papermaking"
+   }
+  },
+  {
+   "from": "tech/papermaking",
+   "to": "tech/woodblock",
+   "type": "enables",
+   "strength": "major",
+   "note": {
+    "zh": "廉价的纸是批量印刷的前提",
+    "en": "Cheap paper was the precondition for printing at scale"
+   }
+  },
+  {
+   "from": "idea/confucian-canon",
+   "to": "tech/woodblock",
+   "type": "applies",
+   "strength": "major",
+   "note": {
+    "zh": "经籍与科举的标准文本需求拉动印刷",
+    "en": "Canonical texts for the classics and examinations pulled printing demand"
+   }
+  },
+  {
+   "from": "tech/papermaking",
+   "to": "tech/samarkand-paper",
+   "type": "derives",
+   "strength": "major",
+   "disputed": true,
+   "note": {
+    "zh": "造纸术经中亚西传；怛罗斯战俘传艺说存疑",
+    "en": "Papermaking spread west via Central Asia; the Talas prisoner story is doubted"
+   }
+  },
+  {
+   "from": "tech/samarkand-paper",
+   "to": "wonder/house-of-wisdom",
+   "type": "enables",
+   "strength": "major",
+   "note": {
+    "zh": "纸使翻译与抄写成本骤降",
+    "en": "Paper slashed the cost of translation and copying"
+   }
+  },
+  {
+   "from": "tech/samarkand-paper",
+   "to": "tech/gutenberg-press",
+   "type": "enables",
+   "strength": "major",
+   "note": {
+    "zh": "纸经伊斯兰世界与意大利传入欧洲",
+    "en": "Paper reached Europe through the Islamic world and Italy"
+   }
+  },
+  {
+   "from": "tech/woodblock",
+   "to": "tech/clay-movable-type",
+   "type": "derives",
+   "strength": "major",
+   "note": {
+    "zh": "从整版雕刻到可重组的活字",
+    "en": "From carving whole blocks to recombinable type"
+   }
+  },
+  {
+   "from": "person/bi-sheng",
+   "to": "tech/clay-movable-type",
+   "type": "contributed",
+   "strength": "major",
+   "note": {
+    "zh": "沈括《梦溪笔谈》记其法",
+    "en": "Shen Kuo's Dream Pool Essays records his method"
+   }
+  },
+  {
+   "from": "tech/clay-movable-type",
+   "to": "tech/wangzhen-typecase",
+   "type": "derives",
+   "strength": "minor",
+   "note": {
+    "zh": "王祯以木活字与转轮排字盘改良检字",
+    "en": "Wang Zhen improved typesetting with wooden type and a revolving case"
+   }
+  },
+  {
+   "from": "tech/clay-movable-type",
+   "to": "tech/korean-metal-type",
+   "type": "parallels",
+   "strength": "minor",
+   "note": {
+    "zh": "东亚活字谱系内的递进与并行",
+    "en": "Progression and parallel within East Asia's movable-type lineage"
+   }
+  },
+  {
+   "from": "tech/korean-metal-type",
+   "to": "tech/gutenberg-press",
+   "type": "parallels",
+   "strength": "major",
+   "note": {
+    "zh": "金属活字的东西方呼应，无传播证据",
+    "en": "An East-West echo in metal type, with no evidence of transmission"
+   }
+  },
+  {
+   "from": "tech/clay-movable-type",
+   "to": "tech/gutenberg-press",
+   "type": "parallels",
+   "strength": "major",
+   "note": {
+    "zh": "毕昇与古腾堡：独立发明的经典案例",
+    "en": "Bi Sheng and Gutenberg: a classic case of independent invention"
+   }
+  },
+  {
+   "from": "tech/woodblock",
+   "to": "tech/paper-money",
+   "type": "derives",
+   "strength": "minor",
+   "note": {
+    "zh": "印刷技术的金融应用",
+    "en": "A financial application of printing technology"
+   }
+  },
+  {
+   "from": "tech/woodblock",
+   "to": "wonder/tripitaka-koreana",
+   "type": "enables",
+   "strength": "major",
+   "note": {
+    "zh": "八万经版：雕版技术的极限工程",
+    "en": "Eighty thousand blocks: woodblock printing at its engineering limit"
+   }
+  },
+  {
+   "from": "person/gutenberg",
+   "to": "tech/gutenberg-press",
+   "type": "contributed",
+   "strength": "major",
+   "note": {
+    "zh": "整合铸字、合金、油墨与压印机",
+    "en": "Integrated type-casting, alloy, ink, and the press"
+   }
+  },
+  {
+   "from": "tech/gutenberg-press",
+   "to": "idea/reformation",
+   "type": "informs",
+   "strength": "major",
+   "note": {
+    "zh": "檄文与小册子的媒介动员",
+    "en": "Media mobilization by pamphlet and broadsheet"
+   }
+  },
+  {
+   "from": "tech/gutenberg-press",
+   "to": "idea/censorship-index",
+   "type": "informs",
+   "strength": "major",
+   "note": {
+    "zh": "印刷失控催生禁书建制",
+    "en": "Print out of control begat the apparatus of censorship"
+   }
+  },
+  {
+   "from": "idea/reformation",
+   "to": "idea/mass-literacy",
+   "type": "inspires",
+   "strength": "minor",
+   "note": {
+    "zh": "人人读经的义务推动识字",
+    "en": "The duty to read Scripture pushed literacy"
+   }
+  },
+  {
+   "from": "tech/gutenberg-press",
+   "to": "idea/republic-of-letters",
+   "type": "informs",
+   "strength": "minor",
+   "note": {
+    "zh": "出版网络支撑跨国学术共同体",
+    "en": "Publishing networks sustained a transnational learned community"
+   }
+  },
+  {
+   "from": "tech/gutenberg-press",
+   "to": "idea/copyright",
+   "type": "informs",
+   "strength": "major",
+   "note": {
+    "zh": "印刷商利益与作者权利的博弈产物",
+    "en": "Born of the contest between printers' interests and authors' rights"
+   }
+  },
+  {
+   "from": "tech/gutenberg-press",
+   "to": "idea/printing-revolution",
+   "type": "informs",
+   "strength": "minor",
+   "note": {
+    "zh": "爱森斯坦命题的研究对象",
+    "en": "The subject of Eisenstein's thesis"
+   }
+  },
+  {
+   "from": "person/eisenstein",
+   "to": "idea/printing-revolution",
+   "type": "contributed",
+   "strength": "major",
+   "note": {
+    "zh": "《作为变革动因的印刷机》(1979)",
+    "en": "The Printing Press as an Agent of Change (1979)"
+   }
+  },
+  {
+   "from": "tech/gutenberg-press",
+   "to": "tech/rotary-press",
+   "type": "derives",
+   "strength": "major",
+   "note": {
+    "zh": "蒸汽动力时代的报业印刷",
+    "en": "Newspaper printing for the steam age"
+   }
+  },
+  {
+   "from": "tech/rotary-press",
+   "to": "idea/mass-literacy",
+   "type": "informs",
+   "strength": "minor",
+   "note": {
+    "zh": "便士报造就大众读者",
+    "en": "The penny press created the mass reader"
+   }
+  },
+  {
+   "from": "tech/telegraph",
+   "to": "tech/radio",
+   "type": "derives",
+   "strength": "minor",
+   "note": {
+    "zh": "从有线电讯到无线广播",
+    "en": "From wired telegraphy to wireless broadcasting"
+   }
+  },
+  {
+   "from": "tech/telegraph",
+   "to": "idea/information-theory",
+   "type": "informs",
+   "strength": "major",
+   "note": {
+    "zh": "编码与信道问题的工程起源",
+    "en": "Coding and channel problems began as engineering"
+   }
+  },
+  {
+   "from": "idea/information-theory",
+   "to": "tech/computer",
+   "type": "applies",
+   "strength": "minor",
+   "note": {
+    "zh": "通信与计算共享的理论底座",
+    "en": "The shared theoretical floor of communication and computing"
+   }
+  },
+  {
+   "from": "idea/information-theory",
+   "to": "tech/internet",
+   "type": "applies",
+   "strength": "minor",
+   "note": {
+    "zh": "分组交换背后的信息度量",
+    "en": "The information measure behind packet switching"
+   }
+  },
+  {
+   "from": "tech/computer",
+   "to": "tech/internet",
+   "type": "enables",
+   "strength": "major",
+   "note": {
+    "zh": "联网的前提是通用计算机",
+    "en": "Networking presupposes the general-purpose computer"
+   }
+  },
+  {
+   "from": "tech/internet",
+   "to": "tech/www",
+   "type": "enables",
+   "strength": "major",
+   "note": {
+    "zh": "万维网运行于互联网之上",
+    "en": "The Web runs on top of the Internet"
+   }
+  },
+  {
+   "from": "person/berners-lee",
+   "to": "tech/www",
+   "type": "contributed",
+   "strength": "major",
+   "note": {
+    "zh": "1989年在CERN提出并实现",
+    "en": "Proposed and built at CERN in 1989"
+   }
+  },
+  {
+   "from": "idea/hypertext",
+   "to": "tech/www",
+   "type": "applies",
+   "strength": "major",
+   "note": {
+    "zh": "Memex与Xanadu设想的工程落地",
+    "en": "Memex and Xanadu made engineering fact"
+   }
+  },
+  {
+   "from": "tech/www",
+   "to": "wonder/wikipedia",
+   "type": "enables",
+   "strength": "major",
+   "note": {
+    "zh": "开放网络之上的协作百科",
+    "en": "A collaborative encyclopedia on the open Web"
+   }
+  },
+  {
+   "from": "wonder/wikipedia",
+   "to": "wonder/encyclopedie",
+   "type": "parallels",
+   "strength": "major",
+   "note": {
+    "zh": "启蒙百科工程的当代回声",
+    "en": "A contemporary echo of the Enlightenment encyclopedia"
+   }
+  },
+  {
+   "from": "idea/republic-of-letters",
+   "to": "wonder/encyclopedie",
+   "type": "inspires",
+   "strength": "major",
+   "note": {
+    "zh": "文人共和国的集大成出版",
+    "en": "The Republic of Letters in one great publication"
+   }
+  },
+  {
+   "from": "wonder/encyclopedie",
+   "to": "wonder/yongle-dadian",
+   "type": "parallels",
+   "strength": "minor",
+   "note": {
+    "zh": "类书与百科：两种\"知识总汇\"传统",
+    "en": "Leishu and encyclopedie: two traditions of summing up knowledge"
+   }
+  },
+  {
+   "from": "idea/copyright",
+   "to": "wonder/wikipedia",
+   "type": "informs",
+   "strength": "minor",
+   "note": {
+    "zh": "自由许可(Copyleft)对版权逻辑的反转",
+    "en": "Copyleft inverts the logic of copyright"
+   }
+  },
+  {
+   "from": "person/alexander",
+   "to": "person/ptolemy-i",
+   "type": "inspires",
+   "strength": "major",
+   "note": {
+    "zh": "继业者继承帝国与希腊化事业",
+    "en": "The Successors inherited empire and the Hellenizing project"
+   }
+  },
+  {
+   "from": "person/ptolemy-i",
+   "to": "wonder/library-alexandria",
+   "type": "patronized",
+   "strength": "major",
+   "note": {
+    "zh": "建馆并立\"收尽天下之书\"之策",
+    "en": "Founded the Library and the policy of collecting all the books in the world"
+   }
+  },
+  {
+   "from": "person/ptolemy-ii",
+   "to": "wonder/library-alexandria",
+   "type": "patronized",
+   "strength": "minor",
+   "note": {
+    "zh": "扩藏与供养学者",
+    "en": "Expanded the collection and maintained the scholars"
+   }
+  },
+  {
+   "from": "wonder/library-alexandria",
+   "to": "idea/axiomatic-method",
+   "type": "enables",
+   "strength": "major",
+   "note": {
+    "zh": "缪斯宫建制供养了欧几里得们",
+    "en": "The Mouseion's establishment sustained the Euclids"
+   }
+  },
+  {
+   "from": "person/euclid",
+   "to": "idea/axiomatic-method",
+   "type": "contributed",
+   "strength": "major",
+   "note": {
+    "zh": "《几何原本》十三卷",
+    "en": "The thirteen books of the Elements"
+   }
+  },
+  {
+   "from": "person/al-mamun",
+   "to": "wonder/house-of-wisdom",
+   "type": "patronized",
+   "strength": "major",
+   "note": {
+    "zh": "以重金延揽译者与学者",
+    "en": "Drew translators and scholars with lavish patronage"
+   }
+  },
+  {
+   "from": "wonder/house-of-wisdom",
+   "to": "idea/translation-movement",
+   "type": "enables",
+   "strength": "major",
+   "note": {
+    "zh": "翻译运动的建制核心",
+    "en": "The institutional core of the Translation Movement"
+   }
+  },
+  {
+   "from": "wonder/library-alexandria",
+   "to": "wonder/house-of-wisdom",
+   "type": "inspires",
+   "strength": "minor",
+   "note": {
+    "zh": "帝国藏书传统的自觉继承",
+    "en": "A conscious heir to the imperial library tradition"
+   }
+  },
+  {
+   "from": "disaster/alexandria-fires",
+   "to": "disaster/burning-books",
+   "type": "parallels",
+   "strength": "major",
+   "note": {
+    "zh": "东西方知识浩劫的呼应",
+    "en": "Eastern and Western catastrophes of knowledge in echo"
+   }
+  },
+  {
+   "from": "disaster/alexandria-fires",
+   "to": "disaster/nazi-book-burning",
+   "type": "parallels",
+   "strength": "minor",
+   "note": {
+    "zh": "焚书作为文明创伤的跨时空重演",
+    "en": "Book-burning as a recurring trauma of civilization"
+   }
+  },
+  {
+   "from": "disaster/burning-books",
+   "to": "idea/confucian-canon",
+   "type": "inspires",
+   "strength": "minor",
+   "disputed": true,
+   "note": {
+    "zh": "劫后重建经学，官学化因祸而强；因果强度存争议",
+    "en": "Rebuilding the canon after the fire strengthened official learning; causal weight disputed"
+   }
+  },
+  {
+   "from": "tech/woodblock",
+   "to": "disaster/literary-inquisition",
+   "type": "causes",
+   "strength": "minor",
+   "disputed": true,
+   "note": {
+    "zh": "出版繁荣与清代思想清剿的关联存争议",
+    "en": "The link from print prosperity to Qing literary inquisition is disputed"
+   }
+  },
+  {
+   "from": "tech/radio",
+   "to": "disaster/radio-genocide",
+   "type": "causes",
+   "strength": "major",
+   "note": {
+    "zh": "千丘自由电台以广播动员屠杀",
+    "en": "Radio Mille Collines mobilized massacre by broadcast"
+   }
+  },
+  {
+   "from": "idea/manuscript-culture",
+   "to": "tech/gutenberg-press",
+   "type": "enables",
+   "strength": "minor",
+   "note": {
+    "zh": "抄本市场培育了书籍需求与工坊",
+    "en": "The manuscript market bred book demand and workshops"
+   }
+  }
+ ]
+}

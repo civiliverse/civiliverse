@@ -1,0 +1,28 @@
+:root {
+  --bg: #0b1026;
+  --ink: #e9e4d6;
+  --dim: #a9a494;
+  --accent: #d8b56a;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body, #root { height: 100%; }
+body {
+  background: radial-gradient(1200px 700px at 50% -10%, #1b2a4a 0%, var(--bg) 55%);
+  color: var(--ink);
+  font-family: "Songti SC", "STSong", "SimSun", Georgia, serif;
+  display: grid;
+  place-items: center;
+}
+.hero { text-align: center; padding: 48px 24px; max-width: 640px; }
+.mark { color: var(--accent); font-size: 28px; margin-bottom: 18px; }
+h1 { font-size: 34px; letter-spacing: 0.3em; font-weight: 600; }
+h1 .latin { display: block; font-size: 13px; letter-spacing: 0.5em; color: var(--dim); margin-top: 10px; }
+.tag { color: var(--dim); margin-top: 14px; letter-spacing: 0.12em; font-size: 14px; }
+.body { margin-top: 26px; line-height: 2; font-size: 15px; }
+.links { margin-top: 30px; display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; }
+.links a {
+  color: var(--accent); text-decoration: none; font-size: 13px; letter-spacing: 0.08em;
+  border: 1px solid rgba(216, 181, 106, 0.35); border-radius: 999px; padding: 8px 18px;
+}
+.links a:hover { border-color: var(--accent); }
+footer { margin-top: 46px; color: var(--dim); font-size: 11px; letter-spacing: 0.1em; }
