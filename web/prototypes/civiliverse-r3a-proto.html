@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Civiliverse · R3a 原型 — 丙 P0 整改 ＋ LOD／时间刷／背景介绍页</title>
+<style>
+  :root{
+    --ink:#0b0e15; --ink2:#101523; --parch:#f0e6cf; --parch2:#e6d9ba;
+    --gold:#c9a961; --gold-hi:#dcbe78; --gold-dim:#8a7440; --line:#c9a96155;
+    --tx:#e8ddc2; --tx-dim:#b9ad8e;
+    /* P0-1 对比度令牌（对 --ink 底）：strong≈16:1 · mid≈11:1 · faint≈7:1（最暗正文令牌仍 ≥4.5:1）*/
+    --ink-strong:#f4ecd6; --ink-mid:#d3c7a6; --ink-faint:#a89b76;
+    --seal:#d4472a;
+    --serif:"Songti SC","STSong","Noto Serif SC","Noto Serif CJK SC",Georgia,"Times New Roman",serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0}
+  html,body{height:100%}
+  body{background:var(--ink); color:var(--tx); font-family:var(--serif); overflow:hidden}
+  #app{position:relative; width:100vw; height:100vh; display:flex; flex-direction:column}
+
+  /* ── P0-3 细暗滚动条（替换系统白色滚动条）── */
+  *{scrollbar-width:thin; scrollbar-color:#5c5030 #131828}
+  ::-webkit-scrollbar{width:9px; height:9px}
+  ::-webkit-scrollbar-track{background:#131828}
+  ::-webkit-scrollbar-thumb{background:#5c5030; border-radius:5px; border:2px solid #131828}
+  ::-webkit-scrollbar-thumb:hover{background:#8a7440}
+  #ground{scrollbar-color:#8a7440 #ddd0ad}
+  #ground::-webkit-scrollbar-track{background:#ddd0ad}
+  #ground::-webkit-scrollbar-thumb{background:#8a7440; border:2px solid #ddd0ad}
+
+  /* ── P0-2 题签行（卷首）＋ 工具行 ── */
+  #cartouche{
+    display:flex; align-items:baseline; gap:18px; padding:10px 18px 4px;
+    background:linear-gradient(180deg,#11162399,#0b0e1500);
+  }
+  #cartouche .title{display:flex; flex-direction:column; line-height:1.3}
+  #cartouche .title b{font-size:20px; letter-spacing:.16em; color:var(--gold-hi)}
+  #cartouche .title span{font-size:12px; color:var(--ink-mid); letter-spacing:.08em}
+  #toolbar{
+    display:flex; align-items:center; gap:0 14px; flex-wrap:wrap; padding:2px 12px 4px;
+    border-bottom:1px solid var(--line); background:#0d111c66;
+  }
+  .tabs{display:flex; gap:6px}
+  .tab{
+    font-size:13px; letter-spacing:.12em; padding:0 16px; min-height:40px;
+    display:inline-flex; align-items:center; cursor:pointer;
+    border:1px solid var(--gold-dim); color:var(--ink-mid); border-radius:2px;
+    background:transparent; user-select:none;
+  }
+  .tab.on{color:var(--ink); background:var(--gold); border-color:var(--gold)}
+  #filters{display:flex; align-items:center; gap:0 4px; font-size:12.5px; color:var(--ink-mid); flex-wrap:wrap}
+  #filters label{cursor:pointer; display:flex; align-items:center; gap:5px; letter-spacing:.05em; min-height:40px; padding:0 7px}
+  #filters label:hover{color:var(--ink-strong)}
+  #filters input{accent-color:var(--gold); width:15px; height:15px}
+  .toolgrp{display:flex; gap:8px; margin-left:auto; flex-wrap:wrap; align-items:center}
+  .btn{font-size:12.5px; min-height:40px; padding:0 14px; display:inline-flex; align-items:center;
+       border:1px solid var(--gold-dim); color:var(--ink-mid);
+       background:transparent; cursor:pointer; border-radius:2px; font-family:var(--serif); letter-spacing:.1em}
+  .btn:hover{color:var(--gold-hi); border-color:var(--gold)}
+  .btn.on{color:var(--ink); background:var(--gold); border-color:var(--gold)}
+
+  /* ── P0-3 主区：左右停靠坞 ＋ 星图台 ＋ 时间刷 ── */
+  #main{display:flex; flex:1; min-height:0}
+  .dock{display:none; flex:0 0 auto; width:min(340px,32vw); min-height:0;
+        flex-direction:column; gap:10px; padding:10px}
+  .dock.has{display:flex}
+  #dockL{border-right:1px solid var(--line)}
+  #dockR{border-left:1px solid var(--line)}
+  #centercol{flex:1; min-width:0; display:flex; flex-direction:column}
+  #stage{position:relative; flex:1; min-height:0}
+  svg#cosmos{position:absolute; inset:0; width:100%; height:100%; display:block; cursor:default;
+             -webkit-user-select:none; user-select:none}
+  svg#cosmos.panning{cursor:grabbing}
+
+  /* ── 星图元素（P0-1 提亮：古意靠字形与字距，不靠低浓度）── */
+  .bandline{stroke:var(--gold); stroke-opacity:.55; stroke-width:1}
+  .bandlabel{fill:var(--ink-mid); font-size:12px; letter-spacing:.18em}
+  .axis text{fill:var(--ink-strong); font-size:11.5px; letter-spacing:.06em}
+  .axis line.tick{stroke:var(--gold); stroke-opacity:.55}
+  .axis line.grid{stroke:var(--gold); stroke-opacity:.13}
+  .region{cursor:pointer}
+  .region rect{fill:url(#pat-parent); stroke:var(--gold); stroke-opacity:.6; stroke-dasharray:1 3; rx:10}
+  .region.child rect{fill:url(#pat-child); stroke-dasharray:none; stroke-opacity:.8}
+  .region text{fill:var(--gold-hi); font-size:12.5px; letter-spacing:.14em; paint-order:stroke; stroke:#0b0e15; stroke-width:3px}
+  .region:hover rect{stroke-width:1.7}
+  .tether{stroke:var(--gold); stroke-opacity:.8; stroke-width:1.3; stroke-dasharray:1 6; stroke-linecap:round; fill:none}
+  .nestlink{stroke:var(--gold); stroke-opacity:.8; stroke-width:1.6; fill:none}
+  .tetherlabel{fill:var(--ink-mid); font-size:11px; paint-order:stroke; stroke:#0b0e15; stroke-width:2.5px}
+  .edge{fill:none; opacity:.95}
+  .edge.minor{opacity:.8; display:none}
+  svg.lodz .edge.minor, .edge.minor.lodshow{display:inline}
+  .edge.disputed{stroke-dasharray:5 4}
+  .edge.regulates{stroke-dasharray:12 3 3 3}
+  .edge.ghostend{opacity:.68}
+  .edge.dim,.edge.tdim,.edge.lfdim{opacity:.06}
+  .leader{stroke:var(--gold); stroke-opacity:.55; stroke-width:.8}
+  .node{cursor:pointer}
+  .node text{fill:var(--ink-strong); font-size:12.5px; letter-spacing:.04em; paint-order:stroke; stroke:#0b0e15; stroke-width:3px}
+  .node.dim,.node.tdim,.node.lfdim{opacity:.12}
+  .node.sel .halo{opacity:.9}
+  .halo{opacity:0; transition:opacity .2s}
+  .ghost{cursor:pointer}
+  .ghost circle{fill:#cbbd97; opacity:.4}
+  .ghost .glabel{fill:var(--ink-mid); font-size:11px; letter-spacing:.03em; paint-order:stroke; stroke:#0b0e15; stroke-width:2.5px; display:none}
+  svg.lodz .ghost .glabel, .ghost:hover .glabel, .ghost.lfshow .glabel{display:inline}
+  .ghost.atro path{opacity:.5}
+  .ghost.dim,.ghost.tdim,.ghost.lfdim{opacity:.05}
+  .ghost:hover circle{opacity:.85}
+  .region.tdim{opacity:.15}
+  g.lfdim{opacity:.12}
+  .loopcap{fill:var(--gold-hi); font-size:16px; letter-spacing:.22em; paint-order:stroke; stroke:#0b0e15; stroke-width:4px}
+  .loopcap2{fill:var(--ink-mid); font-size:11.5px; letter-spacing:.08em; paint-order:stroke; stroke:#0b0e15; stroke-width:3px}
+  .edgelabel{font-size:11px; letter-spacing:.05em; paint-order:stroke; stroke:#0b0e15; stroke-width:3px}
+
+  /* 星系视图 */
+  .nebula{cursor:pointer}
+  .nebula:hover .neb-core{opacity:.5}
+
+  /* ── P0-3 面板组件：定头＋滚身，停靠不遮图 ── */
+  .panel{display:none; flex-direction:column; min-height:0; width:100%; max-width:340px;
+    background:linear-gradient(180deg,#151a29f8,#0f1420f8);
+    border:1px solid var(--gold-dim); border-radius:3px; font-size:12px; line-height:1.8}
+  .panel.open{display:flex; flex:1 1 auto}
+  .panel-head{flex:none; display:flex; align-items:center; gap:8px; padding:8px 12px;
+    border-bottom:1px solid var(--line); background:#181e30}
+  .panel-head h3{color:var(--gold-hi); font-size:14.5px; letter-spacing:.14em; flex:1; font-weight:600}
+  .pclose{background:none; border:1px solid transparent; color:var(--ink-mid); font-size:15px; cursor:pointer;
+    width:30px; height:30px; border-radius:2px; font-family:var(--serif); flex:none}
+  .pclose:hover{color:var(--gold-hi); border-color:var(--gold-dim)}
+  .panel-body{flex:1 1 auto; min-height:0; overflow-y:auto; padding:10px 14px}
+  .panel h4{color:var(--gold-hi); font-size:12.5px; letter-spacing:.18em; margin:9px 0 4px}
+  .panel h4:first-child{margin-top:0}
+  .panel .row{display:flex; align-items:center; gap:8px; color:var(--ink-mid)}
+  .sw{display:inline-block; width:22px; height:0; border-top:2px solid; flex:none}
+  .dot{display:inline-block; width:9px; height:9px; border-radius:50%; flex:none}
+  #specsBody p{color:var(--ink-mid); margin-bottom:7px}
+  #specsBody b{color:var(--gold-hi)}
+  #specsBody .small{font-size:11px; color:var(--ink-faint)}
+
+  /* 词条抽屉（停靠态） */
+  #drawerBody .en{color:var(--ink-faint); font-size:11.5px; font-style:italic; margin-bottom:8px}
+  #drawerBody .meta{font-size:11.5px; color:var(--ink-mid); margin-bottom:10px; line-height:1.7}
+  #drawerBody .meta b{color:var(--tx)}
+  #drawerBody .loc{font-size:12.5px; line-height:1.8; color:var(--tx); font-style:italic; border-left:2px solid var(--gold-dim); padding-left:10px; margin-bottom:10px}
+  #drawerBody .sum{font-size:12.5px; line-height:1.9; color:var(--ink-mid); margin-bottom:12px}
+  #drawerBody .land{width:100%; min-height:40px; font-size:13px; letter-spacing:.2em; background:var(--gold); color:var(--ink);
+    border:none; cursor:pointer; font-family:var(--serif); border-radius:2px; margin-top:2px}
+  .badge{display:inline-block; font-size:10.5px; padding:1px 7px; border:1px solid var(--gold-dim); color:var(--gold-hi); border-radius:8px; margin-right:5px; letter-spacing:.1em}
+  .badge.red{border-color:#c0392b; color:#e08573}
+
+  /* ── R3-3 背景介绍页 ── */
+  #ctxBody .en{color:var(--ink-faint); font-size:11.5px; font-style:italic; margin-bottom:6px}
+  #ctxBody .lineage{font-size:12px; color:var(--gold-hi); letter-spacing:.05em; margin:0 0 4px}
+  #ctxBody .lineage-zh{font-size:11.5px; color:var(--ink-faint); margin:0 0 8px}
+  #ctxBody .sum{font-size:12.5px; line-height:1.9; color:var(--ink-mid); margin:8px 0 12px}
+  #ctxBody .members{display:flex; flex-wrap:wrap; gap:6px; margin-top:6px}
+  .mem{font-size:12px; min-height:32px; padding:4px 10px; border:1px solid var(--gold-dim); background:transparent;
+    color:var(--ink-mid); cursor:pointer; border-radius:2px; font-family:var(--serif); letter-spacing:.05em}
+  .mem:hover{color:var(--gold-hi); border-color:var(--gold)}
+  .mem.plan{border-style:dashed; color:var(--ink-faint)}
+
+  /* ── R3-2 时间刷（羊皮纸条·墨色刻度）── */
+  #timeline{position:relative; flex:none; height:66px; border-top:1px solid var(--line);
+    background:linear-gradient(180deg,var(--parch),var(--parch2))}
+  #timeline svg{position:absolute; inset:0; width:100%; height:100%; display:block; cursor:crosshair;
+    -webkit-user-select:none; user-select:none}
+  #tlcap{position:absolute; left:12px; bottom:3px; font-size:11px; color:#5a4b2e; letter-spacing:.25em; pointer-events:none}
+  #tlbar{position:absolute; right:8px; top:13px; display:flex; gap:8px; align-items:center; z-index:2}
+  #tlread{font-size:11.5px; color:#41341d; letter-spacing:.08em; background:#f4ecd6cc; padding:3px 8px;
+    border:1px solid #8a744088; border-radius:2px}
+  .btn.parch{color:#41341d; border-color:#8a7440; background:#f4ecd680}
+  .btn.parch:hover{color:#1f1810; border-color:#41341d; background:#f4ecd6}
+
+  /* ── 星球层 planet ── */
+  #planet{position:absolute; inset:0; z-index:20; display:none; flex-direction:column; background:var(--ink)}
+  #planet.show{display:flex}
+  #sky{position:relative; flex:1.2; min-height:0; overflow:hidden;
+       background:radial-gradient(ellipse at 50% 130%, #1c2340 0%, #0b0e15 62%)}
+  #sky svg{position:absolute; inset:0; width:100%; height:100%}
+  #skycap{position:absolute; top:12px; left:18px; color:var(--ink-mid); font-size:12px; letter-spacing:.25em}
+  #ascend{position:absolute; top:10px; right:16px; z-index:2}
+  #ground{flex:1; min-height:0; overflow:auto; background:
+      linear-gradient(180deg, var(--parch), var(--parch2));
+      color:#33291a; padding:20px 8vw 40px; border-top:3px double var(--gold-dim); position:relative}
+  #ground.mourn{background:linear-gradient(180deg,#e7e2d5,#d9d4c6)}
+  #ground h2{font-size:22px; letter-spacing:.12em; color:#2c2413}
+  #ground .gen{font-style:italic; color:#6b5b3a; font-size:12px; margin-bottom:2px}
+  #ground .gcap{font-size:11px; color:#6b5b3a; letter-spacing:.22em; margin:6px 0 12px}
+  #ground .quote{border-left:3px solid var(--gold-dim); padding:6px 14px; margin:12px 0; font-size:14px; line-height:2; color:#41341d; background:#fff3}
+  #ground .quote .src{font-size:11px; color:#6b5b3a; display:block; margin-top:4px}
+  #ground .sec{margin:14px 0}
+  #ground .sec h5{font-size:12px; letter-spacing:.3em; color:#7a6636; margin-bottom:6px}
+  #ground .sec p{font-size:13.5px; line-height:2.05; text-align:justify}
+  #ground .vrow{display:flex; gap:0; align-items:stretch; margin-top:8px; border-top:1px solid #8a744066}
+  #ground .ver{flex:1; padding:8px 10px; border-right:1px solid #8a744033; font-size:12px; line-height:1.7}
+  #ground .ver b{display:block; color:#2c2413}
+  #ground .ver span{color:#6b5b3a; font-size:11px}
+  #ground .cavs li{font-size:12px; line-height:1.9; color:#5a4b2e; margin-left:18px}
+  #ground .refs{font-size:11.5px; color:#6b5b3a; line-height:1.9}
+  #ground .ebadge{display:inline-block; font-size:10.5px; border:1px solid #8a7440; border-radius:9px; padding:1px 8px; margin:0 6px 6px 0; color:#5a4b2e}
+  .mournbadge{display:inline-block; font-size:10.5px; padding:2px 9px; border:1px solid #7a2a2a; color:#7a2a2a; border-radius:2px; letter-spacing:.15em; margin-bottom:8px}
+
+  /* tooltip / footer / 角饰 */
+  #tip{position:fixed; z-index:50; display:none; max-width:290px; padding:7px 10px; font-size:12px; line-height:1.7;
+       background:#0f1420f5; border:1px solid var(--gold-dim); color:var(--ink-strong); border-radius:2px; pointer-events:none}
+  #foot{display:flex; gap:16px; padding:7px 18px; font-size:11.5px; color:var(--ink-mid);
+        border-top:1px solid var(--line); letter-spacing:.06em; background:#0d111c; flex-wrap:wrap}
+  #foot .r{margin-left:auto}
+  .corner{position:absolute; width:34px; height:34px; border:1px solid var(--gold); opacity:.55; pointer-events:none}
+  .c1{top:8px; left:8px; border-right:none; border-bottom:none}
+  .c2{top:8px; right:8px; border-left:none; border-bottom:none}
+  .c3{bottom:8px; left:8px; border-right:none; border-top:none}
+  .c4{bottom:8px; right:8px; border-left:none; border-top:none}
+
+  @media (max-width:920px){
+    .dock{width:min(300px,46vw)}
+    #cartouche .title b{font-size:17px}
+  }
+</style>
+</head>
+<body>
+<div id="app">
+  <header id="cartouche">
+    <div class="title">
+      <b>文明宇宙 · CIVILIVERSE</b>
+      <span>R3a 原型 · A 星图手稿风 —— 丙 P0 五项整改落图 ＋ R3 核心：LOD 分级显隐 · 时间刷 · 背景介绍页</span>
+    </div>
+  </header>
+  <div id="toolbar">
+    <div class="tabs">
+      <div class="tab" id="tabGal">星系视图</div>
+      <div class="tab on" id="tabStar">星图视图</div>
+    </div>
+    <div id="filters">
+      <label><input type="checkbox" data-t="tech" checked>技术</label>
+      <label><input type="checkbox" data-t="idea" checked>思想</label>
+      <label><input type="checkbox" data-t="person" checked>人物</label>
+      <label><input type="checkbox" data-t="wonder" checked>奇观</label>
+      <label><input type="checkbox" data-t="disaster" checked>灾祸</label>
+      <label><input type="checkbox" id="fGhost" checked>规划节点</label>
+      <label><input type="checkbox" id="fCtx" checked>时代背景</label>
+    </div>
+    <div class="toolgrp">
+      <button class="btn" id="bLoop">回路聚焦</button>
+      <button class="btn" id="bZreset">视角复位</button>
+      <button class="btn" id="bLegend">图例</button>
+      <button class="btn" id="bSpecs">设计说明</button>
+    </div>
+  </div>
+
+  <div id="main">
+    <aside id="dockL" class="dock">
+      <section class="panel" id="legend">
+        <div class="panel-head"><h3>图例</h3><button class="pclose" data-close="legend">✕</button></div>
+        <div class="panel-body" id="legendBody"></div>
+      </section>
+    </aside>
+    <div id="centercol">
+      <div id="stage">
+        <svg id="cosmos" preserveAspectRatio="none"></svg>
+        <div class="corner c1"></div><div class="corner c2"></div>
+        <div class="corner c3"></div><div class="corner c4"></div>
+      </div>
+      <div id="timeline">
+        <svg id="tl" viewBox="0 0 1600 66" preserveAspectRatio="none"></svg>
+        <div id="tlcap">时间刷 · 拖选年段以聚焦（R3-2）</div>
+        <div id="tlbar"><span id="tlread">全时段</span><button class="btn parch" id="tlReset">重置</button></div>
+      </div>
+    </div>
+    <aside id="dockR" class="dock">
+      <section class="panel" id="drawer">
+        <div class="panel-head"><h3 id="drawerTitle">词条</h3><button class="pclose" data-close="drawer">✕</button></div>
+        <div class="panel-body" id="drawerBody"></div>
+      </section>
+      <section class="panel" id="ctxintro">
+        <div class="panel-head"><h3 id="ctxTitle">背景介绍</h3><button class="pclose" data-close="ctxintro">✕</button></div>
+        <div class="panel-body" id="ctxBody"></div>
+      </section>
+      <section class="panel" id="specs">
+        <div class="panel-head"><h3>设计说明</h3><button class="pclose" data-close="specs">✕</button></div>
+        <div class="panel-body" id="specsBody"></div>
+      </section>
+    </aside>
+  </div>
+
+  <div id="planet">
+    <div id="sky">
+      <svg id="skysvg"></svg>
+      <div id="skycap">仰望 · 关系星空 —— 边即论证</div>
+      <button class="btn" id="ascend">升空返回 ↑</button>
+    </div>
+    <div id="ground"></div>
+  </div>
+
+  <footer id="foot">
+    <span>工程组 Fable5 · R3a · 2026-07-19</span>
+    <span>数据＝内容组 R2 实产 11 词条＋5 时代背景＋批产名单规划位（时位示意）</span>
+    <span>布局种子 20260718（确定性）</span>
+    <span class="r">R3a＝R2b ＋ 丙 P0 整改（对比度 · 双行题签 · 停靠面板 · 回路与边编码 · 嵌套纹理）＋ LOD／时间刷／背景介绍页</span>
+  </footer>
+</div>
+<div id="tip"></div>
+<script>
+/*DATA-START*/
+window.CIVDATA = (function(){
+  var CULTURES = [
+    {k:"ancient-near-east", zh:"古代近东",   c:"#b08d57", w:.07},
+    {k:"greco-roman",       zh:"希腊—罗马", c:"#9db4c9", w:.08},
+    {k:"western",           zh:"欧洲—西方", c:"#6f94c9", w:.15},
+    {k:"trans",             zh:"跨文明",     c:"#d8d8e0", w:.07},
+    {k:"islamic",           zh:"伊斯兰世界", c:"#63b0a0", w:.07},
+    {k:"indic",             zh:"印度—南亚", c:"#d9905a", w:.07},
+    {k:"sinic",             zh:"中华（东亚）", c:"#e3b455", w:.16},
+    {k:"steppe",            zh:"中亚—草原", c:"#8f9e6a", w:.06},
+    {k:"americas",          zh:"美洲原住民", c:"#c96a6a", w:.06},
+    {k:"africa",            zh:"撒南非洲",   c:"#a97fc9", w:.06},
+    {k:"sea-oceania",       zh:"东南亚—大洋洲", c:"#5fb3c9", w:.06}
+  ];
+  var TYPEZH = {tech:"技术", idea:"思想", person:"人物", wonder:"奇观", disaster:"灾祸"};
+  var EDGETYPES = {
+    enables:    {zh:"使能",   c:"#7fb069"},
+    derives:    {zh:"衍生",   c:"#8fa3bf"},
+    applies:    {zh:"应用",   c:"#b48ead"},
+    informs:    {zh:"反哺",   c:"#5e81ac"},
+    inspires:   {zh:"激发",   c:"#d9b44a"},
+    contributed:{zh:"贡献",   c:"#c78d5e"},
+    patronized: {zh:"赞助",   c:"#b97a8b"},
+    parallels:  {zh:"并流",   c:"#9a9a9a"},
+    causes:     {zh:"致祸",   c:"#a83a3a"},
+    regulates:  {zh:"管制",   c:"#d4472a", r1:true}
+  };
+  /* r1 端点表（冻结规格 §二） */
+  var RULES = {
+    enables:    {src:["tech","idea","person","wonder"], tgt:["tech","idea","wonder"]},
+    derives:    {src:["tech","idea","wonder"],          tgt:["tech","idea","wonder"]},
+    applies:    {src:["idea"],                          tgt:["tech","wonder"]},
+    informs:    {src:["tech","wonder"],                 tgt:["idea"]},
+    inspires:   {src:"any",                             tgt:["idea","person","wonder"]},
+    contributed:{src:["person"],                        tgt:["tech","idea","wonder"]},
+    patronized: {src:["person"],                        tgt:["person","tech","idea","wonder"]},
+    parallels:  {src:"any",                             tgt:"any"},
+    causes:     {src:["tech","idea","wonder"],          tgt:["disaster"]},
+    regulates:  {src:["idea"],                          tgt:["tech","wonder"]}
+  };
+
+  var NODES = [
+   {id:"movable-type", type:"tech", zh:"活字印刷", en:"Movable-Type Printing", y0:1041, y1:1048, circa:true,
+    culture:"sinic", tier:"major", domain:"信息与传播",
+    quote:"若止印三二本，未为简易；若印数十百千本，则极为神速。", qsrc:"沈括《梦溪笔谈·技艺》（约1088）",
+    loc:"一项比古登堡早约四百年、在自己故乡却长期未成主流的发明。",
+    sum:"北宋布衣毕昇约于庆历年间发明胶泥活字，以可重排的单字取代整版雕刻。因汉字数量庞大、泥字易损，中国长期仍以雕版为主流，但「活字」理念在东亚木活字、金属活字与后世不断再生。",
+    conf:"medium", cavs:["毕昇生卒不详（孤证于《梦溪笔谈》）","泥活字无确认实物出土","与欧洲活字是否存在间接知识传播为 disputed"],
+    refs:["沈括《梦溪笔谈》卷十八·技艺","钱存训《纸和印刷》（李约瑟《中国科学技术史》V-1）","钱存训《书于竹帛》"]},
+   {id:"printing-revolution", type:"idea", zh:"印刷革命", en:"The Printing Revolution", y0:1440, y1:1500, circa:true,
+    culture:"western", tier:"major", domain:"信息与传播",
+    quote:"印刷术、火药与磁石这三者，改变了全世界事物的整个面貌与状态。", qsrc:"培根《新工具》I.129（1620）",
+    loc:"让知识第一次可以被精确复制的那场变革——以及关于它是否真那么「革命」的一场争论。",
+    sum:"约1440年代古登堡在美因茨结合金属活字、油墨与螺旋压印机，半世纪内印刷术传遍欧洲近三百城。爱森斯坦称其「固定性」是宗教改革与科学革命的隐形引擎；但东亚早有活字而未生同等剧变，提示「革命」属于社会条件而非机器本身。",
+    conf:"high", cavs:["摇篮本版本/册数为估算","「固定性」论题为 Eisenstein–Johns 持续论战"],
+    refs:["Eisenstein, The Printing Press as an Agent of Change","Johns, The Nature of the Book","Febvre & Martin, L'apparition du livre"]},
+   {id:"cai-lun", type:"person", zh:"蔡伦", en:"Cai Lun", y0:50, y1:121, circa:true,
+    culture:"sinic", tier:"major", domain:"信息与传播",
+    quote:"伦乃造意，用树肤、麻头及敝布、鱼网以为纸。", qsrc:"《后汉书·宦者列传》（范晔编，5世纪）",
+    loc:"被尊为「纸圣」的人，是造纸术得以推广的枢纽，也是一桩宫廷血案的参与者。",
+    sum:"东汉宦官蔡伦掌皇家作坊，元兴元年（105）进献改良之纸，世称「蔡侯纸」。考古显示纸先于蔡伦已存在，学界多视其为集大成改良者与推广者——他是造纸术的「枢纽」而非「原因」。",
+    conf:"medium", cavs:["生年不详（约50–62）","灞桥纸是否为真正意义的纸有争议","《后汉书》成书距其约300年"],
+    refs:["《后汉书》卷七十八·宦者列传","钱存训《书于竹帛》","郭伟涛等《中国古代造纸术起源新探》（2023）"]},
+   {id:"library-of-alexandria", type:"wonder", zh:"亚历山大图书馆", en:"The Library of Alexandria", y0:-283, y1:391, circa:true,
+    culture:"greco-roman", tier:"major", domain:"信息与传播",
+    quote:"领受巨资，以期尽其所能，搜罗天下之书。", qsrc:"《阿里斯特亚书信》§9（伪托，约前2世纪）",
+    loc:"一座知识的国家工程，和一则关于它如何「毁于一炬」的、并不真实的传说。",
+    sum:"托勒密王朝以近乎国家工程之力搜罗希腊语世界抄本，供养逾百学者。其「焚毁」非一场大火，而是历数百年的渐进凋零；单次焚毁的通俗神话已被史学否弃。文明归属按「时代优先」规则记 greco-roman，为该规则样板。",
+    conf:"medium", cavs:["创建归托勒密一世 vs 二世","藏书数字不可确证（4万–40万卷）","「渐进多因」为共识（此点 high）"],
+    refs:["MacLeod (ed.), The Library of Alexandria","Delia, From Romance to Rhetoric (AHR 1992)","Letter of Aristeas"]},
+   {id:"great-famine-ireland", type:"disaster", subtype:"famine", zh:"爱尔兰大饥荒", en:"The Great Famine (An Gorta Mór)", y0:1845, y1:1852,
+    culture:"western", tier:"major", domain:"农业与食物", mourn:true,
+    quote:"全能的上帝固然降下了马铃薯疫病，但制造饥荒的是英国人。", qsrc:"约翰·米切尔（1861）",
+    loc:"一场常被称作「天灾」、却最需要被拆穿这一称呼的灾难。",
+    sum:"1845年起致病疫霉连年摧毁爱尔兰薯作；因贫苦人口几乎全赖单一「卢珀」马铃薯为生，病害演成大饥荒：约百万人死亡、一至二百万人外迁。疫病是扳机，单一栽培、殖民地土地制度与自由放任救济政策是结构性成因。",
+    conf:"high", cavs:["死亡约100万、外迁约100–200万为估计区间","粮食出口净效应有争议","责任定性有史学分歧"],
+    refs:["Woodham-Smith, The Great Hunger","Ó Gráda, Ireland's Great Famine","Mitchel, The Last Conquest of Ireland (Perhaps)"]},
+   {id:"ddt", type:"tech", zh:"DDT", en:"DDT", y0:1939, y1:1972, circa:true,
+    culture:"western", sec:["trans"], tier:"major", domain:"材料·化学·制造",
+    quote:"DDT 对我好得很！", qsrc:"宾索特化工广告，《时代》1947",
+    loc:"一种先获诺贝尔奖、后被公约点名的杀虫剂——「奇迹」与「代价」是同一种分子。",
+    sum:"1874年蔡德勒首次合成，1939年米勒发现杀虫性（1948诺奖）。二战起大规模灭蚊灭虱、防疟疾斑疹伤寒，战后广施农业。因持久、脂溶、生物富集重创生态：1972美禁农用，2001《斯德哥尔摩公约》限用，仅存公共卫生豁免。",
+    conf:"high", cavs:["关键年代均确证","净健康–生态权衡至今有政策争议"],
+    refs:["DDT (Wikipedia)","Nobel Prize 1948, P. H. Müller","How DDT went from triumph to tragedy (Chemistry World)"],
+    versions:[{t:"战时灭虱灭蚊（那不勒斯 1943–44）", e:"1943–1945"},{t:"战后农业大面积喷洒", e:"1945–1972"},{t:"限于疾病媒介防治（公约豁免）", e:"2001–"}]},
+   {id:"ddt-ecological-crisis", type:"disaster", subtype:"env", zh:"DDT 生态危机", en:"The DDT Ecological Crisis", y0:1950, y1:1972, circa:true,
+    culture:"trans", tier:"major", domain:"农业与食物", mourn:true,
+    quote:"湖畔苔草已枯萎，不闻鸟鸣。", qsrc:"济慈；卡森取为《寂静的春天》题词",
+    loc:"春天何以沉默：一种杀虫剂如何沿着食物链，一路杀到了天空。",
+    sum:"DDT 的持久性与脂溶性使其沿食物链生物富集，在猛禽体内浓度极高，DDE 致蛋壳变薄、繁殖失败，白头海雕、游隼、褐鹈鹕、鱼鹰种群骤降。这一「寂静的春天」是合成杀虫剂生态代价的标志性案例。",
+    conf:"high", cavs:["蛋壳变薄由 DDE 致为主流共识","各物种下降的多因性中 DDT 为主因之一"],
+    refs:["Carson, Silent Spring","DDT (Wikipedia)","蛋壳变薄与 DDE 同行评议文献"]},
+   {id:"silent-spring", type:"idea", zh:"《寂静的春天》", en:"Silent Spring", y0:1962, y1:null,
+    culture:"western", tier:"major", domain:"自然哲学与科学方法",
+    quote:"「控制自然」是一个傲慢的说法，诞生于生物学与哲学的蒙昧时代。", qsrc:"蕾切尔·卡森（1962）",
+    loc:"一本让「环境」第一次成为公共议题的书。",
+    sum:"卡森1962年出版之作，以文学之笔和科学证据揭示合成农药的生态与健康代价。遭化工业猛烈反击却引爆公众意识，被视为现代环保运动的奠基之作，间接推动 EPA 成立（1970）与 DDT 禁用（1972）。",
+    conf:"high", cavs:["出版史实均确证"],
+    refs:["Carson, Silent Spring","Silent Spring (Wikipedia)"]},
+   {id:"rachel-carson", type:"person", zh:"蕾切尔·卡森", en:"Rachel Carson", y0:1907, y1:1964,
+    culture:"western", tier:"major", domain:"医学与生命",
+    quote:"在自然中，没有什么是孤立存在的。", qsrc:"《寂静的春天》（1962）",
+    loc:"用一本书改变了人与自然关系的生物学家——她自己正被癌症一点点夺走。",
+    sum:"美国海洋生物学家与科普作家。以《我们周围的海洋》成名，1962年出版《寂静的春天》，在与乳腺癌抗争中完成此书并出庭作证，1964年病逝——环保署与 DDT 禁令都在她身后到来。",
+    conf:"high", cavs:["生卒与病史均确证"],
+    refs:["Rachel Carson (Wikipedia)","Carson, The Sea Around Us"]},
+   {id:"environmental-movement", type:"idea", zh:"现代环保运动", en:"The Modern Environmental Movement", y0:1962, y1:1972, circa:true,
+    culture:"western", sec:["trans"], tier:"major", domain:"经济·制度·治理",
+    quote:"万物相互关联。", qsrc:"康芒纳「生态学第一法则」（1971）",
+    loc:"当「技术的代价」第一次拥有了自己的政治。",
+    sum:"1960–70年代兴起的社会运动与思想潮流，以生态系统的相互联系为核心认知。《寂静的春天》为其奠基意象；地球日与 EPA（1970）为制度里程碑。它是灾祸类 inspires 边的公共汇聚点。",
+    conf:"high", cavs:["运动的多源性（不止源于卡森一书）"],
+    refs:["Commoner, The Closing Circle","Carson, Silent Spring"]},
+   {id:"pesticide-regulation", type:"idea", zh:"农药管制", en:"Pesticide Regulation", y0:1972, y1:2001, circa:true,
+    culture:"trans", tier:"major", domain:"经济·制度·治理",
+    quote:"消除或限制持久性有机污染物的排放。", qsrc:"《斯德哥尔摩公约》（2001）宗旨（释义待终校）",
+    loc:"回路的最后一环：被看见的代价，如何变成约束技术的规则。",
+    sum:"由农药生态危机催生的制度回应：1972 美禁 DDT 农用，2001《斯德哥尔摩公约》全球管控、保留疟疾媒介防治豁免。它是 DDT 回路的闭合节点——代价被看见后转化为规则，回过头约束了技术本身（r1 新增 regulates 边即为此设）。",
+    conf:"high", cavs:["公约宗旨为释义性译述，原文措辞待协调终校","管制的健康–生态权衡仍有政策争议"],
+    refs:["Stockholm Convention on POPs (2001)","US EPA, DDT — A Brief History and Status"]}
+  ];
+
+  /* 批产名单规划位（batch-2/3＋batch-1 顺延＋裁定②追加）；时位为示意（名单只记时段） */
+  var GHOSTS = [
+   {id:"malaria-control-ddt", zh:"DDT 与疟疾防治", type:"idea", culture:"trans", era:"工当", batch:"1（顺延）"},
+   {id:"synthetic-insecticides", zh:"合成杀虫剂（族）", type:"tech", culture:"western", era:"工当", batch:"1（顺延）", family:true},
+   {id:"cuneiform", zh:"楔形文字", type:"tech", culture:"ancient-near-east", era:"深古", batch:"2"},
+   {id:"phoenician-alphabet", zh:"腓尼基字母", type:"idea", culture:"ancient-near-east", era:"深古", batch:"2"},
+   {id:"papyrus", zh:"纸草", type:"tech", culture:"ancient-near-east", era:"深古", batch:"2"},
+   {id:"papermaking", zh:"造纸术", type:"tech", culture:"sinic", era:"深古", batch:"2"},
+   {id:"woodblock-printing", zh:"雕版印刷", type:"tech", culture:"sinic", era:"中古", batch:"2"},
+   {id:"gutenberg-press", zh:"古登堡印刷机", type:"tech", culture:"western", era:"近早", batch:"2"},
+   {id:"hindu-arabic-numerals", zh:"印度—阿拉伯数字", type:"idea", culture:"indic", era:"中古", batch:"2"},
+   {id:"zero-place-value", zh:"零与位值制", type:"idea", culture:"indic", era:"中古", batch:"2"},
+   {id:"house-of-wisdom", zh:"智慧宫", type:"wonder", culture:"islamic", era:"中古", batch:"2"},
+   {id:"nalanda", zh:"那烂陀", type:"wonder", culture:"indic", era:"中古", batch:"2"},
+   {id:"timbuktu-manuscripts", zh:"廷巴克图手稿群", type:"wonder", culture:"africa", era:"中古", batch:"2"},
+   {id:"grand-canal", zh:"大运河", type:"wonder", culture:"sinic", era:"中古", batch:"2"},
+   {id:"scientific-method", zh:"科学方法", type:"idea", culture:"western", era:"近早", batch:"2"},
+   {id:"heliocentrism", zh:"日心说", type:"idea", culture:"western", era:"近早", batch:"2"},
+   {id:"double-entry-bookkeeping", zh:"复式记账", type:"idea", culture:"western", era:"近早", batch:"2"},
+   {id:"shen-kuo", zh:"沈括", type:"person", culture:"sinic", era:"中古", batch:"2"},
+   {id:"al-khwarizmi", zh:"花拉子米", type:"person", culture:"islamic", era:"中古", batch:"2"},
+   {id:"gutenberg", zh:"约翰内斯·古登堡", type:"person", culture:"western", era:"近早", batch:"2"},
+   {id:"ptolemy-i", zh:"托勒密一世", type:"person", culture:"greco-roman", era:"深古", batch:"2"},
+   {id:"cataloguing-pinakes", zh:"文献编目学", type:"idea", culture:"greco-roman", era:"深古", batch:"2"},
+   {id:"reformation", zh:"宗教改革（印刷之效）", type:"idea", culture:"western", era:"近早", batch:"2"},
+   {id:"gunpowder", zh:"火药", type:"tech", culture:"sinic", era:"中古", batch:"3"},
+   {id:"compass", zh:"指南针", type:"tech", culture:"sinic", era:"中古", batch:"3"},
+   {id:"bronze-metallurgy", zh:"青铜冶炼", type:"tech", culture:"ancient-near-east", era:"深古", batch:"3"},
+   {id:"ironworking", zh:"冶铁", type:"tech", culture:"ancient-near-east", era:"深古", batch:"3"},
+   {id:"meroe-ironworking", zh:"麦罗埃冶铁", type:"tech", culture:"africa", era:"深古", batch:"3"},
+   {id:"maya-calendar", zh:"玛雅历法", type:"idea", culture:"americas", era:"深古", batch:"3"},
+   {id:"quipu", zh:"印加结绳", type:"tech", culture:"americas", era:"中古", batch:"3"},
+   {id:"polynesian-navigation", zh:"波利尼西亚航海", type:"tech", culture:"sea-oceania", era:"中古", batch:"3"},
+   {id:"wootz-steel", zh:"乌兹钢", type:"tech", culture:"indic", era:"中古", batch:"3"},
+   {id:"algebra", zh:"代数", type:"idea", culture:"islamic", era:"中古", batch:"3"},
+   {id:"optics-alhazen", zh:"光学（海什木）", type:"idea", culture:"islamic", era:"中古", batch:"3"},
+   {id:"steam-engine", zh:"蒸汽机", type:"tech", culture:"western", era:"工当", batch:"3"},
+   {id:"interchangeable-parts", zh:"可更换零件", type:"tech", culture:"western", era:"工当", batch:"3"},
+   {id:"telegraph", zh:"电报", type:"tech", culture:"western", era:"工当", batch:"3"},
+   {id:"monoculture", zh:"单一栽培", type:"idea", culture:"trans", era:"近早", batch:"3"},
+   {id:"great-smog-london", zh:"伦敦大烟雾", type:"disaster", subtype:"env", culture:"western", era:"工当", batch:"3"},
+   {id:"chernobyl", zh:"切尔诺贝利", type:"disaster", subtype:"accident", culture:"western", era:"工当", batch:"3"},
+   {id:"luddites", zh:"卢德运动", type:"idea", culture:"western", era:"工当", batch:"3"},
+   {id:"scientific-revolution", zh:"科学革命（印刷之效）", type:"idea", culture:"western", era:"近早", batch:"3"},
+   {id:"columbian-exchange", zh:"哥伦布交换", type:"idea", culture:"trans", era:"近早", batch:"3"},
+   {id:"ozone-hole", zh:"臭氧层空洞", type:"disaster", subtype:"env", culture:"trans", era:"工当", batch:"3"},
+   {id:"holocaust", zh:"纳粹大屠杀", type:"disaster", subtype:"atrocity", culture:"western", era:"工当", batch:"3（裁定②追加）", atro:true}
+  ];
+
+  var CONTEXTS = [
+   {id:"sinosphere", zh:"中华文明圈", en:"The Sinosphere", culture:"sinic", y0:-1600, y1:1912,
+    sum:"以中国为中心、经汉字与典籍辐射至朝鲜、日本、越南的东亚文化圈。共享造纸、印刷、冶铁、稻作水利、历法与官僚制的技术底盘。作为父背景，统摄宋朝、蒙元、明治日本等技术环境各异的次级背景。"},
+   {id:"song-dynasty", zh:"宋朝", en:"The Song Dynasty", culture:"sinic", y0:960, y1:1279, parent:"sinosphere",
+    sum:"中国技术与商业的黄金时代：雕版与活字、火药武器化、指南针航海、水运仪象台、交子与城市市场在此汇聚。以「精耕的和平繁荣与制度创新」为特征，与蒙元的欧亚征服环境判然有别。"},
+   {id:"mongol-yuan", zh:"蒙元", en:"The Mongol Yuan", culture:"sinic", y0:1271, y1:1368, parent:"sinosphere", edge:"steppe",
+    sum:"「蒙古和平」使技术与知识沿欧亚通道空前流动——波斯天文入元廷、火药印刷西传、郭守敬修《授时历》。虽属中华文明圈，草原—欧亚维度显著（区域贴近草原带边界呈现）。"},
+   {id:"high-middle-ages", zh:"中世纪盛期", en:"The High Middle Ages", culture:"western", y0:1000, y1:1300,
+    sum:"约1000–1300年的拉丁欧洲，一个常被低估的技术上行期：重犁三圃制、水磨风车、哥特工程、大学兴起、托莱多翻译运动。父背景 latin-west 待 batch-2 建立后回填。"},
+   {id:"meiji-japan", zh:"明治日本", en:"Meiji Japan", culture:"sinic", y0:1868, y1:1912, parent:"sinosphere", tether:"western",
+    sum:"国家主导的高速现代化，非西方防御性现代化样板；「和魂洋才」。按总编辑裁定③挂东亚 sinosphere 之下，西学影响以节点层 culture_secondary 与朝向西方带的虚线牵引表达（规格 §三示例已勘误）。"}
+  ];
+
+  /* 边（已按组会三整改与裁定④修正后的口径）*/
+  var EDGES = [
+   {s:"papermaking", t:"movable-type", ty:"enables", imp:"major", n:"无纸不成印，造纸为前置"},
+   {s:"woodblock-printing", t:"movable-type", ty:"enables", imp:"major", n:"雕刻与刷印工艺为技术前身"},
+   {s:"movable-type", t:"printing-revolution", ty:"parallels", imp:"major", disputed:true, n:"东亚活字与古登堡各自独立起源，不预设影响方向"},
+   {s:"cai-lun", t:"papermaking", ty:"contributed", imp:"major", n:"集大成改良与制度化推广（整改#5：patronized 反向边已撤）"},
+   {s:"papermaking", t:"printing-revolution", ty:"enables", imp:"major", n:"纸经伊斯兰世界西传，为印刷前置"},
+   {s:"printing-revolution", t:"reformation", ty:"enables", imp:"major", disputed:true, n:"使能而非唯一动因"},
+   {s:"printing-revolution", t:"scientific-revolution", ty:"enables", imp:"major", disputed:true, n:"标准化与传播为隐形引擎（程度有争议）"},
+   {s:"ptolemy-i", t:"library-of-alexandria", ty:"patronized", imp:"major", n:"王家赞助与构想（方向＝赞助者→被赞助）"},
+   {s:"library-of-alexandria", t:"nalanda", ty:"parallels", imp:"major", n:"跨文明「知识奇观」呼应"},
+   {s:"library-of-alexandria", t:"cataloguing-pinakes", ty:"enables", imp:"minor", n:"催生文献编目学（wonder 作 enables 源样板）"},
+   {s:"monoculture", t:"great-famine-ireland", ty:"causes", imp:"major", n:"对单一品种的依赖＝技术–生态脆弱性（整改#9：疫霉不立节点，主源＝单一栽培）"},
+   {s:"synthetic-insecticides", t:"ddt", ty:"derives", imp:"major", n:"DDT 为有机氯杀虫剂族之代表（族→个例）"},
+   {s:"ddt", t:"ddt-ecological-crisis", ty:"causes", imp:"major", n:"持久性与生物富集引发生态危机"},
+   {s:"ddt", t:"malaria-control-ddt", ty:"informs", imp:"major", n:"疟疾媒介防治的正面应用（整改#1：原 applies 违端点表，改 informs）"},
+   {s:"ddt-ecological-crisis", t:"silent-spring", ty:"inspires", imp:"major", n:"危机经卡森之笔进入公众视野（整改#3：名单 informs 口径统一为 inspires）"},
+   {s:"ddt-ecological-crisis", t:"environmental-movement", ty:"inspires", imp:"major", n:"「寂静的春天」成为运动的原初意象"},
+   {s:"rachel-carson", t:"silent-spring", ty:"contributed", imp:"major", n:"卡森著述"},
+   {s:"rachel-carson", t:"environmental-movement", ty:"inspires", imp:"minor", n:"其人其书成为运动象征"},
+   {s:"silent-spring", t:"environmental-movement", ty:"inspires", imp:"major", n:"现代环保运动的奠基之作"},
+   {s:"silent-spring", t:"pesticide-regulation", ty:"inspires", imp:"major", n:"间接推动 EPA 成立与 DDT 禁用"},
+   {s:"environmental-movement", t:"pesticide-regulation", ty:"inspires", imp:"major", n:"运动推动立法与管制"},
+   {s:"pesticide-regulation", t:"ddt", ty:"regulates", imp:"major", n:"管制约束/终结 DDT 农用——回路在此闭合（裁定④：r1 新增 regulates）", r1:true},
+   {s:"great-smog-london", t:"environmental-movement", ty:"inspires", imp:"minor", n:"多灾祸汇入的运动"}
+  ];
+
+  return {CULTURES:CULTURES, TYPEZH:TYPEZH, EDGETYPES:EDGETYPES, RULES:RULES,
+          NODES:NODES, GHOSTS:GHOSTS, CONTEXTS:CONTEXTS, EDGES:EDGES};
+})();
+/*DATA-END*/
+</script>
+
+<script>
+/*APP-START*/
+(function(){
+  var D = window.CIVDATA;
+  /* P0-1 渲染层对比度覆写：causes 边色提亮至 ≥3:1（数据块原值不动，语义不变） */
+  D.EDGETYPES.causes.c = "#b84a44";
+  var svg = document.getElementById("cosmos");
+  var NS = "http://www.w3.org/2000/svg";
+  var W = 1600, H = 900, TOP = 26, BOT = 40, L = 60, R = 30;
+  svg.setAttribute("viewBox", "0 0 " + W + " " + H);
+
+  /* 确定性：mulberry32(20260718) ＋ id 哈希 */
+  function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+  function hash(s){var h=2166136261;for(var i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return (h>>>0)/4294967296}
+  var seed = mulberry32(20260718);
+
+  /* 分段时间比例尺（对齐 bake.mjs 思路）*/
+  var ANCH = [[-3400,.035],[500,.30],[1500,.56],[1800,.74],[2026,.975]];
+  function tx(y){
+    if(y<=ANCH[0][0]) return L + ANCH[0][1]*(W-L-R);
+    for(var i=0;i<ANCH.length-1;i++){
+      var a=ANCH[i], b=ANCH[i+1];
+      if(y<=b[0]){ var f=(y-a[0])/(b[0]-a[0]); return L + (a[1]+f*(b[1]-a[1]))*(W-L-R); }
+    }
+    return L + ANCH[ANCH.length-1][1]*(W-L-R);
+  }
+  /* R3-2 逆映射：星图 x → 年 */
+  function invTx(x){
+    var f=(x-L)/(W-L-R);
+    if(f<=ANCH[0][1]) return ANCH[0][0];
+    for(var i=0;i<ANCH.length-1;i++){
+      var a=ANCH[i], b=ANCH[i+1];
+      if(f<=b[1]) return a[0] + (f-a[1])/(b[1]-a[1])*(b[0]-a[0]);
+    }
+    return ANCH[ANCH.length-1][0];
+  }
+  function fmtY(y){ y=Math.round(y); return y<0? "前"+(-y): ""+y }
+
+  /* 文明带 */
+  var wsum = D.CULTURES.reduce(function(s,c){return s+c.w},0);
+  var y0 = TOP+44, y1 = H-BOT-14, yh = y1-y0, acc = 0;
+  var BANDS = {};
+  D.CULTURES.forEach(function(c){
+    var h = yh*c.w/wsum;
+    BANDS[c.k] = {top:y0+acc, h:h, c:c.c, zh:c.zh};
+    acc += h;
+  });
+  function bandY(cul, f){ var b=BANDS[cul]; return b.top + b.h*(0.18+0.64*f); }
+
+  function el(n, attrs, parent, txt){
+    var e = document.createElementNS(NS, n);
+    for(var k in attrs) e.setAttribute(k, attrs[k]);
+    if(txt!=null) e.textContent = txt;
+    (parent||svg).appendChild(e); return e;
+  }
+
+  /* ── 图层 ── */
+  var gBack = el("g",{}); var gBands = el("g",{}); var gAxis = el("g",{"class":"axis"});
+  var gCtx = el("g",{}); var gEdges = el("g",{}); var gGhost = el("g",{}); var gNodes = el("g",{});
+  var gFx = el("g",{});
+  var gGal = el("g",{style:"display:none"});
+
+  /* 星尘背景（seeded）*/
+  (function(){
+    for(var i=0;i<340;i++){
+      var x=seed()*W, y=seed()*H, r=seed()*1.1+.15, o=seed()*.5+.08;
+      el("circle",{cx:x,cy:y,r:r,fill:"#d8cfae",opacity:o}, gBack);
+    }
+    el("circle",{cx:W-90,cy:TOP+96,r:26,fill:"none",stroke:"#c9a961",opacity:.5}, gBack);
+    el("circle",{cx:W-90,cy:TOP+96,r:3,fill:"#c9a961",opacity:.7}, gBack);
+    for(var a=0;a<8;a++){
+      var ang=a*Math.PI/4;
+      el("line",{x1:W-90+8*Math.cos(ang),y1:TOP+96+8*Math.sin(ang),x2:W-90+(a%2?18:24)*Math.cos(ang),y2:TOP+96+(a%2?18:24)*Math.sin(ang),stroke:"#c9a961",opacity:.55,"stroke-width":1}, gBack);
+    }
+    el("path",{d:"M 0 "+(H*.55)+" Q "+(W*.5)+" "+(H*.48)+" "+W+" "+(H*.55),stroke:"#c9a961",fill:"none",opacity:.05,"stroke-width":40}, gBack);
+  })();
+
+  /* 文明带 ＋ 标签（P0-1：满浓度墨色令牌）*/
+  D.CULTURES.forEach(function(c){
+    var b = BANDS[c.k];
+    el("line",{x1:L,x2:W-R,y1:b.top,y2:b.top,"class":"bandline"}, gBands);
+    el("text",{x:14,y:b.top+b.h/2+4,"class":"bandlabel"}, gBands, c.zh);
+    el("rect",{x:L,y:b.top,width:6,height:b.h,fill:c.c,opacity:.6}, gBands);
+  });
+  el("line",{x1:L,x2:W-R,y1:y1,y2:y1,"class":"bandline"}, gBands);
+
+  /* 时间轴（P0-1：短刻加浓，细网线单独降级）*/
+  var AXYEARS = [-3000,-2000,-1000,-500,1,500,1000,1300,1500,1700,1800,1900,2000];
+  AXYEARS.forEach(function(yv){
+    var x = tx(yv);
+    el("line",{x1:x,x2:x,y1:y0-9,y2:y0-1,"class":"tick"}, gAxis);
+    el("line",{x1:x,x2:x,y1:y0,y2:y1,"class":"grid"}, gAxis);
+    el("text",{x:x,y:y0-14,"text-anchor":"middle"}, gAxis, yv<0? "前"+(-yv) : ""+yv);
+  });
+
+  /* ── defs：箭头 ＋ P0-5 嵌套纹理 ── */
+  var defs = el("defs",{});
+  Object.keys(D.EDGETYPES).forEach(function(k){
+    var m = el("marker",{id:"arr-"+k, viewBox:"0 0 10 10", refX:9, refY:5, markerWidth:7.5, markerHeight:7.5, orient:"auto-start-reverse"}, defs);
+    el("path",{d:"M 0 1 L 9 5 L 0 9 z", fill:D.EDGETYPES[k].c}, m);
+  });
+  /* 父背景：疏点铺底（stipple）*/
+  var patP = el("pattern",{id:"pat-parent", width:16, height:16, patternUnits:"userSpaceOnUse"}, defs);
+  el("rect",{width:16,height:16,fill:"#c9a961","fill-opacity":.035}, patP);
+  el("circle",{cx:3.5,cy:3.5,r:.9,fill:"#c9a961","fill-opacity":.55}, patP);
+  el("circle",{cx:11.5,cy:11.5,r:.9,fill:"#c9a961","fill-opacity":.4}, patP);
+  /* 子背景：密斜网纹（cross-hatch）*/
+  var patC = el("pattern",{id:"pat-child", width:7, height:7, patternUnits:"userSpaceOnUse", patternTransform:"rotate(45)"}, defs);
+  el("rect",{width:7,height:7,fill:"#c9a961","fill-opacity":.05}, patC);
+  el("line",{x1:3.5,y1:0,x2:3.5,y2:7,stroke:"#c9a961","stroke-opacity":.5,"stroke-width":.8}, patC);
+  el("line",{x1:0,y1:3.5,x2:7,y2:3.5,stroke:"#c9a961","stroke-opacity":.3,"stroke-width":.8}, patC);
+
+  /* ── 时代背景区域（P0-5：纹理分级 · ≥6px 留隙 · 嵌套梗线实线 vs 影响牵引圆点虚线）── */
+  var ctxIndex = {}, CTXRECT = {}, CTXG = {};
+  D.CONTEXTS.forEach(function(c){ctxIndex[c.id]=c});
+  D.CONTEXTS.forEach(function(c){
+    var b = BANDS[c.culture]; if(!b) return;
+    var x = tx(c.y0), x2 = tx(c.y1);
+    var isChild = !!c.parent;
+    var pad = isChild ? b.h*0.16 : 3;
+    var yTop = b.top + pad, hh = b.h - pad*2;
+    if(isChild){
+      if(c.id==="song-dynasty"){ yTop = b.top + b.h*0.14; hh = b.h*0.40; }
+      if(c.id==="mongol-yuan"){ yTop = b.top + b.h*0.55; hh = b.h*0.42; } /* 贴向草原带边界 */
+      if(c.id==="meiji-japan"){ yTop = b.top + b.h*0.14; hh = b.h*0.44; }
+    }
+    var wdt = Math.max(x2-x, 26);
+    /* P0-5：子区界压进父区界内 8px，保证 6–10px 视隙 */
+    if(isChild && CTXRECT[c.parent]){
+      var pr = CTXRECT[c.parent], G = 8;
+      var nx = Math.max(x, pr.x+G), nx2 = Math.min(x+wdt, pr.x+pr.w-G);
+      x = nx; wdt = Math.max(nx2-nx, 26);
+      var nyT = Math.max(yTop, pr.y+G), nyB = Math.min(yTop+hh, pr.y+pr.h-G);
+      yTop = nyT; hh = Math.max(nyB-nyT, 20);
+    }
+    CTXRECT[c.id] = {x:x, y:yTop, w:wdt, h:hh};
+    var g = el("g",{"class":"region"+(isChild?" child":""),"data-ctx":c.id}, gCtx);
+    CTXG[c.id] = g;
+    el("rect",{x:x,y:yTop,width:wdt,height:hh,rx:10}, g);
+    el("text",{x:x+8,y:yTop+16}, g, c.zh + (isChild? "": " ⌂"));
+    if(isChild && CTXRECT[c.parent]){ /* 嵌套梗线：实线短梗，连向最近的父区界 */
+      var pr2 = CTXRECT[c.parent];
+      var toTop = (yTop - pr2.y) <= ((pr2.y+pr2.h) - (yTop+hh));
+      var sd = toTop? ("M "+(x+14)+" "+yTop+" L "+(x+14)+" "+(pr2.y+1.5))
+                    : ("M "+(x+14)+" "+(yTop+hh)+" L "+(x+14)+" "+(pr2.y+pr2.h-1.5));
+      el("path",{d:sd,"class":"nestlink"}, g);
+    }
+    if(c.tether){ /* 影响牵引：圆点虚线（区别于嵌套实线，P0-5）*/
+      var tb = BANDS[c.tether];
+      var mx = x + wdt/2;
+      el("path",{d:"M "+mx+" "+yTop+" C "+mx+" "+(yTop-60)+", "+(mx-30)+" "+(tb.top+tb.h)+", "+(mx-30)+" "+(tb.top+tb.h-6),"class":"tether"}, gCtx);
+      el("circle",{cx:mx-30, cy:tb.top+tb.h-6, r:2.4, fill:"#c9a961","fill-opacity":.85}, gCtx);
+      el("text",{x:mx+6,y:(yTop+tb.top+tb.h)/2,"class":"tetherlabel"}, gCtx, "西学影响牵引（culture_secondary·节点层）");
+    }
+    if(c.edge){
+      el("text",{x:x+8,y:yTop+hh-7,"class":"tetherlabel"}, gCtx, "↓ 贴草原带边界（A-8 空间语义）");
+    }
+    g.addEventListener("click", function(ev){ ev.stopPropagation(); openCtxIntro(c); });
+    g.addEventListener("mousemove", function(ev){ tip(ev, "<b>时代背景 · "+c.zh+"</b><br>"+(c.parent? "父背景："+ctxIndex[c.parent].zh+"（嵌套·子区密网纹）": "父背景（疏点铺底·可含次级背景）")+"<br><i>点击打开背景介绍页（R3-3）</i>"); });
+    g.addEventListener("mouseleave", hideTip);
+  });
+
+  /* ── 节点定位 ── */
+  var POS = {}, ALL = {};
+  D.NODES.forEach(function(n){ALL[n.id]={type:n.type, zh:n.zh, real:true, node:n}});
+  D.GHOSTS.forEach(function(g){ALL[g.id]={type:g.type, zh:g.zh, real:false, node:g}});
+  var NUDGE = {"cai-lun":.2,"movable-type":.62,"library-of-alexandria":.5,"printing-revolution":.3,
+               "great-famine-ireland":.72,"ddt":.5,"silent-spring":.18,"rachel-carson":.42,
+               "environmental-movement":.62,"pesticide-regulation":.4,"ddt-ecological-crisis":.5};
+  D.NODES.forEach(function(n){
+    var f = (n.id in NUDGE)? NUDGE[n.id] : hash(n.id);
+    POS[n.id] = {x:tx(n.y0), y:bandY(n.culture, f)};
+  });
+  var ERAR = {"深古":[-3200,-150], "中古":[560,1440], "近早":[1520,1780], "工当":[1815,1995]};
+  D.GHOSTS.forEach(function(g){
+    var r = ERAR[g.era], yv = r[0] + hash(g.id)* (r[1]-r[0]);
+    POS[g.id] = {x:tx(yv), y:bandY(g.culture, hash(g.id+"y")), yv:yv};
+  });
+  /* 局部避让：同带同 x 邻近的散开（确定性微调）*/
+  (function(){
+    var ids = Object.keys(POS);
+    for(var it=0; it<3; it++){
+      for(var i=0;i<ids.length;i++) for(var j=i+1;j<ids.length;j++){
+        var a=POS[ids[i]], b=POS[ids[j]];
+        var dx=a.x-b.x, dy=a.y-b.y, d2=dx*dx+dy*dy;
+        if(d2<520){ var push=(hash(ids[i]+ids[j])>.5?1:-1)*4; a.y+=push; b.y-=push; }
+      }
+    }
+  })();
+  /* 当前坐标（回路聚焦扇开时偏离基准位）*/
+  var CUR = {};
+  Object.keys(POS).forEach(function(id){ CUR[id]={x:POS[id].x, y:POS[id].y} });
+
+  /* ── 边（P0-4：全体有向边具箭头；regulates 朱砂＋印玺式长短虚实）── */
+  var EV = [];
+  function edgeD(e){
+    var a=CUR[e.s], b=CUR[e.t];
+    var mx=(a.x+b.x)/2, my=(a.y+b.y)/2;
+    var nx=-(b.y-a.y), ny=(b.x-a.x), nl=Math.sqrt(nx*nx+ny*ny)||1;
+    var bend = 22 + 30*hash(e.s+e.t);
+    var cx=mx+nx/nl*bend, cy=my+ny/nl*bend;
+    return {d:"M "+a.x+" "+a.y+" Q "+cx+" "+cy+" "+b.x+" "+b.y, cx:cx, cy:cy, a:a, b:b};
+  }
+  D.EDGES.forEach(function(e){
+    if(!POS[e.s]||!POS[e.t]) return;
+    var ghostEnd = !(ALL[e.s].real && ALL[e.t].real);
+    var p = el("path",{
+      "class":"edge"+(e.imp==="minor"?" minor":"")+(e.disputed?" disputed":"")+(ghostEnd?" ghostend":"")+(e.ty==="regulates"?" regulates":""),
+      stroke:D.EDGETYPES[e.ty].c, "stroke-width": e.ty==="regulates"? 2.6 : (e.imp==="major"? 1.7:1.2),
+      "data-s":e.s, "data-t":e.t}, gEdges);
+    if(e.ty!=="parallels") p.setAttribute("marker-end","url(#arr-"+e.ty+")"); /* parallels＝无向，不带箭头 */
+    EV.push({e:e, p:p});
+    p.addEventListener("mousemove", function(ev){
+      tip(ev, "<b>"+ALL[e.s].zh+" —"+D.EDGETYPES[e.ty].zh+"（"+e.ty+"）→ "+ALL[e.t].zh+"</b>"+(e.r1? " <span style='color:#e05a3d'>r1</span>":"")+(e.disputed?" · disputed":"")+"<br>"+e.n);
+    });
+    p.addEventListener("mouseleave", hideTip);
+  });
+  function redrawEdges(){ EV.forEach(function(v){ v.p.setAttribute("d", edgeD(v.e).d) }) }
+  redrawEdges();
+
+  /* ── 形状 ── */
+  function shape(g, type, s, color, atro){
+    if(type==="tech"){ el("polygon",{points:(-s)+",0 0,"+(-s)+" "+s+",0 0,"+s, fill:color, stroke:"#0b0e15","stroke-width":1}, g); }
+    else if(type==="idea"){ el("circle",{r:s*.78, fill:"none", stroke:color,"stroke-width":2.2}, g); el("circle",{r:s*.3, fill:color}, g); }
+    else if(type==="person"){ el("path",{d:"M 0 "+(-s)+" L "+(s*.24)+" "+(-s*.24)+" L "+s+" 0 L "+(s*.24)+" "+(s*.24)+" L 0 "+s+" L "+(-s*.24)+" "+(s*.24)+" L "+(-s)+" 0 L "+(-s*.24)+" "+(-s*.24)+" Z", fill:color, stroke:"#0b0e15","stroke-width":.8}, g); }
+    else if(type==="wonder"){ var pts=[]; for(var i=0;i<6;i++){var a=Math.PI/6+i*Math.PI/3; pts.push((s*Math.cos(a))+","+(s*Math.sin(a)));} el("polygon",{points:pts.join(" "), fill:color, stroke:"#0b0e15","stroke-width":1}, g); }
+    else { /* disaster 裂痕暗星 */
+      var pts2=[]; for(var j=0;j<12;j++){var a2=j*Math.PI/6; var rr=(j%2? s*.45: s); pts2.push((rr*Math.cos(a2))+","+(rr*Math.sin(a2)));}
+      el("polygon",{points:pts2.join(" "), fill:"#191219", stroke:color,"stroke-width":1.6}, g);
+      el("line",{x1:-s*.4,y1:s*.28,x2:s*.34,y2:-s*.36, stroke:color,"stroke-width":1,"stroke-opacity":.8}, g);
+      if(atro){ el("circle",{r:s+3.5, fill:"none", stroke:"#8d8d96","stroke-width":1,"stroke-opacity":.65,"stroke-dasharray":"1 2"}, g); }
+    }
+  }
+
+  /* ── 规划位（ghost）＋ LOD 层级标签（R3-1：规划节点保持淡渲染，标签仅缩放/悬停显现）── */
+  var NODEG = {}, GHOSTG = {}, HOVER = null;
+  D.GHOSTS.forEach(function(gh){
+    var p = POS[gh.id];
+    var g = el("g",{"class":"ghost"+(gh.atro?" atro":""), transform:"translate("+p.x+","+p.y+")", "data-type":gh.type, "data-id":gh.id}, gGhost);
+    GHOSTG[gh.id] = g;
+    if(gh.atro){ shape(g, "disaster", 6.5, "#8d8d96", true); }
+    else if(gh.family){ el("circle",{r:7,fill:"none",stroke:"#cbbd97","stroke-opacity":.5,"stroke-dasharray":"2 2"}, g); el("circle",{r:2.6}, g); }
+    else { el("circle",{r:2.6}, g); }
+    el("text",{x:0,y:16,"text-anchor":"middle","class":"glabel"}, g, gh.zh);
+    g.addEventListener("mouseenter", function(){ HOVER=gh.id; refreshMinor(); });
+    g.addEventListener("mousemove", function(ev){
+      tip(ev, "<b>"+gh.zh+"</b> · "+D.TYPEZH[gh.type]+(gh.subtype? "·"+gh.subtype:"")+"<br>规划中 · batch-"+gh.batch+"（名单在册，时位示意）"+(gh.family? "<br>族节点：星系视图中与个例聚合（A-1）":"")+(gh.atro? "<br>subtype=atrocity（r1 新增）· 灾祸零幽默绝对红线":""));
+    });
+    g.addEventListener("mouseleave", function(){ HOVER=null; refreshMinor(); hideTip(); });
+  });
+
+  /* ── 实产节点 ── */
+  D.NODES.forEach(function(n){
+    var p = POS[n.id];
+    var cul = D.CULTURES.filter(function(c){return c.k===n.culture})[0];
+    var s = n.tier==="major"? 11:7.5;
+    var g = el("g",{"class":"node","transform":"translate("+p.x+","+p.y+")","data-id":n.id,"data-type":n.type}, gNodes);
+    NODEG[n.id] = g;
+    el("circle",{r:s+7,fill:cul.c,opacity:.10,"class":"glow"}, g);
+    el("circle",{r:s+11,fill:"none",stroke:"#c9a961","stroke-width":1,"class":"halo","stroke-dasharray":"2 3"}, g);
+    shape(g, n.type, s, cul.c);
+    el("text",{x:0,y:s+17,"text-anchor":"middle"}, g, n.zh);
+    g.addEventListener("click", function(ev){ ev.stopPropagation(); select(n.id); });
+    g.addEventListener("mouseenter", function(){ HOVER=n.id; refreshMinor(); });
+    g.addEventListener("mousemove", function(ev){
+      tip(ev, "<b>"+n.zh+"</b>（"+D.TYPEZH[n.type]+(n.subtype? "·"+n.subtype:"")+" · "+cul.zh+" · "+(n.tier==="major"?"主星":"辅星")+"）<br><i>"+n.loc+"</i><br>点击聚焦 → 抽屉 → 降落星球层");
+    });
+    g.addEventListener("mouseleave", function(){ HOVER=null; refreshMinor(); hideTip(); });
+  });
+
+  /* ── P0-4 标签避让：四槽位择优 ＋ 侧置引线（DDT 簇等密集区）── */
+  (function layoutLabels(){
+    var blocks = [];
+    Object.keys(CUR).forEach(function(id){
+      var r = ALL[id].real? 14: 5;
+      blocks.push([CUR[id].x-r, CUR[id].y-r, 2*r, 2*r]);
+    });
+    function overlap(rc){
+      var s=0;
+      for(var i=0;i<blocks.length;i++){
+        var b=blocks[i];
+        var ox=Math.min(rc[0]+rc[2],b[0]+b[2])-Math.max(rc[0],b[0]);
+        var oy=Math.min(rc[1]+rc[3],b[1]+b[3])-Math.max(rc[1],b[1]);
+        if(ox>0&&oy>0) s+=ox*oy;
+      }
+      return s;
+    }
+    D.NODES.slice().sort(function(a,b){return POS[a.id].x-POS[b.id].x}).forEach(function(n){
+      var g=NODEG[n.id], t=g.querySelector("text");
+      var cx=CUR[n.id].x, cy=CUR[n.id].y;
+      var s=n.tier==="major"?11:7.5, w=n.zh.length*13+4, h=15;
+      var cands=[
+        {x:0, y:s+17, a:"middle", r:[cx-w/2, cy+s+5, w, h], lead:null},
+        {x:0, y:-s-8, a:"middle", r:[cx-w/2, cy-s-20, w, h], lead:null},
+        {x:s+14, y:4.5, a:"start", r:[cx+s+12, cy-7, w, h], lead:[s+3,0,s+11,0]},
+        {x:-s-14, y:4.5, a:"end", r:[cx-s-12-w, cy-7, w, h], lead:[-s-3,0,-s-11,0]}
+      ];
+      var best=cands[0], bo=Infinity;
+      for(var i=0;i<cands.length;i++){
+        var o=overlap(cands[i].r);
+        if(o===0){ best=cands[i]; bo=0; break; }
+        if(o<bo){ bo=o; best=cands[i]; }
+      }
+      t.setAttribute("x",best.x); t.setAttribute("y",best.y); t.setAttribute("text-anchor",best.a);
+      if(best.lead){ el("line",{x1:best.lead[0],y1:best.lead[1],x2:best.lead[2],y2:best.lead[3],"class":"leader"}, g); }
+      blocks.push(best.r);
+    });
+  })();
+
+  /* ── 聚焦 ── */
+  var SEL = null;
+  function neighbors(id){
+    var set = {}; set[id]=1;
+    D.EDGES.forEach(function(e){ if(e.s===id) set[e.t]=1; if(e.t===id) set[e.s]=1; });
+    return set;
+  }
+  function select(id){
+    SEL = id;
+    var nb = neighbors(id);
+    gNodes.querySelectorAll(".node").forEach(function(g){
+      g.classList.toggle("dim", !(g.getAttribute("data-id") in nb));
+      g.classList.toggle("sel", g.getAttribute("data-id")===id);
+    });
+    gGhost.querySelectorAll(".ghost").forEach(function(g){
+      g.classList.toggle("dim", !(g.getAttribute("data-id") in nb));
+    });
+    gEdges.querySelectorAll(".edge").forEach(function(p){
+      p.classList.toggle("dim", !(p.getAttribute("data-s")===id || p.getAttribute("data-t")===id));
+    });
+    refreshMinor();
+    openDrawer(id);
+  }
+  function clearSel(){
+    SEL=null;
+    document.querySelectorAll(".dim").forEach(function(x){x.classList.remove("dim")});
+    document.querySelectorAll(".sel").forEach(function(x){x.classList.remove("sel")});
+    closePanel("drawer");
+    refreshMinor();
+  }
+
+  /* ── R3-1 LOD：次要边默认藏，悬停/选中或缩放≥阈值显现 ── */
+  function refreshMinor(){
+    EV.forEach(function(v){
+      if(v.e.imp!=="minor") return;
+      var show = (SEL && (v.e.s===SEL||v.e.t===SEL)) || (HOVER && (v.e.s===HOVER||v.e.t===HOVER))
+              || (LF && inLoop(v.e.s) && inLoop(v.e.t));
+      v.p.classList.toggle("lodshow", !!show);
+    });
+  }
+
+  /* ── P0-3 面板坞管理 ── */
+  var PANELS = {legend:document.getElementById("legend"), specs:document.getElementById("specs"),
+                drawer:document.getElementById("drawer"), ctxintro:document.getElementById("ctxintro")};
+  var dockL = document.getElementById("dockL"), dockR = document.getElementById("dockR");
+  var bLegend=document.getElementById("bLegend"), bSpecs=document.getElementById("bSpecs");
+  var bLoop=document.getElementById("bLoop"), bZreset=document.getElementById("bZreset");
+  function updateDocks(){
+    dockL.classList.toggle("has", !!dockL.querySelector(".panel.open"));
+    dockR.classList.toggle("has", !!dockR.querySelector(".panel.open"));
+    bLegend.classList.toggle("on", PANELS.legend.classList.contains("open"));
+    bSpecs.classList.toggle("on", PANELS.specs.classList.contains("open"));
+  }
+  function openPanel(k){ PANELS[k].classList.add("open"); updateDocks(); }
+  function closePanel(k){ PANELS[k].classList.remove("open"); updateDocks(); }
+  document.querySelectorAll(".pclose").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var k = btn.getAttribute("data-close");
+      if(k==="drawer") clearSel(); else closePanel(k);
+    });
+  });
+  bLegend.onclick=function(){ PANELS.legend.classList.contains("open")? closePanel("legend"): openPanel("legend") };
+  bSpecs.onclick=function(){ PANELS.specs.classList.contains("open")? closePanel("specs"): openPanel("specs") };
+
+  /* ── 词条抽屉（停靠）── */
+  var drawerBody = document.getElementById("drawerBody");
+  function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;")}
+  function openDrawer(id){
+    var n = ALL[id].node;
+    var cul = D.CULTURES.filter(function(c){return c.k===n.culture})[0];
+    var era = (n.y0<0? "前"+(-n.y0): n.y0) + (n.y1? "–"+(n.y1<0? "前"+(-n.y1): n.y1):"") + (n.circa? "（约）":"");
+    document.getElementById("drawerTitle").textContent = n.zh;
+    drawerBody.innerHTML = "<div class='en'>"+esc(n.en||"")+"</div>"
+      + "<div class='meta'>"
+      + "<span class='badge'>"+D.TYPEZH[n.type]+(n.subtype? " · "+n.subtype:"")+"</span>"
+      + "<span class='badge'>"+cul.zh+"</span>"
+      + "<span class='badge'>"+(n.tier==="major"?"主星 major":"辅星 minor")+"</span>"
+      + (n.mourn? "<span class='badge red'>灾祸 · 零幽默</span>":"")
+      + "<br><b>年代</b> "+era+"　<b>主领域</b> "+esc(n.domain)
+      + (n.sec? "　<b>次文明</b> "+n.sec.join("、"):"")
+      + "<br><b>置信</b> "+n.conf+"（caveats "+n.cavs.length+" 条）</div>"
+      + "<div class='loc'>"+esc(n.loc)+"</div>"
+      + "<div class='sum'>"+esc(n.sum)+"</div>"
+      + "<button class='land'>降落 · 进入星球层 ↓</button>";
+    drawerBody.querySelector(".land").onclick=function(){openPlanet(id)};
+    drawerBody.scrollTop = 0;
+    openPanel("drawer");
+  }
+
+  /* ── R3-3 背景介绍页（停靠）── */
+  var ctxBody = document.getElementById("ctxBody");
+  function lineageOf(c){
+    var chain=[c.id], p=c.parent;
+    while(p){ chain.unshift(p); p = ctxIndex[p] && ctxIndex[p].parent; }
+    return chain;
+  }
+  function openCtxIntro(c){
+    var chain = lineageOf(c);
+    var kids = D.CONTEXTS.filter(function(x){return x.parent===c.id});
+    var memR = D.NODES.filter(function(n){ var b=(n.y1!=null? n.y1: n.y0); return n.culture===c.culture && b>=c.y0 && n.y0<=c.y1 });
+    var memG = D.GHOSTS.filter(function(g){ var yv=POS[g.id].yv; return g.culture===c.culture && yv>=c.y0 && yv<=c.y1 });
+    document.getElementById("ctxTitle").textContent = "背景介绍 · "+c.zh;
+    var h = "<div class='en'>"+esc(c.en)+" · 时代背景 context</div>"
+      + "<div class='lineage'>谱系　"+chain.join(" ⊃ ")+"</div>"
+      + (chain.length>1? "<div class='lineage-zh'>"+chain.map(function(id){return ctxIndex[id].zh}).join(" ⊃ ")+"</div>"
+                       : "<div class='lineage-zh'>根背景"+(c.id==="high-middle-ages"? "（父区 latin-west 待 batch-2 回填）":"（可含次级背景）")+"</div>")
+      + "<div class='meta' style='margin-bottom:6px'>"
+      + "<span class='badge'>"+fmtY(c.y0)+" – "+fmtY(c.y1)+"</span>"
+      + (c.parent? "<span class='badge'>父背景 "+esc(ctxIndex[c.parent].zh)+"</span>":"<span class='badge'>父背景层</span>")
+      + (kids.length? "<span class='badge'>次级 ×"+kids.length+"</span>":"")
+      + "</div>"
+      + "<div class='sum'>"+esc(c.sum)+"</div>"
+      + "<h4>成员词条（"+(memR.length+memG.length)+"）</h4>"
+      + "<div class='members'>"
+      + memR.map(function(n){return "<button class='mem' data-id='"+n.id+"'>"+esc(n.zh)+"</button>"}).join("")
+      + memG.map(function(g){return "<button class='mem plan' data-id='"+g.id+"' data-plan='1'>"+esc(g.zh)+" · 规划</button>"}).join("")
+      + ((memR.length+memG.length)? "": "<span style='color:var(--ink-faint)'>（本时段暂无在册成员；规划位随批产回填）</span>")
+      + "</div>"
+      + (kids.length? "<h4>次级背景</h4><div class='members'>"+kids.map(function(k){return "<button class='mem' data-ctx='"+k.id+"'>"+esc(k.zh)+"</button>"}).join("")+"</div>":"")
+      + "<div style='margin-top:10px;color:var(--ink-faint);font-size:11px'>点击成员＝聚焦该星（规划位将放大定位并显现标签）；点击次级背景＝切换介绍页。</div>";
+    ctxBody.innerHTML = h;
+    ctxBody.querySelectorAll(".mem[data-id]").forEach(function(b){
+      b.addEventListener("click", function(){
+        var id = b.getAttribute("data-id");
+        if(b.getAttribute("data-plan")){ centerOn(id); }
+        else { select(id); centerOn(id); }
+      });
+    });
+    ctxBody.querySelectorAll(".mem[data-ctx]").forEach(function(b){
+      b.addEventListener("click", function(){ openCtxIntro(ctxIndex[b.getAttribute("data-ctx")]) });
+    });
+    ctxBody.scrollTop = 0;
+    openPanel("ctxintro");
+  }
+
+  /* ── 星球层 ── */
+  var planet = document.getElementById("planet");
+  var skysvg = document.getElementById("skysvg");
+  var ground = document.getElementById("ground");
+  function el2(parent,n,attrs,txt){var e=document.createElementNS(NS,n);for(var k in attrs)e.setAttribute(k,attrs[k]);if(txt!=null)e.textContent=txt;parent.appendChild(e);return e}
+  function openPlanet(id){
+    var n = ALL[id].node;
+    planet.classList.add("show");
+    /* 天空：邻域星座 */
+    skysvg.innerHTML = "";
+    var sw = skysvg.clientWidth||1200, sh = skysvg.clientHeight||420;
+    skysvg.setAttribute("viewBox","0 0 "+sw+" "+sh);
+    var sdefs = el2(skysvg,"defs",{});
+    Object.keys(D.EDGETYPES).forEach(function(k){
+      var m = el2(sdefs,"marker",{id:"sarr-"+k, viewBox:"0 0 10 10", refX:9, refY:5, markerWidth:7, markerHeight:7, orient:"auto-start-reverse"});
+      el2(m,"path",{d:"M 0 1 L 9 5 L 0 9 z", fill:D.EDGETYPES[k].c});
+    });
+    var rnd = mulberry32(20260718);
+    for(var i=0;i<160;i++){
+      el2(skysvg,"circle",{cx:rnd()*sw, cy:rnd()*sh, r:rnd()*1.2+.2, fill:"#d8cfae", opacity:rnd()*.6+.1});
+    }
+    var cx0=sw/2, cy0=sh*0.92;
+    el2(skysvg,"circle",{cx:cx0,cy:cy0,r:46,fill:"#c9a961",opacity:.12});
+    el2(skysvg,"circle",{cx:cx0,cy:cy0,r:22,fill:"#c9a961",opacity:.25});
+    el2(skysvg,"text",{x:cx0,y:cy0-56,fill:"#dcbe78","text-anchor":"middle","font-size":13,"letter-spacing":".2em"},"本星 · "+n.zh);
+    var rel = D.EDGES.filter(function(e){return e.s===id||e.t===id});
+    rel.forEach(function(e,i){
+      var other = e.s===id? e.t : e.s;
+      var ang = Math.PI*(0.14 + 0.72*(i/(Math.max(rel.length-1,1))));
+      var rr = sh*0.62;
+      var x = cx0 + rr*Math.cos(Math.PI-ang), y = cy0 - rr*Math.sin(ang);
+      var col = D.EDGETYPES[e.ty].c;
+      var dashv = e.ty==="regulates"? "12 3 3 3" : (e.disputed? "5 4" : "none");
+      var ln = el2(skysvg,"line",{x1:cx0,y1:cy0-8,x2:x,y2:y,stroke:col,"stroke-width":e.ty==="regulates"?2.4:1.2,opacity:.8,"stroke-dasharray":dashv});
+      if(e.ty!=="parallels"){ if(e.s===id) ln.setAttribute("marker-end","url(#sarr-"+e.ty+")"); else ln.setAttribute("marker-start","url(#sarr-"+e.ty+")"); }
+      var star = el2(skysvg,"circle",{cx:x,cy:y,r:ALL[other].real?5:3,fill:ALL[other].real?"#e8ddc2":"#8f866c",style:"cursor:pointer"});
+      el2(skysvg,"text",{x:x,y:y-10,fill:"#d3c7a6","text-anchor":"middle","font-size":11.5}, ALL[other].zh);
+      el2(skysvg,"text",{x:(cx0+x)/2,y:(cy0+y)/2-6,fill:col,"text-anchor":"middle","font-size":11,"paint-order":"stroke",stroke:"#0b0e15","stroke-width":3},
+          (e.s===id? "→":"←")+" "+D.EDGETYPES[e.ty].zh+(e.r1?"·r1":""));
+      star.addEventListener("click",function(){ if(ALL[other].real){openPlanet(other); select(other);} });
+    });
+    /* 大地：词条 */
+    var vh = "";
+    if(n.versions && n.versions.length){
+      vh = "<div class='sec'><h5>重要版本更迭 · 星球层谱系（A-1）</h5><div class='vrow'>"
+         + n.versions.map(function(v){return "<div class='ver'><b>"+esc(v.t)+"</b><span>"+esc(v.e)+"</span></div>"}).join("")
+         + "</div></div>";
+    }
+    var edgesH = rel.map(function(e){
+      var other = e.s===id? e.t : e.s;
+      return "<span class='ebadge'>"+(e.s===id?"→":"←")+" "+D.EDGETYPES[e.ty].zh+"·"+esc(ALL[other].zh)+"</span>";
+    }).join("");
+    ground.className = n.mourn? "mourn":"";
+    ground.innerHTML =
+      "<div class='gcap'>俯视 · 词条大地　［三层结构 · 星球层原型；VR 为远期（A-1）］</div>"
+      + (n.mourn? "<div class='mournbadge'>灾祸条目 · 零幽默红线 · 图像间接意象</div>":"")
+      + "<h2>"+esc(n.zh)+"</h2><div class='gen'>"+esc(n.en||"")+"</div>"
+      + "<div class='quote'>「"+esc(n.quote)+"」<span class='src'>——"+esc(n.qsrc)+"</span></div>"
+      + "<div class='sec'><h5>定位</h5><p><i>"+esc(n.loc)+"</i></p></div>"
+      + "<div class='sec'><h5>摘要（正文全文随批产入仓）</h5><p>"+esc(n.sum)+"</p></div>"
+      + vh
+      + "<div class='sec'><h5>边即论证</h5><div>"+edgesH+"</div></div>"
+      + "<div class='sec'><h5>置信 · "+n.conf+"</h5><ul class='cavs'>"+n.cavs.map(function(c){return "<li>"+esc(c)+"</li>"}).join("")+"</ul></div>"
+      + "<div class='sec'><h5>参考文献</h5><div class='refs'>"+n.refs.map(esc).join("｜")+"</div></div>";
+    ground.scrollTop = 0;
+  }
+  document.getElementById("ascend").onclick=function(){planet.classList.remove("show")};
+
+  /* ── 星系视图（LOD 聚合概念）── */
+  var CLUSTERS = [
+    {zh:"知识的复制与传播", n:29, x:.36, y:.42, r:150, note:"主脊切片：文字—纸—印刷—图书馆—编目—科学革命"},
+    {zh:"技术的代价与回响（DDT 回路）", n:14, x:.72, y:.62, r:110, note:"causes→inspires→regulates 完整反馈回路（r1 闭合）", loop:true},
+    {zh:"跨文明使能 · 其余灾祸", n:8, x:.6, y:.24, r:86, note:"火药 · 指南针 · 冶金 · 航海 ·（灾祸批产随终审）"}
+  ];
+  CLUSTERS.forEach(function(c){
+    var g = el("g",{"class":"nebula"}, gGal);
+    var cx=W*c.x, cy=H*c.y;
+    for(var i=0;i<3;i++){
+      el("ellipse",{cx:cx+ (i-1)*22, cy:cy+(i-1)*10, rx:c.r*(1-.18*i), ry:c.r*(.55-.08*i),
+        fill:"#c9a961", opacity:.05+.03*i, "class": i===2?"neb-core":""}, g);
+    }
+    var rnd = mulberry32(hash(c.zh)*1e9|0);
+    for(var s=0;s<c.n;s++){
+      el("circle",{cx:cx+(rnd()-.5)*c.r*1.7, cy:cy+(rnd()-.5)*c.r*.9, r:rnd()*2+0.7, fill:"#e8ddc2", opacity:.5+rnd()*.4}, g);
+    }
+    el("text",{x:cx, y:cy+c.r*.62+22, fill:"#dcbe78","text-anchor":"middle","font-size":16,"letter-spacing":".2em"}, g, c.zh);
+    el("text",{x:cx, y:cy+c.r*.62+42, fill:"#d3c7a6","text-anchor":"middle","font-size":12}, g, c.n+" 星 · "+c.note);
+    g.addEventListener("click", function(){ setView("star"); if(c.loop) focusLoop(true); });
+    g.addEventListener("mousemove", function(ev){ tip(ev,"<b>"+c.zh+"</b><br>远景＝一片（族/主题聚合）；凑近见个例。点击降入星图层"+(c.loop? "并聚焦回路（P0-4）":"")+"。") });
+    g.addEventListener("mouseleave", hideTip);
+  });
+  el("text",{x:W/2, y:H-70, fill:"#d3c7a6","text-anchor":"middle","font-size":12.5,"letter-spacing":".12em"}, gGal,
+     "三层结构 · 第一层：星系/星团（族的 LOD 聚合，A-1）——例：「合成杀虫剂族」远景为一星，降入星图层始见 DDT 个例与 derives 边");
+
+  /* ── 视图切换 ── */
+  var tabGal=document.getElementById("tabGal"), tabStar=document.getElementById("tabStar");
+  var tlWrap=document.getElementById("timeline");
+  function setView(v){
+    var star = v==="star";
+    if(!star && LF) focusLoop(false, true);
+    [gBands,gAxis,gCtx,gEdges,gGhost,gNodes,gFx].forEach(function(g){g.style.display= star? "":"none"});
+    gGal.style.display = star? "none":"";
+    tabGal.classList.toggle("on",!star); tabStar.classList.toggle("on",star);
+    tlWrap.style.display = star? "":"none";
+    clearSel();
+    resetVB();
+  }
+  tabGal.onclick=function(){setView("gal")};
+  tabStar.onclick=function(){setView("star")};
+
+  /* ── 滤镜 ── */
+  document.querySelectorAll("#filters input[data-t]").forEach(function(cb){
+    cb.addEventListener("change", function(){
+      var t=cb.getAttribute("data-t"), on=cb.checked;
+      gNodes.querySelectorAll(".node[data-type='"+t+"']").forEach(function(g){g.style.display=on?"":"none"});
+      gGhost.querySelectorAll(".ghost[data-type='"+t+"']").forEach(function(g){g.style.display=on?"":"none"});
+    });
+  });
+  document.getElementById("fGhost").addEventListener("change", function(){ gGhost.style.display=this.checked?"":"none" });
+  document.getElementById("fCtx").addEventListener("change", function(){ gCtx.style.display=this.checked?"":"none" });
+
+  /* ── R3-1 滚轮缩放 ＋ 平移（LOD 阈值联动）── */
+  var VB = {x:0,y:0,w:W,h:H}, zoomK = 1, LODK = 1.5;
+  function applyVB(){
+    svg.setAttribute("viewBox", VB.x+" "+VB.y+" "+VB.w+" "+VB.h);
+    zoomK = W/VB.w;
+    svg.classList.toggle("lodz", zoomK>=LODK);
+  }
+  function clampVB(){
+    VB.w = Math.min(Math.max(VB.w, W/6), W*1.3); VB.h = VB.w*H/W;
+    VB.x = Math.min(Math.max(VB.x, -W*.25), W*1.25-VB.w);
+    VB.y = Math.min(Math.max(VB.y, -H*.25), H*1.25-VB.h);
+  }
+  function resetVB(){ VB = {x:0,y:0,w:W,h:H}; applyVB(); }
+  function centerOn(id){
+    var p = CUR[id]; if(!p) return;
+    var k = 2.2; VB.w = W/k; VB.h = H/k; VB.x = p.x-VB.w/2; VB.y = p.y-VB.h/2;
+    clampVB(); applyVB();
+  }
+  svg.addEventListener("wheel", function(ev){
+    ev.preventDefault();
+    var r = svg.getBoundingClientRect();
+    var mx = VB.x + (ev.clientX-r.left)/r.width*VB.w;
+    var my = VB.y + (ev.clientY-r.top)/r.height*VB.h;
+    var f = Math.exp(ev.deltaY*0.0016);
+    VB.x = mx-(mx-VB.x)*f; VB.y = my-(my-VB.y)*f; VB.w = VB.w*f; VB.h = VB.w*H/W;
+    clampVB(); applyVB();
+  }, {passive:false});
+  var panSt=null, dragMoved=false;
+  svg.addEventListener("pointerdown", function(ev){
+    if(ev.button!==0) return;
+    panSt={x:ev.clientX, y:ev.clientY, vx:VB.x, vy:VB.y}; dragMoved=false;
+    function mv(e2){
+      if(!panSt) return;
+      var dx=e2.clientX-panSt.x, dy=e2.clientY-panSt.y;
+      if(!dragMoved && dx*dx+dy*dy<25) return;
+      dragMoved=true; svg.classList.add("panning");
+      var r=svg.getBoundingClientRect();
+      VB.x=panSt.vx-dx*VB.w/r.width; VB.y=panSt.vy-dy*VB.h/r.height;
+      clampVB(); applyVB();
+    }
+    function up(){
+      panSt=null; svg.classList.remove("panning");
+      window.removeEventListener("pointermove",mv); window.removeEventListener("pointerup",up);
+      setTimeout(function(){dragMoved=false},0);
+    }
+    window.addEventListener("pointermove",mv); window.addEventListener("pointerup",up);
+  });
+  svg.addEventListener("click", function(ev){ if(dragMoved){ ev.stopPropagation(); } }, true);
+  svg.addEventListener("click", function(){ if(!dragMoved) clearSel(); });
+  bZreset.onclick=function(){ resetVB() };
+
+  /* ── R3-2 时间刷（原生 brush：新建/移动/两端缩放/点击清除）── */
+  var tl = document.getElementById("tl"), tlread = document.getElementById("tlread");
+  var gTlBase = el("g",{}, tl), gTlBrush = el("g",{}, tl);
+  el("line",{x1:0,x2:W,y1:1,y2:1,stroke:"#8a7440","stroke-opacity":.9,"stroke-width":2}, gTlBase);
+  el("line",{x1:0,x2:W,y1:4.5,y2:4.5,stroke:"#8a7440","stroke-opacity":.5}, gTlBase);
+  AXYEARS.forEach(function(yv){
+    var x = tx(yv);
+    el("line",{x1:x,x2:x,y1:22,y2:52,stroke:"#6b5b3a","stroke-opacity":.6}, gTlBase);
+    el("text",{x:x,y:17,"text-anchor":"middle","font-size":11,fill:"#41341d","letter-spacing":".06em"}, gTlBase, yv<0? "前"+(-yv): ""+yv);
+  });
+  D.NODES.forEach(function(n){
+    var cul = D.CULTURES.filter(function(c){return c.k===n.culture})[0];
+    el("circle",{cx:tx(n.y0), cy:41, r:2.6, fill:cul.c, stroke:"#41341d","stroke-width":.7}, gTlBase);
+  });
+  D.GHOSTS.forEach(function(g){
+    el("circle",{cx:POS[g.id].x, cy:48, r:1.5, fill:"#6b5b3a","fill-opacity":.55}, gTlBase);
+  });
+  var shadeL = el("rect",{x:0,y:7,width:0,height:52,fill:"#0b0e15","fill-opacity":.32,visibility:"hidden"}, gTlBrush);
+  var shadeR = el("rect",{x:0,y:7,width:0,height:52,fill:"#0b0e15","fill-opacity":.32,visibility:"hidden"}, gTlBrush);
+  var selR  = el("rect",{x:0,y:7,width:0,height:52,fill:"#c9a961","fill-opacity":.16,stroke:"#6b4f17","stroke-width":1.4,visibility:"hidden"}, gTlBrush);
+  var hL = el("rect",{x:0,y:7,width:5,height:52,fill:"#6b4f17",visibility:"hidden"}, gTlBrush);
+  var hR = el("rect",{x:0,y:7,width:5,height:52,fill:"#6b4f17",visibility:"hidden"}, gTlBrush);
+  var BR = null;
+  function tlX(ev){
+    var r = tl.getBoundingClientRect();
+    return Math.max(L, Math.min(W-R, (ev.clientX-r.left)/r.width*W));
+  }
+  function renderBrush(){
+    var vis = BR? "visible":"hidden";
+    [shadeL,shadeR,selR,hL,hR].forEach(function(e){e.setAttribute("visibility",vis)});
+    if(!BR){ tlread.textContent="全时段"; return; }
+    shadeL.setAttribute("x",0); shadeL.setAttribute("width",Math.max(BR[0],0));
+    shadeR.setAttribute("x",BR[1]); shadeR.setAttribute("width",Math.max(W-BR[1],0));
+    selR.setAttribute("x",BR[0]); selR.setAttribute("width",BR[1]-BR[0]);
+    hL.setAttribute("x",BR[0]-2.5); hR.setAttribute("x",BR[1]-2.5);
+    tlread.textContent = fmtY(invTx(BR[0]))+" — "+fmtY(invTx(BR[1]));
+  }
+  function isTdim(id){
+    var g = NODEG[id]||GHOSTG[id];
+    return !!(g && g.classList.contains("tdim"));
+  }
+  function applyTimeDim(){
+    var t0 = BR? invTx(BR[0]) : null, t1 = BR? invTx(BR[1]) : null;
+    D.NODES.forEach(function(n){
+      var b = (n.y1!=null? n.y1 : n.y0);
+      NODEG[n.id].classList.toggle("tdim", BR? !(b>=t0 && n.y0<=t1) : false);
+    });
+    D.GHOSTS.forEach(function(g){
+      var yv = POS[g.id].yv;
+      GHOSTG[g.id].classList.toggle("tdim", BR? !(yv>=t0 && yv<=t1) : false);
+    });
+    EV.forEach(function(v){
+      v.p.classList.toggle("tdim", BR? (isTdim(v.e.s)||isTdim(v.e.t)) : false);
+    });
+    D.CONTEXTS.forEach(function(c){
+      if(CTXG[c.id]) CTXG[c.id].classList.toggle("tdim", BR? !(c.y1>=t0 && c.y0<=t1) : false);
+    });
+  }
+  function clearBrush(){ BR=null; renderBrush(); applyTimeDim(); }
+  var bMode=null, bAnchor=0, bOff=0;
+  tl.addEventListener("pointerdown", function(ev){
+    if(ev.button!==0) return;
+    ev.preventDefault();
+    var sx = tlX(ev); bAnchor = sx;
+    if(BR && Math.abs(sx-BR[0])<12) bMode="l";
+    else if(BR && Math.abs(sx-BR[1])<12) bMode="r";
+    else if(BR && sx>BR[0] && sx<BR[1]){ bMode="m"; bOff=sx-BR[0]; }
+    else { bMode="n"; BR=[sx,sx]; }
+    function mv(e2){
+      if(!bMode) return;
+      var x = tlX(e2);
+      if(bMode==="n"){ BR=[Math.min(bAnchor,x), Math.max(bAnchor,x)]; }
+      else if(bMode==="l"){ BR[0]=Math.min(x, BR[1]-2); }
+      else if(bMode==="r"){ BR[1]=Math.max(x, BR[0]+2); }
+      else if(bMode==="m"){
+        var w=BR[1]-BR[0];
+        var nx0=Math.max(L, Math.min(W-R-w, x-bOff));
+        BR=[nx0, nx0+w];
+      }
+      renderBrush(); applyTimeDim();
+    }
+    function up(){
+      if(bMode==="n" && BR && (BR[1]-BR[0])<5){ clearBrush(); }
+      bMode=null;
+      window.removeEventListener("pointermove",mv); window.removeEventListener("pointerup",up);
+    }
+    window.addEventListener("pointermove",mv); window.addEventListener("pointerup",up);
+    renderBrush(); applyTimeDim();
+  });
+  document.getElementById("tlReset").onclick=clearBrush;
+
+  /* ── P0-4 回路聚焦：DDT 反馈回路扇形展开 ── */
+  var LF = false;
+  var LOOPPOS = (function(){
+    var cx=W*.55, cy=H*.50, rx=330, ry=250;
+    function P(deg,k){ var a=deg*Math.PI/180; return {x:cx+rx*k*Math.cos(a), y:cy+ry*k*Math.sin(a)} }
+    return {
+      cx:cx, cy:cy,
+      pos:{
+        "ddt":P(-90,1), "ddt-ecological-crisis":P(-18,1), "silent-spring":P(54,1),
+        "environmental-movement":P(126,1), "pesticide-regulation":P(198,1),
+        "rachel-carson":P(90,1.38), "malaria-control-ddt":P(-52,1.45),
+        "synthetic-insecticides":P(-128,1.45), "great-smog-london":P(160,1.42)
+      }
+    };
+  })();
+  var LOOP_IDS = Object.keys(LOOPPOS.pos);
+  function inLoop(id){ return LOOP_IDS.indexOf(id)>=0 }
+  function animatePos(targets, ids, done){
+    var from={};
+    ids.forEach(function(id){ from[id]={x:CUR[id].x, y:CUR[id].y} });
+    var st=null;
+    function frame(t){
+      if(st==null) st=t;
+      var u=Math.min(1,(t-st)/480), e=u<.5? 2*u*u : 1-Math.pow(-2*u+2,2)/2;
+      ids.forEach(function(id){
+        CUR[id].x = from[id].x+(targets[id].x-from[id].x)*e;
+        CUR[id].y = from[id].y+(targets[id].y-from[id].y)*e;
+        (NODEG[id]||GHOSTG[id]).setAttribute("transform","translate("+CUR[id].x+","+CUR[id].y+")");
+      });
+      redrawEdges();
+      if(u<1) requestAnimationFrame(frame); else if(done) done();
+    }
+    requestAnimationFrame(frame);
+  }
+  function focusLoop(on, instant){
+    if(on===LF) return;
+    LF = on; bLoop.classList.toggle("on", on);
+    gFx.innerHTML = "";
+    if(on){
+      clearSel(); resetVB();
+      D.NODES.forEach(function(n){ NODEG[n.id].classList.toggle("lfdim", !inLoop(n.id)) });
+      D.GHOSTS.forEach(function(g){
+        GHOSTG[g.id].classList.toggle("lfdim", !inLoop(g.id));
+        GHOSTG[g.id].classList.toggle("lfshow", inLoop(g.id)); /* 聚焦时规划位成员显名 */
+      });
+      EV.forEach(function(v){ v.p.classList.toggle("lfdim", !(inLoop(v.e.s)&&inLoop(v.e.t))) });
+      gCtx.classList.add("lfdim");
+      refreshMinor();
+      var fin = function(){
+        EV.forEach(function(v){
+          if(!(inLoop(v.e.s)&&inLoop(v.e.t))) return;
+          var q = edgeD(v.e);
+          var mxx=.25*q.a.x+.5*q.cx+.25*q.b.x, myy=.25*q.a.y+.5*q.cy+.25*q.b.y;
+          el("text",{x:mxx,y:myy-5,"text-anchor":"middle","class":"edgelabel",fill:D.EDGETYPES[v.e.ty].c}, gFx,
+             D.EDGETYPES[v.e.ty].zh+" "+v.e.ty+(v.e.r1? " · r1":""));
+        });
+        el("text",{x:LOOPPOS.cx,y:H-64,"text-anchor":"middle","class":"loopcap"}, gFx, "DDT 反馈回路 · 聚焦扇开");
+        el("text",{x:LOOPPOS.cx,y:H-40,"text-anchor":"middle","class":"loopcap2"}, gFx, "致祸 → 激发 → 管制（朱砂 · 印玺式长短虚实）→ 回抵技术 —— r1 闭环 · 再按「回路聚焦」复位");
+      };
+      if(instant){
+        LOOP_IDS.forEach(function(id){
+          CUR[id].x=LOOPPOS.pos[id].x; CUR[id].y=LOOPPOS.pos[id].y;
+          (NODEG[id]||GHOSTG[id]).setAttribute("transform","translate("+CUR[id].x+","+CUR[id].y+")");
+        });
+        redrawEdges(); fin();
+      } else animatePos(LOOPPOS.pos, LOOP_IDS, fin);
+    } else {
+      D.NODES.forEach(function(n){ NODEG[n.id].classList.remove("lfdim") });
+      D.GHOSTS.forEach(function(g){ GHOSTG[g.id].classList.remove("lfdim"); GHOSTG[g.id].classList.remove("lfshow") });
+      EV.forEach(function(v){ v.p.classList.remove("lfdim") });
+      gCtx.classList.remove("lfdim");
+      refreshMinor();
+      var back={};
+      LOOP_IDS.forEach(function(id){ back[id]={x:POS[id].x, y:POS[id].y} });
+      if(instant){
+        LOOP_IDS.forEach(function(id){
+          CUR[id].x=POS[id].x; CUR[id].y=POS[id].y;
+          (NODEG[id]||GHOSTG[id]).setAttribute("transform","translate("+CUR[id].x+","+CUR[id].y+")");
+        });
+        redrawEdges();
+      } else animatePos(back, LOOP_IDS, null);
+    }
+  }
+  bLoop.onclick=function(){
+    if(gGal.style.display!=="none"){ setView("star"); }
+    focusLoop(!LF);
+  };
+
+  /* ── 图例 ── */
+  function edgeRowSvg(k){
+    var e = D.EDGETYPES[k];
+    var dash = k==="regulates"? " stroke-dasharray='12 3 3 3'" : (k==="parallels"? "": "");
+    var arrow = k==="parallels"? "" : "<path d='M 22 1.5 L 29 5 L 22 8.5 z' fill='"+e.c+"'/>";
+    return "<div class='row'><svg width='30' height='10' style='flex:none'><line x1='1' y1='5' x2='22' y2='5' stroke='"+e.c+"' stroke-width='2'"+dash+"/>"+arrow+"</svg>"
+      + e.zh+" "+k+(e.r1? " <b style='color:#e05a3d'>r1 新增</b>":"")+"</div>";
+  }
+  var legendBody = document.getElementById("legendBody");
+  legendBody.innerHTML = "<h4>五类节点</h4>"
+    + [["tech","◆ 技术（菱星）"],["idea","◎ 思想（环星）"],["person","✦ 人物（光点）"],["wonder","⬢ 奇观（晶面）"],["disaster","✧ 灾祸（裂痕暗星·无辉光）"]]
+      .map(function(x){return "<div class='row'>"+x[1]+"</div>"}).join("")
+    + "<div class='row' style='margin-top:2px'>灰环裂星＝atrocity（r1 新增子类）· 零幽默</div>"
+    + "<h4>十一文明（颜色不单独承载信息）</h4>"
+    + D.CULTURES.map(function(c){return "<div class='row'><span class='dot' style='background:"+c.c+"'></span>"+c.zh+"</div>"}).join("")
+    + "<h4>十种边（r1 · 有向边皆有箭头）</h4>"
+    + Object.keys(D.EDGETYPES).map(edgeRowSvg).join("")
+    + "<div class='row' style='margin-top:4px'>管制＝朱砂＋印玺式长短虚实（灰阶/色弱下仍可辨）</div>"
+    + "<div class='row'>虚线 5–4＝disputed · 端点含规划位＝减淡</div>"
+    + "<div class='row'>主星大 · 辅星小（tier）</div>"
+    + "<h4>时代背景嵌套（P0-5）</h4>"
+    + "<div class='row'><svg width='30' height='14' style='flex:none'><defs><pattern id='lgpp' width='8' height='8' patternUnits='userSpaceOnUse'><circle cx='2' cy='2' r='.9' fill='#c9a961' fill-opacity='.8'/></pattern></defs><rect x='1' y='1' width='28' height='12' fill='url(#lgpp)' stroke='#c9a961' stroke-opacity='.6' stroke-dasharray='1 3'/></svg>父背景 · 疏点铺底（虚廓）</div>"
+    + "<div class='row'><svg width='30' height='14' style='flex:none'><defs><pattern id='lgpc' width='5' height='5' patternUnits='userSpaceOnUse' patternTransform='rotate(45)'><line x1='2.5' y1='0' x2='2.5' y2='5' stroke='#c9a961' stroke-opacity='.7' stroke-width='.8'/><line x1='0' y1='2.5' x2='5' y2='2.5' stroke='#c9a961' stroke-opacity='.45' stroke-width='.8'/></pattern></defs><rect x='1' y='1' width='28' height='12' fill='url(#lgpc)' stroke='#c9a961' stroke-opacity='.8'/></svg>子背景 · 密网纹（实廓 · 界间留隙 6–10px）</div>"
+    + "<div class='row'><svg width='30' height='8' style='flex:none'><line x1='2' y1='4' x2='28' y2='4' stroke='#c9a961' stroke-width='1.6'/></svg>嵌套梗线（实线 · 子区连父区界）</div>"
+    + "<div class='row'><svg width='30' height='8' style='flex:none'><line x1='2' y1='4' x2='28' y2='4' stroke='#c9a961' stroke-width='1.3' stroke-dasharray='1 6' stroke-linecap='round'/></svg>影响牵引（圆点虚线 · culture_secondary）</div>"
+    + "<h4>LOD 与时间刷（R3）</h4>"
+    + "<div class='row'>默认仅主干边；悬停/选中节点或缩放 ≥1.5× 显现次要边与规划位标签</div>"
+    + "<div class='row'>规划节点恒为淡渲染（planned 语义）</div>"
+    + "<div class='row'>下方羊皮纸时间刷：拖选年段，选区外星与边减淡；「重置」复原</div>";
+  var specsBody = document.getElementById("specsBody");
+  specsBody.innerHTML = "<h4>设计说明（概念稿要点 · 全文见项目文档）</h4>"
+    + "<p><b>三层宇宙结构（A-1）</b>：①星系视图＝族/主题的 LOD 聚合（远景一片，近景个例）；②星图视图＝节点与边；③星球层＝点击「降落」——仰望天空是关系星空（边即论证的星座），俯视大地是词条内容（版本谱系、引文、置信、文献）。VR 为远期。</p>"
+    + "<p><b>时代背景区域（A-5/9）</b>：文明×年代的可点击范围区。嵌套已按裁定③演示：中华 ⊃ 宋朝｜蒙元｜明治日本；蒙元贴向草原带边界（A-8 空间语义），明治以圆点虚线牵引朝西方带（culture_secondary 的视觉表达）。中世纪盛期待 latin-west 父区（batch-2）。点击区域即入背景介绍页（R3-3）。</p>"
+    + "<p><b>r1 词表已入渲染</b>：regulates 边（朱砂色、加粗、印玺式长短虚实）闭合 DDT 回路；atrocity 子类以灰纱环裂星呈现，无任何奇观化处理。</p>"
+    + "<p><b>整改落图</b>：#1 applies→informs；#3 统一 inspires；#4 沈括错挂边已删（待 shen-kuo 建成回挂）；#5 patronized 反向边撤下；#9 简名 id（reformation 等）、疫霉不立节点。</p>"
+    + "<p><b>R3a 增量（丙 P0 ＋ R3 核心）</b>：P0-1 对比度令牌 --ink-strong/mid/faint（正文≥4.5:1、关键图形≥3:1，古意改由字形与字距承担）；P0-2 题签行/工具行分离，交互件点击高度≥40px，窄幅自动换行；P0-3 图例/设计说明/抽屉/背景页全部停靠于侧坞（定头滚身·细暗滚动条），星图区收缩而非被覆盖；P0-4 有向边全带箭头＋regulates 印玺虚实＋标签四槽避让引线＋「回路聚焦」扇开 DDT 回路；P0-5 父疏点/子网纹＋界间 6–10px 留隙＋嵌套实梗与影响圆点虚线分型；R3-1 LOD（滚轮缩放/拖拽平移，阈值 1.5×）；R3-2 羊皮纸时间刷；R3-3 背景介绍页（谱系/年段/摘要/成员）。</p>"
+    + "<p class='small'>数据：内容组 R2 实产 11 词条＋5 时代背景（全文随批产入仓）；小点为批产名单规划位（时位示意）。布局确定性：seed 20260718，分段时间比例尺＋文明带哈希抖动，任何人重跑同版本得逐像素相同结果。</p>";
+
+  /* ── tooltip ── */
+  var tipEl = document.getElementById("tip");
+  function tip(ev, html){ tipEl.innerHTML=html; tipEl.style.display="block";
+    var x=ev.clientX+14, y=ev.clientY+12;
+    if(x+300>innerWidth) x=ev.clientX-300; if(y+120>innerHeight) y=ev.clientY-110;
+    tipEl.style.left=x+"px"; tipEl.style.top=y+"px"; }
+  function hideTip(){ tipEl.style.display="none" }
+
+  /* 默认展示：星图层 ＋ 图例停靠（开场即讲重点） */
+  setView("star");
+  openPanel("legend");
+  renderBrush();
+  refreshMinor();
+})();
+/*APP-END*/
+</script>
+</body>
+</html>
