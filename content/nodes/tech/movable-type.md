@@ -16,8 +16,24 @@ quote:
     zh: 若止印三二本，未为简易；若印数十百千本，则极为神速。
     en: For printing only two or three copies it would hardly be worth the trouble; but for tens, hundreds, or thousands, it is marvelously quick.
   source: { zh: 沈括《梦溪笔谈·技艺》（约1088）, en: "Shen Kuo, Dream Pool Essays (Mengxi Bitan), c. 1088" }
-icon: { source: ai, license: "CC BY 3.0", status: needs-ai, fallback: "lorc/wax-seal" }
-images: []
+icon: { source: ai, id: "civiliverse/movable-type", license: "CC BY 3.0", status: final, fallback: "lorc/wax-seal" }
+images:
+  - src: /assets/nodes/movable-type/main-a.png
+    caption:
+      zh: 活字字模、排字盘与制墨工具的示意性静物（AI 复原想象图）。
+      en: An interpretive still life of movable type, a composing tray, and inking tools (AI reconstruction, imagined).
+    credit: Civiliverse Art Group (AI-generated with OpenAI built-in image generation)
+    license: CC BY 4.0
+    source_url: https://raw.githubusercontent.com/civiliverse/civiliverse/main/web/public/assets/nodes/movable-type/main-a.png
+    ai_generated: true
+  - src: /assets/nodes/movable-type/icon-line.png
+    caption:
+      zh: 独立活字与字模规矩的线性图标（AI 生成图）。
+      en: A line icon combining an individual type block with a composing square (AI-generated).
+    credit: Civiliverse Art Group (AI-generated with OpenAI built-in image generation)
+    license: CC BY 4.0
+    source_url: https://raw.githubusercontent.com/civiliverse/civiliverse/main/web/public/assets/nodes/movable-type/icon-line.png
+    ai_generated: true
 refs:
   - { title: 沈括《梦溪笔谈》卷十八·技艺 }
   - { title: 《纸和印刷》（李约瑟《中国科学技术史》第五卷第一分册）, author: 钱存训 }

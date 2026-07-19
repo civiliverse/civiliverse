@@ -1,0 +1,172 @@
+edges:
+  - schema_version: 1
+    source: gunpowder
+    target: compass
+    type: parallels
+    importance: minor
+    note:
+      zh: 宋代两项外传技术的并列（无因果）
+      en: Two Song-era technologies that traveled west; juxtaposed, not causally linked
+  - schema_version: 1
+    source: bronze-metallurgy
+    target: ironworking
+    type: parallels
+    importance: major
+    note:
+      zh: 并非线性升级：铁的普及由锡路断绝与矿源普遍所致
+      en: "Not a linear upgrade: iron spread because tin routes failed and iron ore is ubiquitous"
+  - schema_version: 1
+    source: ironworking
+    target: meroe-ironworking
+    type: parallels
+    importance: minor
+    note:
+      zh: 撒哈拉以南冶铁的传播抑或独立起源尚无定论，故取无向并列
+      en: "Whether sub-Saharan ironworking was transmitted or independent remains unsettled; juxtaposed without direction}, disputed: tru"
+  - schema_version: 1
+    source: quipu
+    target: zero-place-value
+    type: parallels
+    importance: minor
+    disputed: true
+    note:
+      zh: 位值与零位在安第斯的独立实现（无历史关联，并列以破单线叙事）
+      en: Place value and an empty-position zero realized independently in the Andes; juxtaposed, with no historical connection
+  - schema_version: 1
+    source: polynesian-navigation
+    target: compass
+    type: parallels
+    importance: minor
+    note:
+      zh: 两套互不相关的远洋定向解法：仪器与身体感知
+      en: "Two unrelated solutions to open-sea orientation: by instrument and by embodied perception"
+  - schema_version: 1
+    source: wootz-steel
+    target: ironworking
+    type: parallels
+    importance: minor
+    note:
+      zh: 坩埚熔炼路线与块炼/生铁路线并列，非承继
+      en: The crucible route set beside the bloomery and cast-iron routes, not descended from them
+  - schema_version: 1
+    source: house-of-wisdom
+    target: optics-alhazen
+    type: enables
+    importance: minor
+    note:
+      zh: 翻译运动所积累的希腊光学文献为其批判对象与前提
+      en: The translation movement's corpus of Greek optics supplied both the premise and the target of his critique
+  - schema_version: 1
+    source: steam-engine
+    target: luddites
+    type: inspires
+    importance: major
+    note:
+      zh: 机器动力化引发的手工业者抗争（inspires：灾祸/冲击→抗争理念）
+      en: Mechanized power provoked the artisans' resistance
+  - schema_version: 1
+    source: steam-engine
+    target: railway
+    type: enables
+    importance: major
+    note:
+      zh: 高压蒸汽机的车载化是轨道机车的前提
+      en: Mounting the high-pressure steam engine on wheels is the precondition of the locomotive
+  - schema_version: 1
+    source: interchangeable-parts
+    target: luddites
+    type: inspires
+    importance: minor
+    note:
+      zh: 去技能化与手工业者抗争的另一面
+      en: Deskilling as the other face of what the artisans resisted
+  - schema_version: 1
+    source: railway
+    target: telegraph
+    type: enables
+    importance: minor
+    note:
+      zh: 电报线多沿铁路架设，铁路的行车调度需求亦是早期电报的主顾
+      en: Telegraph lines were largely strung along railways, whose signalling needs were the early telegraph's main customer
+  - schema_version: 1
+    source: columbian-exchange
+    target: monoculture
+    type: enables
+    importance: minor
+    note:
+      zh: 作物全球移植为大规模单作提供了物质前提
+      en: The global transplantation of crops supplied the material precondition for large-scale monoculture
+  - schema_version: 1
+    source: chernobyl
+    target: environmental-movement
+    type: inspires
+    importance: major
+    note:
+      zh: 欧洲反核与环境政治的分水岭
+      en: A watershed for anti-nuclear and environmental politics in Europe
+  - schema_version: 1
+    source: ozone-hole
+    target: environmental-movement
+    type: inspires
+    importance: minor
+    note:
+      zh: 全球尺度环境治理的示范个案
+      en: The exemplary case of environmental governance at global scale
+  - schema_version: 1
+    source: transatlantic-emigration
+    target: irish-nationalism
+    type: enables
+    importance: major
+    note:
+      zh: 离散社群的汇款与组织空间支撑岛内运动
+      en: Remittances and organizational space in the diaspora sustained the movement at home
+  - schema_version: 1
+    source: wheel
+    target: railway
+    type: enables
+    importance: minor
+    note:
+      zh: 远因：轮缘受导轨约束的形态是铁路的直接前身
+      en: "A distant ancestor: the flanged wheel constrained by a guiding rail is the railway's immediate form"
+  - schema_version: 1
+    source: neolithic-agriculture
+    target: cuneiform
+    type: enables
+    importance: major
+    disputed: true
+    note:
+      zh: 剩余与储藏催生清点符号；为学界通说而非严格因果，故标 disputed
+      en: "Surplus and storage called forth marks for counting: a scholarly commonplace rather than a strict causal claim, hence disputed"
+  - schema_version: 1
+    source: neolithic-agriculture
+    target: monoculture
+    type: enables
+    importance: major
+    note:
+      zh: 单一栽培的远因——可驯化物种数目本就有限，集约化必然收窄作物谱
+      en: "The distant root of monoculture: domesticable species are few, and intensification narrows the crop repertoire"
+  - schema_version: 1
+    source: euclid-elements
+    target: scientific-method
+    type: enables
+    importance: major
+    disputed: true
+    note:
+      zh: 公理—演绎的论证范型为近代科学方法的形式来源之一；作用程度有争议，故标 disputed
+      en: The axiomatic-deductive form is one formal source of the modern scientific method; the degree is contested, hence disputed
+  - schema_version: 1
+    source: euclid-elements
+    target: optics-alhazen
+    type: enables
+    importance: minor
+    note:
+      zh: 海什木《光学》以几何证明处理视觉，其形式直承《原本》的希腊—阿拉伯传承线
+      en: Ibn al-Haytham's Optics treats vision by geometrical demonstration, taking its form from the Greek-Arabic transmission of the Elements
+  - schema_version: 1
+    source: maize-domestication
+    target: columbian-exchange
+    type: enables
+    importance: major
+    note:
+      zh: 玉米为哥伦布交换中影响最广的美洲作物之一，其旧大陆引种为该交换的物质前提之一
+      en: Maize was among the most consequential American crops of the Columbian exchange; its introduction to the Old World is one material precondition of it

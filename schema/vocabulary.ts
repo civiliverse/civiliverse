@@ -39,6 +39,8 @@ const glossaryEntrySchema = z
   .object({
     zh: z.string().min(1),
     en: z.string().min(1),
+    aliases: z.array(z.string().min(1)).optional(),
+    matcher: z.literal("manual").optional(),
     key: z.string().min(1).optional(),
     type: z.string().min(1).optional(),
   })
@@ -75,17 +77,33 @@ export interface GlossaryMismatch {
   language: "zh" | "en";
 }
 
-function normalized(value: string): string {
-  return value
+function normalized(value: string, language: "zh" | "en"): string {
+  const normalizedValue = value
     .normalize("NFKC")
-    .replace(/[*_`“”\"]/g, "")
+    .replace(/[*_`“”\"'《》「」『』]/g, "")
     .replace(/\s+/g, " ")
     .trim()
     .toLocaleLowerCase("en");
+
+  return language === "en"
+    ? normalizedValue.replace(/\b(?:a|an|the)\s+/g, "")
+    : normalizedValue;
 }
 
-function includesNormalized(haystack: string, needle: string): boolean {
-  return normalized(haystack).includes(normalized(needle));
+function includesNormalized(
+  haystack: string,
+  needles: readonly string[],
+  language: "zh" | "en",
+): boolean {
+  const normalizedHaystack = normalized(haystack, language);
+  return needles.some((needle) => normalizedHaystack.includes(normalized(needle, language)));
+}
+
+function isRuleBasedTransliterationEntry(entry: { zh: string; en: string }): boolean {
+  const emperor = /帝$/.test(entry.zh) && /^Emperor\b.+\bof\b/i.test(entry.en);
+  const era = /(?:元年|年间)$/.test(entry.zh) && /\bera\b/i.test(entry.en);
+  const sexagenary = /^[甲乙丙丁戊己庚辛壬癸][子丑寅卯辰巳午未申酉戌亥](?:年)?$/.test(entry.zh);
+  return emperor || era || sexagenary;
 }
 
 export function glossaryMismatches(value: BilingualValue): GlossaryMismatch[] {
@@ -102,12 +120,15 @@ export function glossaryMismatches(value: BilingualValue): GlossaryMismatch[] {
   }
 
   for (const entry of GLOSSARY.check) {
-    const hasZh = includesNormalized(value.zh, entry.zh);
-    const hasEn = includesNormalized(value.en, entry.en);
+    if (entry.matcher === "manual" || isRuleBasedTransliterationEntry(entry)) continue;
+    const aliases = entry.aliases ?? [];
+    const hasZh = includesNormalized(value.zh, [entry.zh, ...aliases], "zh");
+    const hasEn = includesNormalized(value.en, [entry.en, ...aliases], "en");
+    // Content is authored Chinese-first: check that an explicit Chinese controlled term
+    // has a recognized English rendering. Reverse substring matching turns ordinary
+    // English words such as "compass" or "elements" into unrelated false positives.
     if (hasZh && !hasEn) {
       mismatches.push({ severity: "warning", expected: entry, language: "en" });
-    } else if (hasEn && !hasZh) {
-      mismatches.push({ severity: "warning", expected: entry, language: "zh" });
     }
   }
 

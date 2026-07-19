@@ -1,0 +1,11 @@
+schema_version: 1
+id: hellenistic-world
+title: { zh: 希腊化世界, en: The Hellenistic World }
+culture: greco-roman
+era: { start_year: -323, end_year: -31 }
+summary:
+  zh: 自亚历山大之死至罗马兼并埃及，希腊语世界与近东、埃及深度交融的三百年。托勒密王室在亚历山大城建缪斯宫与图书馆，把学者供养制度化；欧几里得的公理演绎、阿基米德的力学、埃拉托色尼的地球测量、希罗与克特西比乌斯的气动装置皆出此期。它示范了一种此后反复出现的模式：王权的赞助与集中的藏书，能在一地造出知识的高压区——也示范了这种高压区对政治变故的脆弱。
+  en: "The three centuries from the death of Alexander to Rome's annexation of Egypt, in which the Greek-speaking world interpenetrated the Near East and Egypt. The Ptolemies built the Museum and Library at Alexandria and institutionalized the keeping of scholars; Euclid's axiomatic deduction, Archimedes' mechanics, Eratosthenes' measurement of the earth, and the pneumatics of Ctesibius and Hero all belong to this period. It demonstrates a pattern that would recur: royal patronage plus concentrated collections can create a local high-pressure zone of knowledge—and demonstrates equally how fragile such zones are to political rupture."
+refs:
+  - { title: "The Forgotten Revolution: How Science Was Born in 300 BC and Why It Had to Be Reborn", author: "Lucio Russo" }
+  - { title: "The Library of Alexandria: Centre of Learning in the Ancient World", author: "Roy MacLeod (ed.)" }

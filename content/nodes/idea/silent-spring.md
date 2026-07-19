@@ -17,7 +17,15 @@ quote:
     en: "The 'control of nature' is a phrase conceived in arrogance, born of the Neanderthal age of biology and philosophy, when it was supposed that nature exists for the convenience of man."
   source: { zh: 蕾切尔·卡森《寂静的春天》（1962）, en: "Rachel Carson, Silent Spring (1962)" }
 icon: { source: game-icons, id: "lorc/open-book", license: "CC BY 3.0", status: tentative }
-images: []
+images:
+  - src: /assets/nodes/silent-spring/icon-line.png
+    caption:
+      zh: 翻开的书与无鸟枯枝的线性图标（AI 生成图）。
+      en: A line icon of an open book and a leafless, birdless branch (AI-generated).
+    credit: Civiliverse Art Group (AI-generated with OpenAI built-in image generation)
+    license: CC BY 4.0
+    source_url: https://raw.githubusercontent.com/civiliverse/civiliverse/main/web/public/assets/nodes/silent-spring/icon-line.png
+    ai_generated: true
 refs:
   - { title: Silent Spring, author: Rachel Carson }
   - { title: "Silent Spring", url: "https://en.wikipedia.org/wiki/Silent_Spring" }

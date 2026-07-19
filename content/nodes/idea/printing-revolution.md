@@ -17,7 +17,15 @@ quote:
     en: "…printing, gunpowder, and the magnet. For these three have changed the whole face and state of things throughout the world; the first in literature, the second in warfare, the third in navigation…"
   source: { zh: 培根《新工具》第一卷·箴言129（1620）, en: "Francis Bacon, Novum Organum, I.129 (1620), trans. Spedding" }
 icon: { source: game-icons, id: "lorc/open-book", license: "CC BY 3.0", status: tentative }
-images: []
+images:
+  - src: /assets/nodes/printing-revolution/main-b.png
+    caption:
+      zh: 15 世纪美因茨印坊与螺旋压印机的示意性场景（AI 复原想象图）。
+      en: An interpretive view of a 15th-century Mainz printshop and screw press (AI reconstruction, imagined).
+    credit: Civiliverse Art Group (AI-generated with OpenAI built-in image generation)
+    license: CC BY 4.0
+    source_url: https://raw.githubusercontent.com/civiliverse/civiliverse/main/web/public/assets/nodes/printing-revolution/main-b.png
+    ai_generated: true
 refs:
   - { title: The Printing Press as an Agent of Change, author: Elizabeth Eisenstein }
   - { title: The Nature of the Book, author: Adrian Johns }

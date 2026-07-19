@@ -16,8 +16,16 @@ quote:
     zh: 消除或限制持久性有机污染物的排放。
     en: "…to eliminate or restrict the release of persistent organic pollutants."
   source: { zh: 《关于持久性有机污染物的斯德哥尔摩公约》（2001）宗旨, en: "Stockholm Convention on Persistent Organic Pollutants (2001), stated objective" }
-icon: { source: ai, license: "CC BY 3.0", status: needs-ai, fallback: "delapouite/scales" }
-images: []
+icon: { source: ai, id: "civiliverse/pesticide-regulation", license: "CC BY 3.0", status: final, fallback: "delapouite/scales" }
+images:
+  - src: /assets/nodes/pesticide-regulation/icon-line.png
+    caption:
+      zh: 麦穗与法典卷轴置于天平两端的线性图标（AI 生成图）。
+      en: A line icon balancing a wheat ear against a legal scroll (AI-generated).
+    credit: Civiliverse Art Group (AI-generated with OpenAI built-in image generation)
+    license: CC BY 4.0
+    source_url: https://raw.githubusercontent.com/civiliverse/civiliverse/main/web/public/assets/nodes/pesticide-regulation/icon-line.png
+    ai_generated: true
 refs:
   - { title: "Stockholm Convention on Persistent Organic Pollutants (2001)" }
   - { title: "DDT - A Brief History and Status", author: US EPA, url: "https://www.epa.gov/ingredients-used-pesticide-products/ddt-brief-history-and-status" }

@@ -8,6 +8,7 @@ summary:
   en: "The idea of zero as both a placeholder and a number in its own right, together with place-value notation. Brahmagupta (628 CE) first gave arithmetic rules for zero and negatives; the Bakhshali manuscript, the Maya Long Count, and the Babylonian placeholder each developed some notion of \"zero\" independently. It is the conceptual bedrock of Hindu–Arabic numerals, algebra, and modern computation—humanity's latest daring, to give \"nothing\" a place among numbers."
 era: { start_year: -300, end_year: 700, circa: true }
 culture: indic
+culture_secondary: [islamic]
 tier: major
 domains: [math-computing]
 region: { zh: 印度（婆罗摩笈多）；另有巴比伦、玛雅独立起源, en: "India (Brahmagupta); independent origins also in Babylon and among the Maya" }

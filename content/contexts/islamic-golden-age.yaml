@@ -1,0 +1,11 @@
+schema_version: 1
+id: islamic-golden-age
+title: { zh: 伊斯兰黄金时代, en: The Islamic Golden Age }
+culture: islamic
+era: { start_year: 750, end_year: 1258 }
+summary:
+  zh: 阿拔斯王朝定都巴格达至蒙古破城的五百年间，伊斯兰世界成为欧亚知识的汇流处。希腊、波斯、印度典籍经大规模翻译进入阿拉伯语；代数、光学、医学、天文与制图在此获得新的形态而非仅是保存；撒马尔罕与巴格达的纸坊使书籍第一次在这一带廉价起来。把这五百年称作「保存希腊遗产的中转站」是欧洲中心的旧说——花拉子米的代数与海什木的实验光学都不是转手之物。其技术环境特征是「翻译—综合—再创造」。
+  en: In the five centuries from the Abbasid founding of Baghdad to its fall to the Mongols, the Islamic world became the confluence of Eurasian learning. Greek, Persian, and Indian works entered Arabic through translation on an industrial scale; algebra, optics, medicine, astronomy, and cartography took new form here rather than merely surviving; and paper mills at Samarkand and Baghdad made books cheap in this region for the first time. To call these centuries a way-station preserving the Greek legacy is a Eurocentric commonplace—al-Khwarizmi's algebra and Ibn al-Haytham's experimental optics were not goods in transit. The period's technical signature is translation, synthesis, and re-creation.
+refs:
+  - { title: "Greek Thought, Arabic Culture", author: "Dimitri Gutas" }
+  - { title: "Paper Before Print: The History and Impact of Paper in the Islamic World", author: "Jonathan Bloom" }

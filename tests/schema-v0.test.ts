@@ -10,6 +10,7 @@ import {
   DOMAIN_TABLE,
   ENDPOINT_RULES,
   GLOSSARY,
+  glossaryMismatches,
   NODE_TYPES,
   nodeSchema,
   normalizeLicense,
@@ -180,7 +181,7 @@ describe("machine-readable controlled vocabularies", () => {
   it("loads every frozen strict and check-level glossary entry", () => {
     expect(GLOSSARY.version).toBe(1);
     expect(GLOSSARY.strict).toHaveLength(18);
-    expect(GLOSSARY.check).toHaveLength(39);
+    expect(GLOSSARY.check).toHaveLength(67);
     expect(GLOSSARY.strict).toContainEqual({ zh: "引发", en: "causes" });
     expect(GLOSSARY.strict).toContainEqual({ zh: "管制", en: "regulates" });
     expect(GLOSSARY.check).toContainEqual({
@@ -351,6 +352,22 @@ describe("context and repository validation", () => {
     } finally {
       await rm(root, { recursive: true, force: true });
     }
+  });
+
+  it("supports glossary articles, aliases, and rule-based transliteration exemptions", () => {
+    expect(
+      glossaryMismatches({ zh: "印刷革命改变了欧洲。", en: "the Printing Revolution changed Europe." }),
+    ).toHaveLength(0);
+    expect(glossaryMismatches({ zh: "奇普用于记账。", en: "Khipu recorded accounts." })).toHaveLength(
+      0,
+    );
+    expect(
+      glossaryMismatches({ zh: "汉和帝下令呈纸。", en: "The Han court ordered paper presented." }),
+    ).toHaveLength(0);
+    expect(glossaryMismatches({ zh: "生铁路线", en: "cast-iron route" })).toHaveLength(0);
+    expect(
+      glossaryMismatches({ zh: "尺规作图", en: "compass-and-straightedge construction" }),
+    ).toHaveLength(0);
   });
 
   it("rejects regulates unless the endpoints are idea to tech or wonder", async () => {

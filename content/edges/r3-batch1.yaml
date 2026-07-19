@@ -64,6 +64,14 @@ edges:
       zh: 运动推动农药立法与管制
       en: The movement drove pesticide legislation and regulation
   - schema_version: 1
+    source: great-smog-london
+    target: environmental-movement
+    type: inspires
+    importance: minor
+    note:
+      zh: 多灾祸汇入的运动
+      en: A movement fed by multiple disasters
+  - schema_version: 1
     source: pesticide-regulation
     target: ddt
     type: regulates
@@ -114,6 +122,15 @@ edges:
       zh: 使能而非唯一动因
       en: An enabling condition, not the sole cause
   - schema_version: 1
+    source: printing-revolution
+    target: scientific-revolution
+    type: enables
+    importance: major
+    disputed: true
+    note:
+      zh: 标准化与传播为科学革命隐形引擎（程度有争议）
+      en: Standardization and dissemination as hidden engines (degree disputed)
+  - schema_version: 1
     source: cai-lun
     target: papermaking
     type: contributed
@@ -130,6 +147,15 @@ edges:
       zh: 王家赞助与构想（赞助者→被赞助者）
       en: Royal patronage and conception (patron→beneficiary)
   - schema_version: 1
+    source: demetrius-of-phalerum
+    target: library-of-alexandria
+    type: contributed
+    importance: minor
+    disputed: true
+    note:
+      zh: 献策收书，角色存疑
+      en: Advised the collection; role disputed
+  - schema_version: 1
     source: library-of-alexandria
     target: nalanda
     type: parallels
@@ -145,3 +171,35 @@ edges:
     note:
       zh: 催生文献编目学
       en: Gave rise to the science of cataloguing
+  - schema_version: 1
+    source: monoculture
+    target: great-famine-ireland
+    type: causes
+    importance: major
+    note:
+      zh: 对单一「卢珀」品种的依赖＝技术–生态脆弱性（扳机为致病疫霉，见正文/caveats）
+      en: Dependence on the single "Lumper" cultivar—a technical-ecological vulnerability (the blight was the trigger; see body/caveats)
+  - schema_version: 1
+    source: colonial-land-system
+    target: great-famine-ireland
+    type: causes
+    importance: major
+    note:
+      zh: 缺席地主与细碎租佃
+      en: Absentee landlords and subdivided tenancies
+  - schema_version: 1
+    source: great-famine-ireland
+    target: irish-nationalism
+    type: inspires
+    importance: major
+    note:
+      zh: 催生民族主义与芬尼亚运动
+      en: Provoked nationalism and the Fenian movement
+  - schema_version: 1
+    source: great-famine-ireland
+    target: transatlantic-emigration
+    type: inspires
+    importance: major
+    note:
+      zh: 大规模跨大西洋移民
+      en: Mass transatlantic emigration

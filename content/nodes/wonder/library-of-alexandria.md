@@ -17,7 +17,15 @@ quote:
     en: "Demetrius of Phalerum, the president of the king's library, received vast sums of money, for the purpose of collecting together, as far as he possibly could, all the books in the world."
   source: { zh: 《阿里斯特亚书信》§9（伪托，约公元前2世纪）, en: "Letter of Aristeas §9 (pseudepigraphic, c. 2nd c. BCE)" }
 icon: { source: game-icons, id: "delapouite/greek-temple", license: "CC BY 3.0", status: tentative }
-images: []
+images:
+  - src: /assets/nodes/library-of-alexandria/main-b.png
+    caption:
+      zh: 托勒密时期亚历山大图书馆卷轴厅的推想性重建（AI 复原想象图）。
+      en: A conjectural reconstruction of a scroll hall in the Ptolemaic Library of Alexandria (AI reconstruction, imagined).
+    credit: Civiliverse Art Group (AI-generated with OpenAI built-in image generation)
+    license: CC BY 4.0
+    source_url: https://raw.githubusercontent.com/civiliverse/civiliverse/main/web/public/assets/nodes/library-of-alexandria/main-b.png
+    ai_generated: true
 refs:
   - { title: The Library of Alexandria, author: "Roy MacLeod (ed.)" }
   - { title: "From Romance to Rhetoric (American Historical Review, 1992)", author: Diana Delia }

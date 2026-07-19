@@ -8,6 +8,7 @@ summary:
   en: "The craft of macerating plant fibre into pulp and forming it into sheets. Archaeology (Fangmatan, Baqiao) shows paper existed under the Western Han; the Eastern Han official Cai Lun (105 CE) perfected and institutionalized it, making it cheap and mass-producible. Over centuries it spread west along the Silk Road—paper mills at Samarkand and Baghdad by the 8th century—reaching Europe and furnishing the material precondition for the printing revolution."
 era: { start_year: -100, end_year: 800, circa: true }
 culture: sinic
+culture_secondary: [islamic, western]
 tier: major
 domains: [information-communication, materials-chemistry]
 region: { zh: 中国→中亚→欧洲, en: China → Central Asia → Europe }
