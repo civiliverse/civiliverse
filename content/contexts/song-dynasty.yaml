@@ -1,0 +1,12 @@
+schema_version: 1
+id: song-dynasty
+title: { zh: 宋朝, en: The Song Dynasty }
+culture: sinic
+era: { start_year: 960, end_year: 1279 }
+parent: sinosphere
+summary:
+  zh: "中国技术与商业的黄金时代。雕版与活字印刷、火药武器化、指南针航海应用、水运仪象台等天文机械、煤铁冶炼、交子纸币与繁荣的城市市场在此汇聚；理学重整思想秩序。宋代的技术环境以「精耕的和平繁荣与制度创新」为特征，与其后蒙元的欧亚征服环境判然有别，故单列为一层时代背景。"
+  en: "A golden age of Chinese technology and commerce. Woodblock and movable-type printing, the weaponization of gunpowder, the navigational use of the compass, astronomical machines such as Su Song's water-driven clock-tower, coal-and-iron metallurgy, paper money, and thriving urban markets converged here, while Neo-Confucianism reorganized intellectual life. The Song's technical environment—one of intensive peacetime prosperity and institutional innovation—differs sharply from the Eurasian-conquest setting of the succeeding Mongol Yuan, and so is set apart as its own background layer."
+refs:
+  - { title: 《中国科学技术史》, author: 李约瑟（Joseph Needham） }
+  - { title: "The Age of Confucian Rule: The Song Transformation of China", author: Dieter Kuhn }

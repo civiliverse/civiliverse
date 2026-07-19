@@ -122,3 +122,61 @@ edges:
     note:
       zh: 伊斯兰天文（马拉盖学派诸模型）为哥白尼所承（程度有争议）
       en: Islamic astronomy (the Maragha-school models) fed Copernicus (degree disputed)
+  - schema_version: 1
+    source: shen-kuo
+    target: movable-type
+    type: contributed
+    importance: minor
+    note:
+      zh: 《梦溪笔谈》为毕昇活字唯一近世记录（记录者义）
+      en: The Dream Pool Essays is the sole near-contemporary record of Bi Sheng's type
+  - schema_version: 1
+    source: gutenberg-press
+    target: printing-revolution
+    type: enables
+    importance: major
+    note:
+      zh: 印刷革命的物质引擎
+      en: The material engine of the printing revolution
+  - schema_version: 1
+    source: papyrus
+    target: library-of-alexandria
+    type: enables
+    importance: minor
+    note:
+      zh: 纸草卷为图书馆藏书的主要载体
+      en: Papyrus scrolls were the Library's main material medium
+  - schema_version: 1
+    source: library-of-alexandria
+    target: house-of-wisdom
+    type: parallels
+    importance: major
+    note:
+      zh: 跨文明知识奇观群的呼应
+      en: Echo within the cross-civilizational cluster of knowledge wonders
+  - schema_version: 1
+    source: library-of-alexandria
+    target: timbuktu-manuscripts
+    type: parallels
+    importance: minor
+    note:
+      zh: 知识奇观群——非洲的手稿之城
+      en: The knowledge-wonder cluster—Africa's city of manuscripts
+  - schema_version: 1
+    source: printing-revolution
+    target: heliocentrism
+    type: enables
+    importance: minor
+    disputed: true
+    note:
+      zh: 印刷使天文表与新说得以广传（使能之一）
+      en: Printing let astronomical tables and the new theory spread widely (an enabling factor)
+  - schema_version: 1
+    source: printing-revolution
+    target: double-entry-bookkeeping
+    type: enables
+    importance: minor
+    disputed: true
+    note:
+      zh: 帕乔利《算术集成》(1494) 借印刷广传复式记账
+      en: Pacioli's Summa (1494) spread double-entry through print

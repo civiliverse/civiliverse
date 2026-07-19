@@ -1,0 +1,12 @@
+schema_version: 1
+id: mongol-yuan
+title: { zh: 蒙元, en: The Mongol Yuan }
+culture: sinic
+era: { start_year: 1271, end_year: 1368 }
+parent: sinosphere
+summary:
+  zh: "蒙古帝国治下的中国王朝。草原征服建立的欧亚大帝国带来「蒙古和平」，使技术与知识沿大陆通道空前流动——波斯天文学入元廷、火药与印刷西传、郭守敬修《授时历》（1281）并造观测仪器。其技术环境以「跨欧亚交流与征服动员」为特征，与宋朝内向精耕迥异；虽属中华文明圈，其草原–欧亚维度显著，于前端以区域边界布局牵引表达。"
+  en: "The Chinese dynasty under Mongol rule. The vast Eurasian empire built by steppe conquest brought the \"Pax Mongolica,\" moving technology and knowledge along continental routes as never before—Persian astronomy reached the Yuan court, gunpowder and printing traveled west, and Guo Shoujing reformed the calendar (the Shoushi li, 1281) and built observational instruments. Its technical environment—defined by trans-Eurasian exchange and conquest mobilization—differs markedly from the inward, intensive Song; though within the Sinosphere, its pronounced steppe-Eurasian dimension is conveyed through boundary layout at the front end."
+refs:
+  - { title: "The Mongols and Global History", author: Morris Rossabi }
+  - { title: 《中国科学技术史·天学卷》, author: 李约瑟等 }

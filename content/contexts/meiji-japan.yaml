@@ -1,0 +1,11 @@
+schema_version: 1
+id: meiji-japan
+title: { zh: 明治日本, en: Meiji Japan }
+culture: sinic
+era: { start_year: 1868, end_year: 1912 }
+parent: sinosphere
+summary:
+  zh: "1868至1912年，日本以国家主导的高速现代化，成为非西方防御性现代化的样板。铁路、电报、工业、现代大学与军队在数十年间建立；「和魂洋才」——以日本精神吸纳西洋技术——概括了其取向。作为东亚文明的一员却大举移植西方科技，明治日本正是「大背景下的小背景」的典型：主归中华文明圈，其显著的西学影响于节点层以 culture_secondary（western）及区域边界布局表达，不写入 context 字段。"
+  en: "From 1868 to 1912, Japan's state-led rapid modernization became a model of non-Western defensive modernization. Railways, telegraphy, industry, modern universities, and a modern army were built within decades; \"Japanese spirit, Western technology\" (wakon-yōsai) captures its stance. An East Asian civilization that transplanted Western science and technology wholesale, Meiji Japan is a textbook \"sub-background within a larger one\": it belongs primarily to the Sinosphere, while its pronounced Western influence is expressed at the node layer via culture_secondary (western) and boundary layout, not written into the context record."
+refs:
+  - { title: "The Making of Modern Japan", author: Marius Jansen }

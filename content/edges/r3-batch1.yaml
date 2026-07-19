@@ -1,0 +1,147 @@
+edges:
+  - schema_version: 1
+    source: ddt
+    target: ddt-ecological-crisis
+    type: causes
+    importance: major
+    note:
+      zh: 持久性与生物富集引发生态危机
+      en: Persistence and biomagnification triggered the ecological crisis
+  - schema_version: 1
+    source: ddt-ecological-crisis
+    target: silent-spring
+    type: inspires
+    importance: major
+    note:
+      zh: 危机经卡森之笔进入公众视野
+      en: The crisis entered public view through Carson's book
+  - schema_version: 1
+    source: ddt-ecological-crisis
+    target: environmental-movement
+    type: inspires
+    importance: major
+    note:
+      zh: 「寂静的春天」成为运动的原初意象
+      en: The "silent spring" became the movement's founding image
+  - schema_version: 1
+    source: rachel-carson
+    target: silent-spring
+    type: contributed
+    importance: major
+    note:
+      zh: 卡森著述
+      en: Authored by Carson
+  - schema_version: 1
+    source: silent-spring
+    target: environmental-movement
+    type: inspires
+    importance: major
+    note:
+      zh: 现代环保运动的奠基之作
+      en: The founding work of the modern environmental movement
+  - schema_version: 1
+    source: silent-spring
+    target: pesticide-regulation
+    type: inspires
+    importance: major
+    note:
+      zh: 间接推动 EPA 成立与 DDT 禁用
+      en: Indirectly spurred the EPA and the DDT ban
+  - schema_version: 1
+    source: rachel-carson
+    target: environmental-movement
+    type: inspires
+    importance: minor
+    note:
+      zh: 其人其书成为运动象征
+      en: She and her book became symbols of the movement
+  - schema_version: 1
+    source: environmental-movement
+    target: pesticide-regulation
+    type: inspires
+    importance: major
+    note:
+      zh: 运动推动农药立法与管制
+      en: The movement drove pesticide legislation and regulation
+  - schema_version: 1
+    source: pesticide-regulation
+    target: ddt
+    type: regulates
+    importance: major
+    note:
+      zh: 管制约束/终结其农用——回路闭合
+      en: Regulation constrained/ended DDT's agricultural use—closing the loop
+  - schema_version: 1
+    source: papermaking
+    target: movable-type
+    type: enables
+    importance: major
+    note:
+      zh: 无纸不成印，造纸为前置
+      en: No paper, no print—papermaking is a precondition
+  - schema_version: 1
+    source: woodblock-printing
+    target: movable-type
+    type: enables
+    importance: major
+    note:
+      zh: 雕刻与刷印工艺为技术前身
+      en: Carving and impression techniques as technical antecedents
+  - schema_version: 1
+    source: movable-type
+    target: printing-revolution
+    type: parallels
+    importance: major
+    disputed: true
+    note:
+      zh: 东亚活字与古登堡各自独立起源，不预设影响方向
+      en: East Asian and Gutenberg movable type arose independently; no direction of influence presumed
+  - schema_version: 1
+    source: papermaking
+    target: printing-revolution
+    type: enables
+    importance: major
+    note:
+      zh: 纸经伊斯兰世界西传，为印刷前置
+      en: Paper, transmitted westward via the Islamic world, was a precondition
+  - schema_version: 1
+    source: printing-revolution
+    target: reformation
+    type: enables
+    importance: major
+    disputed: true
+    note:
+      zh: 使能而非唯一动因
+      en: An enabling condition, not the sole cause
+  - schema_version: 1
+    source: cai-lun
+    target: papermaking
+    type: contributed
+    importance: major
+    note:
+      zh: 集大成改良与制度化推广
+      en: Great improver and institutional promoter
+  - schema_version: 1
+    source: ptolemy-i
+    target: library-of-alexandria
+    type: patronized
+    importance: major
+    note:
+      zh: 王家赞助与构想（赞助者→被赞助者）
+      en: Royal patronage and conception (patron→beneficiary)
+  - schema_version: 1
+    source: library-of-alexandria
+    target: nalanda
+    type: parallels
+    importance: major
+    note:
+      zh: 跨文明「知识奇观」呼应（并连智慧宫、廷巴克图手稿群）
+      en: Cross-civilizational echo of "knowledge wonders"
+  - schema_version: 1
+    source: library-of-alexandria
+    target: cataloguing-pinakes
+    type: enables
+    importance: minor
+    note:
+      zh: 催生文献编目学
+      en: Gave rise to the science of cataloguing

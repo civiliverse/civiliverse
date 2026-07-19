@@ -1,0 +1,10 @@
+schema_version: 1
+id: sinosphere
+title: { zh: 中华文明圈, en: The Sinosphere }
+culture: sinic
+era: { start_year: -1600, end_year: 1912 }
+summary:
+  zh: "以中国为中心、经汉字与典籍辐射至朝鲜、日本、越南的东亚文化圈（此处取商代甲骨至清末的传统帝制时段为范围）。共享一套技术与知识底盘——造纸、印刷、青铜与冶铁、稻作与水利、天文历法、官僚制——并在其中不断本地化再造。作为父背景，它统摄宋朝、蒙元等技术环境各异的次级时代背景。"
+  en: "The East Asian cultural sphere centered on China and radiating—through Chinese script and the classics—to Korea, Japan, and Vietnam (bounded here to the traditional imperial span, from Shang oracle bones to the end of the Qing). It shares a common technical and intellectual substratum—papermaking, printing, bronze and iron, rice agriculture and hydraulics, astronomy and calendars, bureaucracy—continually localized and remade. As a parent background it subsumes sub-contexts of markedly different technical character, such as the Song and the Mongol Yuan."
+refs:
+  - { title: 《中国科学技术史》, author: 李约瑟（Joseph Needham） }
