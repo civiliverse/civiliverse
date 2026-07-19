@@ -5,7 +5,7 @@
    "zh": "知识的复制与传播",
    "en": "The Replication and Spread of Knowledge"
   },
-  "version": "p0-v1",
+  "version": "p0-v2-frozen-fields",
   "status": "draft — 演示样稿，节点与边均待总编辑审定",
   "seed": 20260717,
   "ticks": 400,
@@ -54,7 +54,7 @@
    },
    "culture": "ancient-near-east",
    "domains": [
-    "信息与传播"
+    "information-communication"
    ],
    "tier": "major",
    "summary": {
@@ -75,7 +75,7 @@
    },
    "culture": "ancient-near-east",
    "domains": [
-    "信息与传播"
+    "information-communication"
    ],
    "tier": "minor",
    "summary": {
@@ -96,7 +96,7 @@
    },
    "culture": "sinic",
    "domains": [
-    "信息与传播"
+    "information-communication"
    ],
    "tier": "major",
    "summary": {
@@ -117,7 +117,7 @@
    },
    "culture": "ancient-near-east",
    "domains": [
-    "信息与传播"
+    "information-communication"
    ],
    "tier": "major",
    "summary": {
@@ -138,7 +138,7 @@
    },
    "culture": "greco-roman",
    "domains": [
-    "信息与传播"
+    "information-communication"
    ],
    "tier": "minor",
    "summary": {
@@ -159,7 +159,7 @@
    },
    "culture": "greco-roman",
    "domains": [
-    "信息与传播"
+    "information-communication"
    ],
    "tier": "minor",
    "summary": {
@@ -179,7 +179,7 @@
    },
    "culture": "sinic",
    "domains": [
-    "信息与传播"
+    "information-communication"
    ],
    "tier": "major",
    "summary": {
@@ -200,7 +200,7 @@
    },
    "culture": "islamic",
    "domains": [
-    "信息与传播"
+    "information-communication"
    ],
    "tier": "minor",
    "summary": {
@@ -221,7 +221,7 @@
    },
    "culture": "sinic",
    "domains": [
-    "信息与传播"
+    "information-communication"
    ],
    "tier": "major",
    "summary": {
@@ -242,7 +242,7 @@
    },
    "culture": "sinic",
    "domains": [
-    "信息与传播"
+    "information-communication"
    ],
    "tier": "major",
    "summary": {
@@ -262,7 +262,7 @@
    },
    "culture": "sinic",
    "domains": [
-    "信息与传播"
+    "information-communication"
    ],
    "tier": "minor",
    "summary": {
@@ -283,7 +283,7 @@
    },
    "culture": "sinic",
    "domains": [
-    "信息与传播"
+    "information-communication"
    ],
    "tier": "minor",
    "summary": {
@@ -303,8 +303,8 @@
    },
    "culture": "sinic",
    "domains": [
-    "信息与传播",
-    "经济"
+    "information-communication",
+    "economy-governance"
    ],
    "tier": "minor",
    "summary": {
@@ -325,7 +325,7 @@
    },
    "culture": "western",
    "domains": [
-    "信息与传播"
+    "information-communication"
    ],
    "tier": "major",
    "summary": {
@@ -345,7 +345,7 @@
    },
    "culture": "western",
    "domains": [
-    "信息与传播"
+    "information-communication"
    ],
    "tier": "minor",
    "summary": {
@@ -365,7 +365,7 @@
    },
    "culture": "western",
    "domains": [
-    "信息与传播"
+    "information-communication"
    ],
    "tier": "major",
    "summary": {
@@ -386,7 +386,7 @@
    },
    "culture": "western",
    "domains": [
-    "信息与传播"
+    "information-communication"
    ],
    "tier": "minor",
    "summary": {
@@ -406,8 +406,8 @@
    },
    "culture": "western",
    "domains": [
-    "信息与传播",
-    "计算"
+    "information-communication",
+    "math-computing"
    ],
    "tier": "major",
    "summary": {
@@ -427,8 +427,8 @@
    },
    "culture": "western",
    "domains": [
-    "信息与传播",
-    "计算"
+    "information-communication",
+    "math-computing"
    ],
    "tier": "major",
    "summary": {
@@ -448,8 +448,8 @@
    },
    "culture": "western",
    "domains": [
-    "信息与传播",
-    "计算"
+    "information-communication",
+    "math-computing"
    ],
    "tier": "major",
    "summary": {
@@ -470,7 +470,7 @@
    },
    "culture": "greco-roman",
    "domains": [
-    "数学与逻辑"
+    "math-computing"
    ],
    "tier": "major",
    "summary": {
@@ -490,7 +490,7 @@
    },
    "culture": "sinic",
    "domains": [
-    "制度与教育"
+    "economy-governance"
    ],
    "tier": "minor",
    "summary": {
@@ -511,7 +511,7 @@
    },
    "culture": "western",
    "domains": [
-    "信息与传播"
+    "information-communication"
    ],
    "tier": "minor",
    "summary": {
@@ -532,7 +532,7 @@
    },
    "culture": "islamic",
    "domains": [
-    "制度与教育"
+    "economy-governance"
    ],
    "tier": "major",
    "summary": {
@@ -552,7 +552,7 @@
    },
    "culture": "western",
    "domains": [
-    "宗教与思想"
+    "science-method"
    ],
    "tier": "major",
    "summary": {
@@ -572,7 +572,7 @@
    },
    "culture": "western",
    "domains": [
-    "制度与教育"
+    "economy-governance"
    ],
    "tier": "minor",
    "summary": {
@@ -593,7 +593,7 @@
    },
    "culture": "western",
    "domains": [
-    "制度与教育"
+    "economy-governance"
    ],
    "tier": "minor",
    "summary": {
@@ -613,8 +613,7 @@
    },
    "culture": "western",
    "domains": [
-    "制度与教育",
-    "经济"
+    "economy-governance"
    ],
    "tier": "minor",
    "summary": {
@@ -635,7 +634,7 @@
    },
    "culture": "western",
    "domains": [
-    "制度与教育"
+    "economy-governance"
    ],
    "tier": "minor",
    "summary": {
@@ -655,8 +654,7 @@
    },
    "culture": "western",
    "domains": [
-    "数学与逻辑",
-    "计算"
+    "math-computing"
    ],
    "tier": "major",
    "summary": {
@@ -676,7 +674,7 @@
    },
    "culture": "western",
    "domains": [
-    "计算"
+    "math-computing"
    ],
    "tier": "minor",
    "summary": {
@@ -696,7 +694,7 @@
    },
    "culture": "western",
    "domains": [
-    "史学"
+    "science-method"
    ],
    "tier": "minor",
    "summary": {
@@ -717,7 +715,7 @@
    },
    "culture": "greco-roman",
    "domains": [
-    "制度与教育"
+    "economy-governance"
    ],
    "tier": "major",
    "summary": {
@@ -738,7 +736,7 @@
    },
    "culture": "greco-roman",
    "domains": [
-    "制度与教育"
+    "economy-governance"
    ],
    "tier": "minor",
    "summary": {
@@ -759,7 +757,7 @@
    },
    "culture": "greco-roman",
    "domains": [
-    "制度与教育"
+    "economy-governance"
    ],
    "tier": "minor",
    "summary": {
@@ -781,7 +779,7 @@
    },
    "culture": "greco-roman",
    "domains": [
-    "数学与逻辑"
+    "math-computing"
    ],
    "tier": "major",
    "summary": {
@@ -803,7 +801,7 @@
    },
    "culture": "sinic",
    "domains": [
-    "信息与传播"
+    "information-communication"
    ],
    "tier": "major",
    "summary": {
@@ -824,7 +822,7 @@
    },
    "culture": "islamic",
    "domains": [
-    "制度与教育"
+    "economy-governance"
    ],
    "tier": "major",
    "summary": {
@@ -846,7 +844,7 @@
    },
    "culture": "sinic",
    "domains": [
-    "信息与传播"
+    "information-communication"
    ],
    "tier": "major",
    "summary": {
@@ -868,7 +866,7 @@
    },
    "culture": "western",
    "domains": [
-    "信息与传播"
+    "information-communication"
    ],
    "tier": "major",
    "summary": {
@@ -889,7 +887,7 @@
    },
    "culture": "western",
    "domains": [
-    "史学"
+    "science-method"
    ],
    "tier": "minor",
    "summary": {
@@ -909,7 +907,7 @@
    },
    "culture": "western",
    "domains": [
-    "计算"
+    "math-computing"
    ],
    "tier": "major",
    "summary": {
@@ -930,7 +928,7 @@
    },
    "culture": "greco-roman",
    "domains": [
-    "制度与教育"
+    "economy-governance"
    ],
    "tier": "major",
    "summary": {
@@ -951,7 +949,7 @@
    },
    "culture": "islamic",
    "domains": [
-    "制度与教育"
+    "economy-governance"
    ],
    "tier": "major",
    "summary": {
@@ -971,8 +969,8 @@
    },
    "culture": "sinic",
    "domains": [
-    "信息与传播",
-    "宗教与思想"
+    "information-communication",
+    "science-method"
    ],
    "tier": "minor",
    "summary": {
@@ -992,7 +990,7 @@
    },
    "culture": "sinic",
    "domains": [
-    "制度与教育"
+    "economy-governance"
    ],
    "tier": "minor",
    "summary": {
@@ -1013,8 +1011,8 @@
    },
    "culture": "western",
    "domains": [
-    "制度与教育",
-    "宗教与思想"
+    "economy-governance",
+    "science-method"
    ],
    "tier": "major",
    "summary": {
@@ -1034,8 +1032,8 @@
    },
    "culture": "trans",
    "domains": [
-    "信息与传播",
-    "制度与教育"
+    "information-communication",
+    "economy-governance"
    ],
    "tier": "major",
    "summary": {
@@ -1055,7 +1053,7 @@
    },
    "culture": "sinic",
    "domains": [
-    "制度与教育"
+    "economy-governance"
    ],
    "tier": "minor",
    "summary": {
@@ -1077,7 +1075,7 @@
    },
    "culture": "greco-roman",
    "domains": [
-    "制度与教育"
+    "economy-governance"
    ],
    "tier": "major",
    "summary": {
@@ -1099,7 +1097,7 @@
    },
    "culture": "sinic",
    "domains": [
-    "制度与教育"
+    "economy-governance"
    ],
    "tier": "minor",
    "summary": {
@@ -1119,7 +1117,7 @@
    },
    "culture": "western",
    "domains": [
-    "制度与教育"
+    "economy-governance"
    ],
    "tier": "minor",
    "summary": {
@@ -1139,7 +1137,7 @@
    },
    "culture": "africa",
    "domains": [
-    "信息与传播"
+    "information-communication"
    ],
    "tier": "major",
    "summary": {
@@ -1150,130 +1148,130 @@
  ],
  "edges": [
   {
-   "from": "tech/cuneiform",
-   "to": "tech/oracle-bone",
+   "source": "tech/cuneiform",
+   "target": "tech/oracle-bone",
+   "importance": "major",
    "type": "parallels",
-   "strength": "major",
    "note": {
     "zh": "两河与殷商各自独立发明成体系文字",
     "en": "Mesopotamia and Shang China each invented systematic writing independently"
    }
   },
   {
-   "from": "tech/papyrus",
-   "to": "wonder/library-alexandria",
+   "source": "tech/papyrus",
+   "target": "wonder/library-alexandria",
+   "importance": "major",
    "type": "enables",
-   "strength": "major",
    "note": {
     "zh": "纸草卷轴是馆藏的物质基础",
     "en": "Papyrus scrolls were the material base of the collection"
    }
   },
   {
-   "from": "tech/alphabet",
-   "to": "idea/axiomatic-method",
+   "source": "tech/alphabet",
+   "target": "idea/axiomatic-method",
+   "importance": "minor",
    "type": "enables",
-   "strength": "minor",
    "note": {
     "zh": "希腊字母文本传统承载演绎论证",
     "en": "The Greek alphabetic text tradition carried deductive argument"
    }
   },
   {
-   "from": "tech/alphabet",
-   "to": "tech/gutenberg-press",
+   "source": "tech/alphabet",
+   "target": "tech/gutenberg-press",
+   "importance": "major",
    "type": "enables",
-   "strength": "major",
    "note": {
     "zh": "字母文字令活字字库小而经济",
     "en": "An alphabet keeps the type case small and economical"
    }
   },
   {
-   "from": "tech/papyrus",
-   "to": "tech/parchment",
+   "source": "tech/papyrus",
+   "target": "tech/parchment",
+   "importance": "minor",
    "type": "parallels",
-   "strength": "minor",
    "note": {
     "zh": "帕加马与亚历山大的书写材料之争（替代性并行）",
     "en": "Pergamum vs Alexandria: rival writing materials in parallel"
    }
   },
   {
-   "from": "tech/parchment",
-   "to": "tech/codex",
+   "source": "tech/parchment",
+   "target": "tech/codex",
+   "importance": "major",
    "type": "enables",
-   "strength": "major",
    "note": {
     "zh": "羊皮耐折叠装订，册子本得以取代卷轴",
     "en": "Durable, foldable parchment let the codex displace the scroll"
    }
   },
   {
-   "from": "tech/codex",
-   "to": "idea/manuscript-culture",
+   "source": "tech/codex",
+   "target": "idea/manuscript-culture",
+   "importance": "minor",
    "type": "enables",
-   "strength": "minor",
    "note": {
     "zh": "修道院缮写室以册子本为标准载体",
     "en": "Monastic scriptoria standardized on the codex"
    }
   },
   {
-   "from": "tech/parchment",
-   "to": "idea/manuscript-culture",
+   "source": "tech/parchment",
+   "target": "idea/manuscript-culture",
+   "importance": "minor",
    "type": "enables",
-   "strength": "minor",
    "note": {
     "zh": "中世纪抄本的主要材料",
     "en": "The chief material of medieval manuscripts"
    }
   },
   {
-   "from": "tech/oracle-bone",
-   "to": "tech/woodblock",
+   "source": "tech/oracle-bone",
+   "target": "tech/woodblock",
+   "importance": "minor",
    "type": "enables",
-   "strength": "minor",
    "note": {
     "zh": "汉字文本传统是雕版的文字前提",
     "en": "The Chinese text tradition was the precondition for woodblock printing"
    }
   },
   {
-   "from": "person/cai-lun",
-   "to": "tech/papermaking",
+   "source": "person/cai-lun",
+   "target": "tech/papermaking",
+   "importance": "major",
    "type": "contributed",
-   "strength": "major",
    "note": {
     "zh": "改进工艺并奏报朝廷，使造纸标准化",
     "en": "Improved the craft and reported it to the throne, standardizing papermaking"
    }
   },
   {
-   "from": "tech/papermaking",
-   "to": "tech/woodblock",
+   "source": "tech/papermaking",
+   "target": "tech/woodblock",
+   "importance": "major",
    "type": "enables",
-   "strength": "major",
    "note": {
     "zh": "廉价的纸是批量印刷的前提",
     "en": "Cheap paper was the precondition for printing at scale"
    }
   },
   {
-   "from": "idea/confucian-canon",
-   "to": "tech/woodblock",
+   "source": "idea/confucian-canon",
+   "target": "tech/woodblock",
+   "importance": "major",
    "type": "applies",
-   "strength": "major",
    "note": {
     "zh": "经籍与科举的标准文本需求拉动印刷",
     "en": "Canonical texts for the classics and examinations pulled printing demand"
    }
   },
   {
-   "from": "tech/papermaking",
-   "to": "tech/samarkand-paper",
+   "source": "tech/papermaking",
+   "target": "tech/samarkand-paper",
+   "importance": "major",
    "type": "derives",
-   "strength": "major",
    "disputed": true,
    "note": {
     "zh": "造纸术经中亚西传；怛罗斯战俘传艺说存疑",
@@ -1281,440 +1279,440 @@
    }
   },
   {
-   "from": "tech/samarkand-paper",
-   "to": "wonder/house-of-wisdom",
+   "source": "tech/samarkand-paper",
+   "target": "wonder/house-of-wisdom",
+   "importance": "major",
    "type": "enables",
-   "strength": "major",
    "note": {
     "zh": "纸使翻译与抄写成本骤降",
     "en": "Paper slashed the cost of translation and copying"
    }
   },
   {
-   "from": "tech/samarkand-paper",
-   "to": "tech/gutenberg-press",
+   "source": "tech/samarkand-paper",
+   "target": "tech/gutenberg-press",
+   "importance": "major",
    "type": "enables",
-   "strength": "major",
    "note": {
     "zh": "纸经伊斯兰世界与意大利传入欧洲",
     "en": "Paper reached Europe through the Islamic world and Italy"
    }
   },
   {
-   "from": "tech/woodblock",
-   "to": "tech/clay-movable-type",
+   "source": "tech/woodblock",
+   "target": "tech/clay-movable-type",
+   "importance": "major",
    "type": "derives",
-   "strength": "major",
    "note": {
     "zh": "从整版雕刻到可重组的活字",
     "en": "From carving whole blocks to recombinable type"
    }
   },
   {
-   "from": "person/bi-sheng",
-   "to": "tech/clay-movable-type",
+   "source": "person/bi-sheng",
+   "target": "tech/clay-movable-type",
+   "importance": "major",
    "type": "contributed",
-   "strength": "major",
    "note": {
     "zh": "沈括《梦溪笔谈》记其法",
     "en": "Shen Kuo's Dream Pool Essays records his method"
    }
   },
   {
-   "from": "tech/clay-movable-type",
-   "to": "tech/wangzhen-typecase",
+   "source": "tech/clay-movable-type",
+   "target": "tech/wangzhen-typecase",
+   "importance": "minor",
    "type": "derives",
-   "strength": "minor",
    "note": {
     "zh": "王祯以木活字与转轮排字盘改良检字",
     "en": "Wang Zhen improved typesetting with wooden type and a revolving case"
    }
   },
   {
-   "from": "tech/clay-movable-type",
-   "to": "tech/korean-metal-type",
+   "source": "tech/clay-movable-type",
+   "target": "tech/korean-metal-type",
+   "importance": "minor",
    "type": "parallels",
-   "strength": "minor",
    "note": {
     "zh": "东亚活字谱系内的递进与并行",
     "en": "Progression and parallel within East Asia's movable-type lineage"
    }
   },
   {
-   "from": "tech/korean-metal-type",
-   "to": "tech/gutenberg-press",
+   "source": "tech/korean-metal-type",
+   "target": "tech/gutenberg-press",
+   "importance": "major",
    "type": "parallels",
-   "strength": "major",
    "note": {
     "zh": "金属活字的东西方呼应，无传播证据",
     "en": "An East-West echo in metal type, with no evidence of transmission"
    }
   },
   {
-   "from": "tech/clay-movable-type",
-   "to": "tech/gutenberg-press",
+   "source": "tech/clay-movable-type",
+   "target": "tech/gutenberg-press",
+   "importance": "major",
    "type": "parallels",
-   "strength": "major",
    "note": {
     "zh": "毕昇与古腾堡：独立发明的经典案例",
     "en": "Bi Sheng and Gutenberg: a classic case of independent invention"
    }
   },
   {
-   "from": "tech/woodblock",
-   "to": "tech/paper-money",
+   "source": "tech/woodblock",
+   "target": "tech/paper-money",
+   "importance": "minor",
    "type": "derives",
-   "strength": "minor",
    "note": {
     "zh": "印刷技术的金融应用",
     "en": "A financial application of printing technology"
    }
   },
   {
-   "from": "tech/woodblock",
-   "to": "wonder/tripitaka-koreana",
+   "source": "tech/woodblock",
+   "target": "wonder/tripitaka-koreana",
+   "importance": "major",
    "type": "enables",
-   "strength": "major",
    "note": {
     "zh": "八万经版：雕版技术的极限工程",
     "en": "Eighty thousand blocks: woodblock printing at its engineering limit"
    }
   },
   {
-   "from": "person/gutenberg",
-   "to": "tech/gutenberg-press",
+   "source": "person/gutenberg",
+   "target": "tech/gutenberg-press",
+   "importance": "major",
    "type": "contributed",
-   "strength": "major",
    "note": {
     "zh": "整合铸字、合金、油墨与压印机",
     "en": "Integrated type-casting, alloy, ink, and the press"
    }
   },
   {
-   "from": "tech/gutenberg-press",
-   "to": "idea/reformation",
+   "source": "tech/gutenberg-press",
+   "target": "idea/reformation",
+   "importance": "major",
    "type": "informs",
-   "strength": "major",
    "note": {
     "zh": "檄文与小册子的媒介动员",
     "en": "Media mobilization by pamphlet and broadsheet"
    }
   },
   {
-   "from": "tech/gutenberg-press",
-   "to": "idea/censorship-index",
+   "source": "tech/gutenberg-press",
+   "target": "idea/censorship-index",
+   "importance": "major",
    "type": "informs",
-   "strength": "major",
    "note": {
     "zh": "印刷失控催生禁书建制",
     "en": "Print out of control begat the apparatus of censorship"
    }
   },
   {
-   "from": "idea/reformation",
-   "to": "idea/mass-literacy",
+   "source": "idea/reformation",
+   "target": "idea/mass-literacy",
+   "importance": "minor",
    "type": "inspires",
-   "strength": "minor",
    "note": {
     "zh": "人人读经的义务推动识字",
     "en": "The duty to read Scripture pushed literacy"
    }
   },
   {
-   "from": "tech/gutenberg-press",
-   "to": "idea/republic-of-letters",
+   "source": "tech/gutenberg-press",
+   "target": "idea/republic-of-letters",
+   "importance": "minor",
    "type": "informs",
-   "strength": "minor",
    "note": {
     "zh": "出版网络支撑跨国学术共同体",
     "en": "Publishing networks sustained a transnational learned community"
    }
   },
   {
-   "from": "tech/gutenberg-press",
-   "to": "idea/copyright",
+   "source": "tech/gutenberg-press",
+   "target": "idea/copyright",
+   "importance": "major",
    "type": "informs",
-   "strength": "major",
    "note": {
     "zh": "印刷商利益与作者权利的博弈产物",
     "en": "Born of the contest between printers' interests and authors' rights"
    }
   },
   {
-   "from": "tech/gutenberg-press",
-   "to": "idea/printing-revolution",
+   "source": "tech/gutenberg-press",
+   "target": "idea/printing-revolution",
+   "importance": "minor",
    "type": "informs",
-   "strength": "minor",
    "note": {
     "zh": "爱森斯坦命题的研究对象",
     "en": "The subject of Eisenstein's thesis"
    }
   },
   {
-   "from": "person/eisenstein",
-   "to": "idea/printing-revolution",
+   "source": "person/eisenstein",
+   "target": "idea/printing-revolution",
+   "importance": "major",
    "type": "contributed",
-   "strength": "major",
    "note": {
     "zh": "《作为变革动因的印刷机》(1979)",
     "en": "The Printing Press as an Agent of Change (1979)"
    }
   },
   {
-   "from": "tech/gutenberg-press",
-   "to": "tech/rotary-press",
+   "source": "tech/gutenberg-press",
+   "target": "tech/rotary-press",
+   "importance": "major",
    "type": "derives",
-   "strength": "major",
    "note": {
     "zh": "蒸汽动力时代的报业印刷",
     "en": "Newspaper printing for the steam age"
    }
   },
   {
-   "from": "tech/rotary-press",
-   "to": "idea/mass-literacy",
+   "source": "tech/rotary-press",
+   "target": "idea/mass-literacy",
+   "importance": "minor",
    "type": "informs",
-   "strength": "minor",
    "note": {
     "zh": "便士报造就大众读者",
     "en": "The penny press created the mass reader"
    }
   },
   {
-   "from": "tech/telegraph",
-   "to": "tech/radio",
+   "source": "tech/telegraph",
+   "target": "tech/radio",
+   "importance": "minor",
    "type": "derives",
-   "strength": "minor",
    "note": {
     "zh": "从有线电讯到无线广播",
     "en": "From wired telegraphy to wireless broadcasting"
    }
   },
   {
-   "from": "tech/telegraph",
-   "to": "idea/information-theory",
+   "source": "tech/telegraph",
+   "target": "idea/information-theory",
+   "importance": "major",
    "type": "informs",
-   "strength": "major",
    "note": {
     "zh": "编码与信道问题的工程起源",
     "en": "Coding and channel problems began as engineering"
    }
   },
   {
-   "from": "idea/information-theory",
-   "to": "tech/computer",
+   "source": "idea/information-theory",
+   "target": "tech/computer",
+   "importance": "minor",
    "type": "applies",
-   "strength": "minor",
    "note": {
     "zh": "通信与计算共享的理论底座",
     "en": "The shared theoretical floor of communication and computing"
    }
   },
   {
-   "from": "idea/information-theory",
-   "to": "tech/internet",
+   "source": "idea/information-theory",
+   "target": "tech/internet",
+   "importance": "minor",
    "type": "applies",
-   "strength": "minor",
    "note": {
     "zh": "分组交换背后的信息度量",
     "en": "The information measure behind packet switching"
    }
   },
   {
-   "from": "tech/computer",
-   "to": "tech/internet",
+   "source": "tech/computer",
+   "target": "tech/internet",
+   "importance": "major",
    "type": "enables",
-   "strength": "major",
    "note": {
     "zh": "联网的前提是通用计算机",
     "en": "Networking presupposes the general-purpose computer"
    }
   },
   {
-   "from": "tech/internet",
-   "to": "tech/www",
+   "source": "tech/internet",
+   "target": "tech/www",
+   "importance": "major",
    "type": "enables",
-   "strength": "major",
    "note": {
     "zh": "万维网运行于互联网之上",
     "en": "The Web runs on top of the Internet"
    }
   },
   {
-   "from": "person/berners-lee",
-   "to": "tech/www",
+   "source": "person/berners-lee",
+   "target": "tech/www",
+   "importance": "major",
    "type": "contributed",
-   "strength": "major",
    "note": {
     "zh": "1989年在CERN提出并实现",
     "en": "Proposed and built at CERN in 1989"
    }
   },
   {
-   "from": "idea/hypertext",
-   "to": "tech/www",
+   "source": "idea/hypertext",
+   "target": "tech/www",
+   "importance": "major",
    "type": "applies",
-   "strength": "major",
    "note": {
     "zh": "Memex与Xanadu设想的工程落地",
     "en": "Memex and Xanadu made engineering fact"
    }
   },
   {
-   "from": "tech/www",
-   "to": "wonder/wikipedia",
+   "source": "tech/www",
+   "target": "wonder/wikipedia",
+   "importance": "major",
    "type": "enables",
-   "strength": "major",
    "note": {
     "zh": "开放网络之上的协作百科",
     "en": "A collaborative encyclopedia on the open Web"
    }
   },
   {
-   "from": "wonder/wikipedia",
-   "to": "wonder/encyclopedie",
+   "source": "wonder/wikipedia",
+   "target": "wonder/encyclopedie",
+   "importance": "major",
    "type": "parallels",
-   "strength": "major",
    "note": {
     "zh": "启蒙百科工程的当代回声",
     "en": "A contemporary echo of the Enlightenment encyclopedia"
    }
   },
   {
-   "from": "idea/republic-of-letters",
-   "to": "wonder/encyclopedie",
+   "source": "idea/republic-of-letters",
+   "target": "wonder/encyclopedie",
+   "importance": "major",
    "type": "inspires",
-   "strength": "major",
    "note": {
     "zh": "文人共和国的集大成出版",
     "en": "The Republic of Letters in one great publication"
    }
   },
   {
-   "from": "wonder/encyclopedie",
-   "to": "wonder/yongle-dadian",
+   "source": "wonder/encyclopedie",
+   "target": "wonder/yongle-dadian",
+   "importance": "minor",
    "type": "parallels",
-   "strength": "minor",
    "note": {
     "zh": "类书与百科：两种\"知识总汇\"传统",
     "en": "Leishu and encyclopedie: two traditions of summing up knowledge"
    }
   },
   {
-   "from": "idea/copyright",
-   "to": "wonder/wikipedia",
+   "source": "idea/copyright",
+   "target": "wonder/wikipedia",
+   "importance": "minor",
    "type": "informs",
-   "strength": "minor",
    "note": {
     "zh": "自由许可(Copyleft)对版权逻辑的反转",
     "en": "Copyleft inverts the logic of copyright"
    }
   },
   {
-   "from": "person/alexander",
-   "to": "person/ptolemy-i",
+   "source": "person/alexander",
+   "target": "person/ptolemy-i",
+   "importance": "major",
    "type": "inspires",
-   "strength": "major",
    "note": {
     "zh": "继业者继承帝国与希腊化事业",
     "en": "The Successors inherited empire and the Hellenizing project"
    }
   },
   {
-   "from": "person/ptolemy-i",
-   "to": "wonder/library-alexandria",
+   "source": "person/ptolemy-i",
+   "target": "wonder/library-alexandria",
+   "importance": "major",
    "type": "patronized",
-   "strength": "major",
    "note": {
     "zh": "建馆并立\"收尽天下之书\"之策",
     "en": "Founded the Library and the policy of collecting all the books in the world"
    }
   },
   {
-   "from": "person/ptolemy-ii",
-   "to": "wonder/library-alexandria",
+   "source": "person/ptolemy-ii",
+   "target": "wonder/library-alexandria",
+   "importance": "minor",
    "type": "patronized",
-   "strength": "minor",
    "note": {
     "zh": "扩藏与供养学者",
     "en": "Expanded the collection and maintained the scholars"
    }
   },
   {
-   "from": "wonder/library-alexandria",
-   "to": "idea/axiomatic-method",
+   "source": "wonder/library-alexandria",
+   "target": "idea/axiomatic-method",
+   "importance": "major",
    "type": "enables",
-   "strength": "major",
    "note": {
     "zh": "缪斯宫建制供养了欧几里得们",
     "en": "The Mouseion's establishment sustained the Euclids"
    }
   },
   {
-   "from": "person/euclid",
-   "to": "idea/axiomatic-method",
+   "source": "person/euclid",
+   "target": "idea/axiomatic-method",
+   "importance": "major",
    "type": "contributed",
-   "strength": "major",
    "note": {
     "zh": "《几何原本》十三卷",
     "en": "The thirteen books of the Elements"
    }
   },
   {
-   "from": "person/al-mamun",
-   "to": "wonder/house-of-wisdom",
+   "source": "person/al-mamun",
+   "target": "wonder/house-of-wisdom",
+   "importance": "major",
    "type": "patronized",
-   "strength": "major",
    "note": {
     "zh": "以重金延揽译者与学者",
     "en": "Drew translators and scholars with lavish patronage"
    }
   },
   {
-   "from": "wonder/house-of-wisdom",
-   "to": "idea/translation-movement",
+   "source": "wonder/house-of-wisdom",
+   "target": "idea/translation-movement",
+   "importance": "major",
    "type": "enables",
-   "strength": "major",
    "note": {
     "zh": "翻译运动的建制核心",
     "en": "The institutional core of the Translation Movement"
    }
   },
   {
-   "from": "wonder/library-alexandria",
-   "to": "wonder/house-of-wisdom",
+   "source": "wonder/library-alexandria",
+   "target": "wonder/house-of-wisdom",
+   "importance": "minor",
    "type": "inspires",
-   "strength": "minor",
    "note": {
     "zh": "帝国藏书传统的自觉继承",
     "en": "A conscious heir to the imperial library tradition"
    }
   },
   {
-   "from": "disaster/alexandria-fires",
-   "to": "disaster/burning-books",
+   "source": "disaster/alexandria-fires",
+   "target": "disaster/burning-books",
+   "importance": "major",
    "type": "parallels",
-   "strength": "major",
    "note": {
     "zh": "东西方知识浩劫的呼应",
     "en": "Eastern and Western catastrophes of knowledge in echo"
    }
   },
   {
-   "from": "disaster/alexandria-fires",
-   "to": "disaster/nazi-book-burning",
+   "source": "disaster/alexandria-fires",
+   "target": "disaster/nazi-book-burning",
+   "importance": "minor",
    "type": "parallels",
-   "strength": "minor",
    "note": {
     "zh": "焚书作为文明创伤的跨时空重演",
     "en": "Book-burning as a recurring trauma of civilization"
    }
   },
   {
-   "from": "disaster/burning-books",
-   "to": "idea/confucian-canon",
+   "source": "disaster/burning-books",
+   "target": "idea/confucian-canon",
+   "importance": "minor",
    "type": "inspires",
-   "strength": "minor",
    "disputed": true,
    "note": {
     "zh": "劫后重建经学，官学化因祸而强；因果强度存争议",
@@ -1722,10 +1720,10 @@
    }
   },
   {
-   "from": "tech/woodblock",
-   "to": "disaster/literary-inquisition",
+   "source": "tech/woodblock",
+   "target": "disaster/literary-inquisition",
+   "importance": "minor",
    "type": "causes",
-   "strength": "minor",
    "disputed": true,
    "note": {
     "zh": "出版繁荣与清代思想清剿的关联存争议",
@@ -1733,20 +1731,20 @@
    }
   },
   {
-   "from": "tech/radio",
-   "to": "disaster/radio-genocide",
+   "source": "tech/radio",
+   "target": "disaster/radio-genocide",
+   "importance": "major",
    "type": "causes",
-   "strength": "major",
    "note": {
     "zh": "千丘自由电台以广播动员屠杀",
     "en": "Radio Mille Collines mobilized massacre by broadcast"
    }
   },
   {
-   "from": "idea/manuscript-culture",
-   "to": "tech/gutenberg-press",
+   "source": "idea/manuscript-culture",
+   "target": "tech/gutenberg-press",
+   "importance": "minor",
    "type": "enables",
-   "strength": "minor",
    "note": {
     "zh": "抄本市场培育了书籍需求与工坊",
     "en": "The manuscript market bred book demand and workshops"

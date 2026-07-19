@@ -148,3 +148,9 @@ coverage/
 .cache/
 reports/
 schema/generated/*.schema.json
+
+# web build output
+web/dist/
+
+# Cross-team exchange workspace (never versioned)
+_公共交换/

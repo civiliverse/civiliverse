@@ -14,9 +14,19 @@ function baseNode(id = "source-tech", type = "tech") {
     title: { zh: "测试节点", en: "Test node" },
     summary: { zh: "用于校验器测试。", en: "Used by validator tests." },
     era: { start_year: 1000 },
-    culture: "east_asia",
-    icon: { source: "game-icons", id: "lorc/gear-hammer", license: "CC BY 3.0" },
+    culture: "sinic",
+    tier: "major",
+    domains: ["information-communication"],
+    icon: {
+      source: "game-icons",
+      id: "lorc/gear-hammer",
+      license: "CC BY 3.0",
+      status: "final",
+    },
     images: [],
+    refs: [{ title: "Test source" }],
+    status: "draft",
+    ...(type === "disaster" ? { subtype: "env" } : {}),
   };
 }
 
@@ -242,23 +252,26 @@ describe("validator bad-sample acceptance suite", () => {
     const root = await mkdtemp(resolve(tmpdir(), "civiliverse-validator-"));
     try {
       const nodesDirectory = resolve(root, "content/nodes");
-      const edgesDirectory = resolve(root, "data/edges");
-      await mkdir(nodesDirectory, { recursive: true });
+      const techDirectory = resolve(nodesDirectory, "tech");
+      const personDirectory = resolve(nodesDirectory, "person");
+      const edgesDirectory = resolve(root, "content/edges");
+      await mkdir(techDirectory, { recursive: true });
+      await mkdir(personDirectory, { recursive: true });
       await mkdir(edgesDirectory, { recursive: true });
-      await writeFile(resolve(nodesDirectory, "source-tech.md"), nodeMarkdown(baseNode()), "utf8");
+      await writeFile(resolve(techDirectory, "source-tech.md"), nodeMarkdown(baseNode()), "utf8");
       await writeFile(
-        resolve(nodesDirectory, "target-tech.md"),
+        resolve(techDirectory, "target-tech.md"),
         nodeMarkdown(baseNode("target-tech", "tech")),
         "utf8",
       );
       await writeFile(
-        resolve(nodesDirectory, "source-person.md"),
+        resolve(personDirectory, "source-person.md"),
         nodeMarkdown(baseNode("source-person", "person")),
         "utf8",
       );
 
       const sampleFile = resolve(
-        sample.kind === "node" ? nodesDirectory : edgesDirectory,
+        sample.kind === "node" ? techDirectory : edgesDirectory,
         sample.kind === "node" ? "bad.md" : "bad.yaml",
       );
       await writeFile(sampleFile, sample.content, "utf8");

@@ -1,7 +1,7 @@
 # Civiliverse · 科技史宇宙
 
 Civiliverse is an open 3D knowledge cosmos of the history of technology: five
-types of bilingual nodes connected by nine kinds of historical relationships.
+types of bilingual nodes connected by ten kinds of historical relationships.
 
 This repository is the single source of truth for content and code. Node
 entries are Markdown with YAML frontmatter; graph edges are YAML. The site is

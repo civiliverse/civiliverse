@@ -1,0 +1,11 @@
+schema_version: 1
+id: high-middle-ages
+title: { zh: 中世纪盛期, en: The High Middle Ages }
+culture: western
+era: { start_year: 1000, end_year: 1300 }
+summary:
+  zh: "约1000至1300年的拉丁欧洲，一个常被低估的技术上行期。重犁、三圃制、马轭与水磨风车带来农业革命与人口增长；哥特大教堂展示结构工程；博洛尼亚、巴黎、牛津等大学兴起；托莱多等地翻译希腊–阿拉伯典籍，机械钟与经院方法萌芽；城镇与行会成长。它为其后欧洲的科技演进积蓄了制度与人力。"
+  en: "Latin Europe from roughly 1000 to 1300, an often-underrated period of technical ascent. The heavy plough, three-field rotation, horse collar, and water- and wind-mills drove an agricultural revolution and population growth; Gothic cathedrals showcased structural engineering; universities arose at Bologna, Paris, and Oxford; Greek-Arabic works were translated at centers such as Toledo, while mechanical clocks and scholastic method took shape, and towns and guilds grew. It accumulated the institutions and human capital for Europe's later scientific and technological development."
+refs:
+  - { title: "Medieval Technology and Social Change", author: "Lynn White Jr." }
+  - { title: "The Genesis of Science / God's Philosophers", author: James Hannam }

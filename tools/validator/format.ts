@@ -19,7 +19,7 @@ export function formatValidationResult(
   const warningCount = result.diagnostics.length - errorCount;
   const label = errorCount === 0 ? color(32, "PASS", colors) : color(31, "FAIL", colors);
   output.push(
-    `${label}: ${result.filesChecked} files, ${result.nodes.length} nodes, ${result.edges.length} edges, ${errorCount} errors, ${warningCount} warnings`,
+    `${label}: ${result.filesChecked} files, ${result.nodes.length} nodes, ${result.edges.length} edges, ${result.contexts.length} contexts, ${errorCount} errors, ${warningCount} warnings`,
   );
   return output.join("\n");
 }

@@ -43,15 +43,20 @@ function xOf(year, breaks) {
   return breaks.at(-1)[1];
 }
 
-/** 主领域 → y/z 星云锚点(固定角度表, 未列出的领域用名称散列取角) */
+/** 主领域(冻结 12 slug) → y/z 星云锚点(固定角度表, 未列出值用名称散列取角) */
 const DOMAIN_ANGLE = {
-  "信息与传播": 90,   // 主星云带, 靠中上
-  "制度与教育": 250,
-  "计算": 20,
-  "数学与逻辑": 330,
-  "经济": 160,
-  "宗教与思想": 210,
-  "史学": 120,
+  "information-communication": 90, // 主星云带, 靠中上
+  "economy-governance": 250,
+  "math-computing": 20,
+  "science-method": 210,
+  "astronomy-navigation": 330,
+  "medicine-life": 160,
+  "agriculture-food": 120,
+  "energy-power": 300,
+  "materials-chemistry": 60,
+  "construction-civil": 180,
+  "transport": 270,
+  "military": 30,
 };
 function anchorOf(domain) {
   let deg = DOMAIN_ANGLE[domain];
@@ -79,8 +84,8 @@ export function bake(slicePath = SLICE) {
     };
   });
   const links = slice.edges.map((e) => ({
-    source: e.from, target: e.to,
-    strength: e.strength === "major" ? 0.05 : 0.025,
+    source: e.source, target: e.target,
+    strength: e.importance === "major" ? 0.05 : 0.025,
   }));
 
   const sim = forceSimulation(nodes, 3)

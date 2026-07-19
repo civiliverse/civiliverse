@@ -1,18 +1,77 @@
 import { stat } from "node:fs/promises";
-import { relative, resolve } from "node:path";
+import { basename, relative, resolve } from "node:path";
 
 import fg from "fast-glob";
 import type { ZodIssue } from "zod";
 
 import {
+  contextSchema,
   edgeSchema,
+  glossaryMismatches,
   isEndpointCombinationAllowed,
   nodeSchema,
 } from "../../schema/index.js";
-import type { Diagnostic, LoadedEdge, LoadedNode, ValidationResult } from "./types.js";
+import type {
+  Diagnostic,
+  LoadedContext,
+  LoadedEdge,
+  LoadedNode,
+  ValidationResult,
+} from "./types.js";
 import { parseMarkdownFrontmatter, parseYamlFile } from "./yaml-source.js";
 
-export const DEFAULT_INPUTS = ["content/nodes/**/*.md", "data/edges/**/*.{yaml,yml}"];
+type LocatedRecord = LoadedNode | LoadedEdge | LoadedContext;
+
+interface LocatedBilingualValue {
+  value: { zh: string; en: string };
+  path: Array<string | number>;
+}
+
+function bilingualValues(value: unknown, path: Array<string | number> = []): LocatedBilingualValue[] {
+  if (Array.isArray(value)) {
+    return value.flatMap((item, index) => bilingualValues(item, [...path, index]));
+  }
+  if (typeof value !== "object" || value === null) return [];
+
+  const record = value as Record<string, unknown>;
+  if (typeof record.zh === "string" && typeof record.en === "string") {
+    return [{ value: { zh: record.zh, en: record.en }, path }];
+  }
+
+  return Object.entries(record).flatMap(([key, item]) => bilingualValues(item, [...path, key]));
+}
+
+function glossaryDiagnostics(records: LocatedRecord[]): Diagnostic[] {
+  return records.flatMap((record) =>
+    bilingualValues(record.value).flatMap(({ value, path }) =>
+      glossaryMismatches(value).map((mismatch) => {
+        const diagnosticPath = [...path, mismatch.language];
+        const found = value[mismatch.language];
+        const expected = mismatch.expected[mismatch.language];
+        const strict = mismatch.severity === "error";
+        return {
+          file: record.file,
+          ...record.locate(diagnosticPath),
+          severity: mismatch.severity,
+          code: strict ? "glossary.strict-mismatch" : "glossary.translation-mismatch",
+          message: strict
+            ? `Controlled label \`${mismatch.expected.zh} / ${mismatch.expected.en}\` must match exactly; found \`${found}\`.`
+            : `Preferred translation for \`${mismatch.expected.zh}\` is \`${mismatch.expected.en}\`; found \`${found}\`.`,
+          suggestion: strict
+            ? `Use the exact controlled ${mismatch.language} label \`${expected}\`.`
+            : `Use \`${expected}\` or ask the content coordinator to review schema/data/glossary.json.`,
+          path: diagnosticPath,
+        } satisfies Diagnostic;
+      }),
+    ),
+  );
+}
+
+export const DEFAULT_INPUTS = [
+  "content/nodes/**/*.md",
+  "content/edges/**/*.{yaml,yml}",
+  "content/contexts/**/*.{yaml,yml}",
+];
 
 function displayPath(cwd: string, file: string): string {
   const path = relative(cwd, file) || file;
@@ -32,6 +91,12 @@ function suggestionForIssue(issue: ZodIssue): string {
   }
   if (field === "id" || field === "source" || field === "target") {
     return "Use a lowercase kebab-case identifier, for example `printing-press`.";
+  }
+  if (issue.path.includes("domains")) {
+    return "Use a slug from schema/data/domains.json; the first item is the primary layout domain.";
+  }
+  if (field === "status") {
+    return "Use one of the workflow statuses defined in schema/constants.ts.";
   }
   if (issue.code === "unrecognized_keys") {
     return "Remove or rename the unknown field; schema objects do not allow silent extra keys.";
@@ -74,6 +139,56 @@ async function expandInputs(cwd: string, inputs: string[]): Promise<string[]> {
   return matches.sort((left, right) => left.localeCompare(right));
 }
 
+function nodePathDiagnostics(node: LoadedNode): Diagnostic[] {
+  const parts = node.file.split("/");
+  const contentIndex = parts.findIndex(
+    (part, index) => part === "content" && parts[index + 1] === "nodes",
+  );
+  if (contentIndex < 0) return [];
+
+  const relativeParts = parts.slice(contentIndex + 2);
+  const diagnostics: Diagnostic[] = [];
+  if (relativeParts.length !== 2) {
+    diagnostics.push({
+      file: node.file,
+      ...node.locate(["type"]),
+      severity: "error",
+      code: "path.node-location",
+      message: "Node files must be stored at content/nodes/{type}/{id}.md.",
+      suggestion: `Move this file to content/nodes/${node.value.type}/${node.value.id}.md.`,
+      path: ["type"],
+    });
+    return diagnostics;
+  }
+
+  const directoryType = relativeParts[0];
+  if (directoryType !== node.value.type) {
+    diagnostics.push({
+      file: node.file,
+      ...node.locate(["type"]),
+      severity: "error",
+      code: "path.node-type-mismatch",
+      message: `Node type \`${node.value.type}\` does not match directory \`${directoryType}\`.`,
+      suggestion: `Move this file to content/nodes/${node.value.type}/${node.value.id}.md or fix its type.`,
+      path: ["type"],
+    });
+  }
+
+  const filenameId = basename(relativeParts[1] ?? "", ".md");
+  if (filenameId !== node.value.id) {
+    diagnostics.push({
+      file: node.file,
+      ...node.locate(["id"]),
+      severity: "error",
+      code: "path.node-id-mismatch",
+      message: `Node id \`${node.value.id}\` does not match filename \`${filenameId}.md\`.`,
+      suggestion: `Rename the file to ${node.value.id}.md or fix its id.`,
+      path: ["id"],
+    });
+  }
+  return diagnostics;
+}
+
 async function loadNode(cwd: string, file: string): Promise<{
   node?: LoadedNode;
   diagnostics: Diagnostic[];
@@ -93,10 +208,8 @@ async function loadNode(cwd: string, file: string): Promise<{
     };
   }
 
-  return {
-    diagnostics: [],
-    node: { value: result.data, file: shownFile, locate: parsed.source.locate },
-  };
+  const node: LoadedNode = { value: result.data, file: shownFile, locate: parsed.source.locate };
+  return { diagnostics: nodePathDiagnostics(node), node };
 }
 
 function edgeEntries(data: unknown): Array<{
@@ -147,9 +260,40 @@ async function loadEdges(cwd: string, file: string): Promise<{
   return { edges, diagnostics };
 }
 
-function graphDiagnostics(nodes: LoadedNode[], edges: LoadedEdge[]): Diagnostic[] {
+async function loadContext(cwd: string, file: string): Promise<{
+  context?: LoadedContext;
+  diagnostics: Diagnostic[];
+}> {
+  const parsed = await parseYamlFile(file);
+  const shownFile = displayPath(cwd, file);
+  if (!parsed.source) {
+    return {
+      diagnostics: parsed.diagnostics.map((diagnostic) => ({ ...diagnostic, file: shownFile })),
+    };
+  }
+
+  const result = contextSchema.safeParse(parsed.source.data);
+  if (!result.success) {
+    return {
+      diagnostics: issuesToDiagnostics(shownFile, result.error.issues, parsed.source.locate),
+    };
+  }
+
+  return {
+    diagnostics: [],
+    context: { value: result.data, file: shownFile, locate: parsed.source.locate },
+  };
+}
+
+function graphDiagnostics(
+  nodes: LoadedNode[],
+  edges: LoadedEdge[],
+  contexts: LoadedContext[],
+): Diagnostic[] {
   const diagnostics: Diagnostic[] = [];
   const nodeById = new Map<string, LoadedNode>();
+  const contextById = new Map<string, LoadedContext>();
+  const parallelByPair = new Map<string, LoadedEdge>();
 
   for (const node of nodes) {
     const previous = nodeById.get(node.value.id);
@@ -168,7 +312,56 @@ function graphDiagnostics(nodes: LoadedNode[], edges: LoadedEdge[]): Diagnostic[
     }
   }
 
+  for (const context of contexts) {
+    const previous = contextById.get(context.value.id);
+    if (previous) {
+      diagnostics.push({
+        file: context.file,
+        ...context.locate(["id"]),
+        severity: "error",
+        code: "context.duplicate-id",
+        message: `Context id \`${context.value.id}\` is already defined in ${previous.file}.`,
+        suggestion: "Give each context a globally unique lowercase kebab-case id.",
+        path: ["id"],
+      });
+    } else {
+      contextById.set(context.value.id, context);
+    }
+  }
+
+  for (const context of contexts) {
+    if (context.value.parent && !contextById.has(context.value.parent)) {
+      diagnostics.push({
+        file: context.file,
+        ...context.locate(["parent"]),
+        severity: "error",
+        code: "context.missing-parent",
+        message: `Context parent references missing context \`${context.value.parent}\`.`,
+        suggestion: `Add context \`${context.value.parent}\` or correct the parent id.`,
+        path: ["parent"],
+      });
+    }
+  }
+
   for (const edge of edges) {
+    if (edge.value.type === "parallels") {
+      const key = [edge.value.source, edge.value.target].sort().join("\u0000");
+      const previous = parallelByPair.get(key);
+      if (previous) {
+        diagnostics.push({
+          file: edge.file,
+          ...edge.locate(["type"]),
+          severity: "error",
+          code: "graph.duplicate-parallels",
+          message: `Undirected parallels edge duplicates ${previous.file}; A-B and B-A are the same edge.`,
+          suggestion: "Keep one parallels edge and merge any notes or references into it.",
+          path: ["type"],
+        });
+      } else {
+        parallelByPair.set(key, edge);
+      }
+    }
+
     const source = nodeById.get(edge.value.source);
     const target = nodeById.get(edge.value.target);
     for (const [field, endpoint] of [
@@ -214,6 +407,7 @@ export async function validateRepository(options: {
   const files = await expandInputs(cwd, options.inputs?.length ? options.inputs : DEFAULT_INPUTS);
   const nodes: LoadedNode[] = [];
   const edges: LoadedEdge[] = [];
+  const contexts: LoadedContext[] = [];
   const diagnostics: Diagnostic[] = [];
 
   for (const file of files) {
@@ -221,6 +415,10 @@ export async function validateRepository(options: {
       const loaded = await loadNode(cwd, file);
       diagnostics.push(...loaded.diagnostics);
       if (loaded.node) nodes.push(loaded.node);
+    } else if (displayPath(cwd, file).includes("content/contexts/")) {
+      const loaded = await loadContext(cwd, file);
+      diagnostics.push(...loaded.diagnostics);
+      if (loaded.context) contexts.push(loaded.context);
     } else {
       const loaded = await loadEdges(cwd, file);
       diagnostics.push(...loaded.diagnostics);
@@ -228,11 +426,12 @@ export async function validateRepository(options: {
     }
   }
 
-  diagnostics.push(...graphDiagnostics(nodes, edges));
+  diagnostics.push(...graphDiagnostics(nodes, edges, contexts));
+  diagnostics.push(...glossaryDiagnostics([...nodes, ...edges, ...contexts]));
   diagnostics.sort(
     (left, right) =>
       left.file.localeCompare(right.file) || left.line - right.line || left.column - right.column,
   );
 
-  return { diagnostics, nodes, edges, filesChecked: files.length };
+  return { diagnostics, nodes, edges, contexts, filesChecked: files.length };
 }

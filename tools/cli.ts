@@ -4,6 +4,7 @@ import { resolve } from "node:path";
 
 import { Command } from "commander";
 
+import { LEGACY_LICENSE_ALIASES, normalizeLicense } from "../schema/index.js";
 import { importCommonsSelections } from "./commons/importer.js";
 import { searchCommons } from "./commons/search.js";
 import { writeGameIconAttribution } from "./game-icons/attribution.js";
@@ -54,6 +55,27 @@ program
     }
     if (result.diagnostics.some(({ severity }) => severity === "error")) process.exitCode = 1;
   });
+
+const licenses = program
+  .command("licenses")
+  .description("Inspect and apply one-time legacy license normalization mappings");
+
+licenses
+  .command("normalize")
+  .description("Print canonical whitelist values for legacy license strings")
+  .argument("<values...>", "license values such as PD-old or CC-BY-3.0")
+  .option("--json", "print machine-readable JSON")
+  .action((values: string[], options: { json?: boolean }) => {
+    const results = values.map((value) => ({ input: value, canonical: normalizeLicense(value) ?? null }));
+    if (options.json) console.log(JSON.stringify(results, null, 2));
+    else for (const result of results) console.log(`${result.input}\t${result.canonical ?? "UNSUPPORTED"}`);
+    if (results.some(({ canonical }) => canonical === null)) process.exitCode = 1;
+  });
+
+licenses
+  .command("aliases")
+  .description("Print the complete one-time legacy license mapping")
+  .action(() => console.log(JSON.stringify(LEGACY_LICENSE_ALIASES, null, 2)));
 
 const icons = program.command("icons").description("Index and search the official Game Icons repository");
 

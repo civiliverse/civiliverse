@@ -1,4 +1,4 @@
-import { IMAGE_LICENSES, type ImageLicense } from "../../schema/index.js";
+import { IMAGE_LICENSES, normalizeLicense, type ImageLicense } from "../../schema/index.js";
 
 function clean(value: string): string {
   return value
@@ -11,6 +11,8 @@ function clean(value: string): string {
 
 export function normalizeCommonsLicense(rawValue: string): ImageLicense | undefined {
   const cleaned = clean(rawValue);
+  const legacyOrCanonical = normalizeLicense(cleaned);
+  if (legacyOrCanonical) return legacyOrCanonical;
   const normalized = cleaned
     .toUpperCase()
     .replace(/CREATIVE COMMONS/g, "CC")
