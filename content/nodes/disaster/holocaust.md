@@ -54,6 +54,7 @@ versions: []
   1. `eugenics(idea) —causes→ holocaust`：优生学话语与 T4 计划的直接关系有充分史料支持。**建议 R5 增补 `eugenics` 节点**（idea，trans，medicine-life；须一并写入其国际性——1930年代前优生学在英美北欧均属主流科学话语，非德国独有），届时连此边并标注其限定（优生学不等于灭绝政策，二者之间有决定性的政治跳跃）。
   2. `holocaust —inspires→ research-ethics`：1947年纽伦堡医生审判确立《纽伦堡守则》，知情同意自此成为医学研究伦理的基石，其后有《赫尔辛基宣言》。**建议 R5 增补 `research-ethics`／`nuremberg-code` 节点**后连此边。
 - **给甲的专议请求**：以上两项 R5 增补建议、以及「本条本轮零边」的处置，请甲在第 2 步审定时明确批复；若甲认为本条在无边状态下不宜入仓（孤立节点），乙可依批复调整。
+- **补记（2026-07-20，总编批示4.1，甲直办）**：批示确立**「无孤立节点」原则**，并指示本条应链接「效率至上主义」一类思想与「生产流水线」一类现代技术环境。据此登记**待建前置边**（端点入 R5 起草名单，建成即激活，暂不连以免悬空）：`efficiency-ideology(idea) —informs→ holocaust`、`assembly-line(tech) —informs→ holocaust`（二者边型随 R5 专议定型），连同原登记之 `eugenics —causes→ holocaust`、`holocaust —inspires→ research-ethics`。**孤立为暂态、非终态**；「坚决不连」清单（railway／interchangeable-parts —causes→ 本条）维持不变。
 
 **〔附注〕**
 - **零幽默红线**：本条自 summary 至图注全篇无一处幽默，定位句为陈述、非反差句（手册红线 1/3/5，atrocity 子类绝对适用）。
