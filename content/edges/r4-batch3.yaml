@@ -20,9 +20,10 @@ edges:
     target: meroe-ironworking
     type: parallels
     importance: minor
+    disputed: true
     note:
       zh: 撒哈拉以南冶铁的传播抑或独立起源尚无定论，故取无向并列
-      en: "Whether sub-Saharan ironworking was transmitted or independent remains unsettled; juxtaposed without direction}, disputed: tru"
+      en: "Whether sub-Saharan ironworking was transmitted or independent remains unsettled; juxtaposed without direction"
   - schema_version: 1
     source: quipu
     target: zero-place-value
@@ -170,3 +171,11 @@ edges:
     note:
       zh: 玉米为哥伦布交换中影响最广的美洲作物之一，其旧大陆引种为该交换的物质前提之一
       en: Maize was among the most consequential American crops of the Columbian exchange; its introduction to the Old World is one material precondition of it
+  - schema_version: 1
+    source: ironworking
+    target: stirrup
+    type: enables
+    importance: minor
+    note:
+      zh: 金属锻造为成对金属马镫的工艺前提（总编批示4.1 明示；社会效果之争见词条史论，不在此边主张）
+      en: "Metal forging as the craft precondition of paired metal stirrups (per Editorial Directive 4.1; the social-effects debate stays in the entry, not in this edge)"
