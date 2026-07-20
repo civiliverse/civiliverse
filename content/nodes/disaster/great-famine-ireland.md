@@ -18,7 +18,15 @@ quote:
     en: "The Almighty, indeed, sent the potato blight, but the English created the famine."
   source: { zh: 约翰·米切尔《爱尔兰的最后征服（也许）》（1861）, en: "John Mitchel, The Last Conquest of Ireland (Perhaps), 1861" }
 icon: { source: ai, license: "CC BY 3.0", status: needs-ai, fallback: "lorc/wheat" }
-images: []
+images:
+  - src: /assets/nodes/great-famine-ireland/main-a-restrained.png
+    caption:
+      zh: 歉收后的马铃薯田、空篮与远处石屋；以环境间接呈现灾难（AI 复原想象图）。
+      en: A failed potato field, empty basket, and distant cottages; the disaster is shown indirectly through landscape (AI reconstruction, imagined).
+    credit: Civiliverse Art Group (AI-generated with OpenAI built-in image generation)
+    license: CC BY 4.0
+    source_url: https://raw.githubusercontent.com/civiliverse/civiliverse/main/web/public/assets/nodes/great-famine-ireland/main-a-restrained.png
+    ai_generated: true
 refs:
   - { title: The Great Hunger, author: Cecil Woodham-Smith }
   - { title: "Ireland's Great Famine", author: Cormac Ó Gráda }

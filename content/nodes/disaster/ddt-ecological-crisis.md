@@ -17,8 +17,16 @@ quote:
     zh: 湖畔苔草已枯萎，不闻鸟鸣。
     en: "The sedge is wither'd from the lake, / And no birds sing."
   source: { zh: 济慈《无情的妖女》；卡森取其句为《寂静的春天》题词, en: "John Keats, 'La Belle Dame sans Merci'; taken by Carson as the epigraph of Silent Spring" }
-icon: { source: ai, license: "CC BY 3.0", status: needs-ai, fallback: "lorc/bird-twitter" }
-images: []
+icon: { source: ai, id: "civiliverse/ddt-ecological-crisis", license: "CC BY 3.0", status: final, fallback: "lorc/bird-twitter" }
+images:
+  - src: /assets/nodes/ddt-ecological-crisis/icon-line.png
+    caption:
+      zh: 空鸟巢与裂纹薄壳蛋的克制型线性图标（AI 生成图）。
+      en: A restrained line icon of an empty nest and cracked thin-shelled egg (AI-generated).
+    credit: Civiliverse Art Group (AI-generated with OpenAI built-in image generation)
+    license: CC BY 4.0
+    source_url: https://raw.githubusercontent.com/civiliverse/civiliverse/main/web/public/assets/nodes/ddt-ecological-crisis/icon-line.png
+    ai_generated: true
 refs:
   - { title: "DDT", url: "https://en.wikipedia.org/wiki/DDT" }
   - { title: Silent Spring, author: Rachel Carson }

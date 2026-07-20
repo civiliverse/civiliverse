@@ -1,0 +1,11 @@
+schema_version: 1
+id: ancient-near-east-bronze
+title: { zh: 古代近东（青铜与文字时代）, en: The Ancient Near East (Bronze and Writing) }
+culture: ancient-near-east
+era: { start_year: -3300, end_year: -539 }
+summary:
+  zh: 自苏美尔泥板上出现最早的书写记号，至波斯征服巴比伦。这一带把人类若干最基础的技术做成了制度：楔形文字与泥板档案、青铜合金与冶铁、轮与车、灌溉与历法、纪念性巨工。值得注意的是，文字在此的第一批用途不是诗与史，而是账目——谁交了多少大麦、谁欠了多少羊。图谱把这一时段单列为一带，是因为其后所有关于「记录」与「金属」的因果链，几乎都要回溯到此处。
+  en: "From the earliest written marks on Sumerian clay to the Persian conquest of Babylon. This region turned several of humanity's most basic techniques into institutions: cuneiform and the clay archive, bronze alloying and ironworking, the wheel and the cart, irrigation and the calendar, monumental construction. It is worth noting that writing's first uses here were not poetry or history but accounts—who delivered how much barley, who owed how many sheep. The graph sets this span apart as its own band because nearly every later causal chain concerning records and metals traces back to it."
+refs:
+  - { title: "Before Writing: From Counting to Cuneiform", author: "Denise Schmandt-Besserat" }
+  - { title: "A History of the Ancient Near East, ca. 3000–323 BC", author: "Marc Van De Mieroop" }

@@ -53,57 +53,56 @@ edges:
     type: parallels
     importance: minor
     note:
-      zh: 两种书写材料的世代交替——纸终取代纸草（见塔阿利比语）
-      en: Two writing materials in generational succession—paper finally displaced papyrus (cf. al-Thaʿālibī)
+      zh: 两种独立起源的书写材料，纸最终取代纸草（见造纸术引文）
+      en: Two independently originated writing materials; paper finally displaced papyrus (see the Papermaking quote)
   - schema_version: 1
     source: zero-place-value
     target: hindu-arabic-numerals
     type: enables
     importance: major
     note:
-      zh: 位值与零是这套数码运作的原理内核
-      en: Place-value and zero are the working principle behind these numerals
+      zh: 零与位值制是这套数字得以运算的内核
+      en: Zero and place-value are the operative core that makes the numerals calculable
   - schema_version: 1
     source: al-khwarizmi
     target: hindu-arabic-numerals
     type: contributed
     importance: major
     note:
-      zh: 《印度数字算法》把这套系统传入伊斯兰世界（拉丁化即 algorism/algorithm）
-      en: His On the Hindu Art of Reckoning transmitted the system to the Islamic world (Latinized as algorism/algorithm)
+      zh: 《印度数字算术》将印度数码系统西传（「算法」一词即源于其名）
+      en: His treatise on Indian reckoning carried the numerals westward (the word "algorithm" comes from his name)
   - schema_version: 1
     source: hindu-arabic-numerals
     target: double-entry-bookkeeping
     type: enables
-    importance: minor
-    disputed: true
+    importance: major
     note:
-      zh: 便算的数码为商业算术与复式记账提供便利（使能之一，非唯一）
-      en: Convenient digits eased commercial arithmetic and double-entry (an enabling factor, not the sole cause)
+      zh: 便于笔算的数字为商业算术与复式记账铺路
+      en: Easy pen-reckoning numerals paved the way for commercial arithmetic and double-entry bookkeeping
   - schema_version: 1
     source: al-khwarizmi
     target: house-of-wisdom
     type: contributed
-    importance: minor
+    importance: major
     note:
-      zh: 巴格达学术圈（智慧宫）代表学者
-      en: A representative scholar of the Baghdad circle (House of Wisdom)
+      zh: 花拉子米为智慧宫核心学者
+      en: Al-Khwarizmi was a core scholar of the House of Wisdom
   - schema_version: 1
     source: house-of-wisdom
     target: hindu-arabic-numerals
     type: enables
-    importance: major
+    importance: minor
     note:
-      zh: 翻译运动把印度数码与希腊科学熔铸再传
-      en: The translation movement fused and transmitted the Indian numerals and Greek science
+      zh: 智慧宫的翻译—研究运动为印度数字西传的枢纽
+      en: The House of Wisdom's translation-research movement was the hub of the numerals' westward passage
   - schema_version: 1
     source: house-of-wisdom
     target: timbuktu-manuscripts
     type: parallels
     importance: minor
     note:
-      zh: 伊斯兰学术网络的西非呼应
-      en: A West African echo of the Islamic scholarly network
+      zh: 伊斯兰世界学术奇观群的呼应
+      en: An echo within the constellation of Islamic-world scholarly wonders
   - schema_version: 1
     source: grand-canal
     target: woodblock-printing
@@ -111,8 +110,8 @@ edges:
     importance: minor
     disputed: true
     note:
-      zh: 运河联通的南北市场与流通网络，为宋代书业繁荣提供条件（使能之一，非唯一）
-      en: The canal's north–south market and circulation network was one enabling condition of the Song book trade (not the sole cause)
+      zh: 运河沟通南北、支撑宋代商业与书籍市场的物流基础（环境性使能，程度存疑）
+      en: The canal's north–south integration underpinned the logistics of Song commerce and the book market (an environmental enabling; degree disputed)
   - schema_version: 1
     source: house-of-wisdom
     target: heliocentrism
@@ -144,24 +143,24 @@ edges:
     type: enables
     importance: minor
     note:
-      zh: 纸草卷为图书馆藏书的主要载体
-      en: Papyrus scrolls were the Library's main material medium
+      zh: 图书馆藏卷以纸草为载体，埃及纸草为其物质前提
+      en: The Library's scrolls were papyrus; Egyptian papyrus was its material precondition
   - schema_version: 1
     source: library-of-alexandria
     target: house-of-wisdom
     type: parallels
     importance: major
     note:
-      zh: 跨文明知识奇观群的呼应
-      en: Echo within the cross-civilizational cluster of knowledge wonders
+      zh: 跨文明「知识奇观」星群的又一呼应
+      en: Another echo in the cross-civilizational constellation of knowledge wonders
   - schema_version: 1
     source: library-of-alexandria
     target: timbuktu-manuscripts
     type: parallels
     importance: minor
     note:
-      zh: 知识奇观群——非洲的手稿之城
-      en: The knowledge-wonder cluster—Africa's city of manuscripts
+      zh: 跨文明「知识奇观」星群的又一呼应
+      en: Another echo in the cross-civilizational constellation of knowledge wonders
   - schema_version: 1
     source: printing-revolution
     target: heliocentrism
@@ -176,7 +175,82 @@ edges:
     target: double-entry-bookkeeping
     type: enables
     importance: minor
+    note:
+      zh: 帕乔利《大全》为印本，复式记账借印刷标准化、流播欧洲
+      en: Pacioli's Summa was printed; double-entry was standardized and spread through Europe by print
+  - schema_version: 1
+    source: shen-kuo
+    target: compass
+    type: contributed
+    importance: minor
+    note:
+      zh: 首记磁针磁偏角
+      en: First record of magnetic declination
+  - schema_version: 1
+    source: zero-place-value
+    target: maya-calendar
+    type: parallels
+    importance: minor
     disputed: true
     note:
-      zh: 帕乔利《算术集成》(1494) 借印刷广传复式记账
-      en: Pacioli's Summa (1494) spread double-entry through print
+      zh: 玛雅长纪历独立发展出位值零号，跨文明的又一次「无中生有」
+      en: The Maya Long Count independently developed a positional zero—another cross-civilizational "something from nothing"
+  - schema_version: 1
+    source: zero-place-value
+    target: algebra
+    type: enables
+    importance: minor
+    note:
+      zh: 位值与零为符号代数备下记数基础
+      en: Place-value and zero provided the notational basis for symbolic algebra
+  - schema_version: 1
+    source: al-khwarizmi
+    target: algebra
+    type: contributed
+    importance: major
+    note:
+      zh: 《还原与对消之书》奠定代数并贡献「algebra」一词
+      en: The Kitab al-jabr founded algebra and gave the word "algebra"
+  - schema_version: 1
+    source: house-of-wisdom
+    target: algebra
+    type: enables
+    importance: major
+    note:
+      zh: 花拉子米在其学术圈内奠立代数
+      en: Algebra was founded within its scholarly circle
+  - schema_version: 1
+    source: optics-alhazen
+    target: scientific-method
+    type: inspires
+    importance: minor
+    note:
+      zh: 海什木《光学》的实验—数学进路为近代科学方法之先声
+      en: Ibn al-Haytham's experimental-mathematical Optics was a forerunner of the modern scientific method
+  - schema_version: 1
+    source: scientific-method
+    target: scientific-revolution
+    type: enables
+    importance: major
+    disputed: true
+    note:
+      zh: 方法论是科学革命的引擎（作为「内核」抑或「产物」之关系有诠释差异）
+      en: The method was the engine of the Scientific Revolution (whether "core" or "product," the relation admits interpretive difference)
+  - schema_version: 1
+    source: heliocentrism
+    target: scientific-revolution
+    type: inspires
+    importance: major
+    disputed: true
+    note:
+      zh: 哥白尼革命为科学革命的象征性开端（作为「开端」或「组成」之关系有诠释差异）
+      en: The Copernican revolution as the emblematic opening of the Scientific Revolution (whether "opening" or "component," admitting interpretive difference)
+  - schema_version: 1
+    source: reformation
+    target: scientific-revolution
+    type: parallels
+    importance: minor
+    disputed: true
+    note:
+      zh: 印刷催化下的两场近代思想剧变（并置，不预设因果）
+      en: Two early-modern upheavals of thought catalyzed by print (juxtaposed, no causation presumed)

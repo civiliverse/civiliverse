@@ -1,0 +1,11 @@
+schema_version: 1
+id: latin-west
+title: { zh: 拉丁西方, en: The Latin West }
+culture: western
+era: { start_year: 500, end_year: 1800 }
+summary:
+  zh: 西罗马之后、以拉丁语为学术与教会通用语的西欧文化圈（此处取自蛮族王国至工业革命前夕）。它长期是欧亚大陆技术上的接受方而非输出方——纸、火药、指南针、数字皆自东方与伊斯兰世界辗转传入；其自身的贡献在于把这些异源技术纳入一套独特的制度容器：修道院与大学、行会与特许、成文法与股份公司。作为父背景，它统摄技术环境差异极大的中世纪盛期与近代早期欧洲。
+  en: "The West European cultural sphere after the fall of Rome, with Latin as the language of learning and church (bounded here from the successor kingdoms to the eve of industrialization). For most of its span it was a receiver rather than an exporter of Eurasian technology—paper, gunpowder, the compass, and the numerals all arrived by relay from the East and the Islamic world; its own contribution lay in placing these foreign techniques inside a distinctive institutional container: monasteries and universities, guilds and charters, written law and joint-stock companies. As a parent background it subsumes sub-contexts of very different technical character, the High Middle Ages and Early Modern Europe."
+refs:
+  - { title: "Medieval Technology and Social Change", author: "Lynn White Jr." }
+  - { title: "The Rise of Early Modern Science: Islam, China, and the West", author: "Toby E. Huff" }

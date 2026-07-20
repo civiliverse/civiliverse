@@ -1,0 +1,12 @@
+schema_version: 1
+id: early-modern-europe
+title: { zh: 近代早期欧洲, en: Early Modern Europe }
+culture: western
+era: { start_year: 1450, end_year: 1750 }
+parent: latin-west
+summary:
+  zh: 约1450至1750年，欧洲从技术接受方转为输出方的三百年。古登堡印刷机使文本廉价而稳定，宗教改革与科学革命各自借此传播；远洋航海与殖民把欧洲接入全球物质流动；复式记账、股份公司与专利制度为技术投资提供了制度形式；望远镜、显微镜、气泵一类仪器把「观察」变成可重复的公共事业。此期的技术环境特征是「印刷—航海—仪器」三者的相互放大，与中世纪盛期的农业与建造上行判然有别。
+  en: The three centuries, roughly 1450 to 1750, in which Europe turned from receiver into exporter of technology. Gutenberg's press made texts cheap and stable, and both the Reformation and the Scientific Revolution traveled on it; oceanic voyaging and colonization plugged Europe into global flows of matter; double-entry bookkeeping, joint-stock companies, and patents supplied institutional forms for investing in technique; and instruments—telescope, microscope, air pump—turned observation into a repeatable public enterprise. The period's technical signature is the mutual amplification of print, navigation, and instruments, sharply unlike the agricultural and constructional ascent of the High Middle Ages.
+refs:
+  - { title: "The Printing Press as an Agent of Change", author: "Elizabeth L. Eisenstein" }
+  - { title: "The Invention of Science: A New History of the Scientific Revolution", author: "David Wootton" }

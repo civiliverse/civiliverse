@@ -8,6 +8,7 @@ summary:
   en: "The decimal, positional numeral system with ten digit-signs, including zero. It originated in India (Gupta to early medieval), was transmitted through the Islamic world (whence \"Arabic numerals\" in the West), and reached Europe via the works of al-Khwarizmi and al-Kindi and Fibonacci's Liber Abaci (1202), slowly displacing Roman numerals for calculation and commerce. It is the invisible infrastructure of modern computation."
 era: { start_year: 500, end_year: 1500, circa: true }
 culture: indic
+culture_secondary: [islamic]
 tier: major
 domains: [math-computing, information-communication]
 region: { zh: 印度→伊斯兰世界→欧洲, en: "India → the Islamic world → Europe" }

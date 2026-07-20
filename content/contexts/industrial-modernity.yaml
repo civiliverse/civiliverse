@@ -1,0 +1,11 @@
+schema_version: 1
+id: industrial-modernity
+title: { zh: 工业与当代, en: Industrial Modernity }
+culture: trans
+era: { start_year: 1750, end_year: 2000 }
+summary:
+  zh: 自蒸汽动力起，人类首次以化石燃料大规模替代人畜之力的时代（此处取1750至20世纪末）。铁路、电报、电力、合成化学与流水线在两百余年间重编了生产、时间与距离；同一批技术也第一次把灾难做到了行星尺度——伦敦大烟雾、DDT 生态危机、切尔诺贝利、臭氧层空洞皆生于此期。它不专属任何单一文明：起于西欧，经明治日本、苏联工业化与战后东亚扩散全球，故归 trans。本背景是图谱中「技术—灾祸—矫正」回路最密集的一带。
+  en: "The era, from steam onward, in which humanity first substituted fossil energy for muscle at scale (bounded here from 1750 to the end of the twentieth century). Railways, telegraphy, electricity, synthetic chemistry, and the assembly line recomposed production, time, and distance within two centuries; the same technologies also produced, for the first time, disasters at planetary scale—the Great Smog, the DDT crisis, Chernobyl, the ozone hole all belong here. It is the property of no single civilization: beginning in Western Europe, it spread through Meiji Japan, Soviet industrialization, and postwar East Asia, and is therefore classed as trans. This band carries the graph's densest concentration of technology–disaster–correction loops."
+refs:
+  - { title: "The Unbound Prometheus: Technological Change and Industrial Development in Western Europe", author: "David S. Landes" }
+  - { title: "Something New Under the Sun: An Environmental History of the Twentieth-Century World", author: "J. R. McNeill" }

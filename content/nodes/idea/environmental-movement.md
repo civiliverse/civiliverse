@@ -17,8 +17,16 @@ quote:
     zh: 万物相互关联。
     en: "Everything is connected to everything else."
   source: { zh: 巴里·康芒纳「生态学第一法则」，《封闭的循环》（1971）, en: "Barry Commoner, 'the first law of ecology,' The Closing Circle (1971)" }
-icon: { source: ai, license: "CC BY 3.0", status: needs-ai, fallback: "delapouite/earth-africa-europe" }
-images: []
+icon: { source: ai, id: "civiliverse/environmental-movement", license: "CC BY 3.0", status: final, fallback: "delapouite/earth-africa-europe" }
+images:
+  - src: /assets/nodes/environmental-movement/icon-line.png
+    caption:
+      zh: 地球轮廓与叶脉的线性图标（AI 生成图）。
+      en: A line icon combining the globe and a leaf vein (AI-generated).
+    credit: Civiliverse Art Group (AI-generated with OpenAI built-in image generation)
+    license: CC BY 4.0
+    source_url: https://raw.githubusercontent.com/civiliverse/civiliverse/main/web/public/assets/nodes/environmental-movement/icon-line.png
+    ai_generated: true
 refs:
   - { title: The Closing Circle, author: Barry Commoner }
   - { title: Silent Spring, author: Rachel Carson }

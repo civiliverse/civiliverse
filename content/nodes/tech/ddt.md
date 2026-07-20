@@ -17,8 +17,16 @@ quote:
     zh: DDT 对我好得很！
     en: "DDT is good for me-e-e!"
   source: { zh: 宾索特化工公司广告，《时代》1947年, en: "Pennsalt Chemicals advertisement, Time, 1947" }
-icon: { source: ai, license: "CC BY 3.0", status: needs-ai, fallback: "delapouite/spray" }
-images: []
+icon: { source: ai, id: "civiliverse/ddt", license: "CC BY 3.0", status: final, fallback: "delapouite/spray" }
+images:
+  - src: /assets/nodes/ddt/icon-line.png
+    caption:
+      zh: 手压喷雾器与分子环的线性图标（AI 生成图）。
+      en: A line icon of a hand sprayer and molecular ring (AI-generated).
+    credit: Civiliverse Art Group (AI-generated with OpenAI built-in image generation)
+    license: CC BY 4.0
+    source_url: https://raw.githubusercontent.com/civiliverse/civiliverse/main/web/public/assets/nodes/ddt/icon-line.png
+    ai_generated: true
 refs:
   - { title: "DDT", url: "https://en.wikipedia.org/wiki/DDT" }
   - { title: "Paul Hermann Müller (Nobel Prize 1948)", url: "https://www.nobelprize.org/prizes/medicine/1948/muller/" }

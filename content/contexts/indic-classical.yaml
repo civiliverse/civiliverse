@@ -1,0 +1,11 @@
+schema_version: 1
+id: indic-classical
+title: { zh: 印度古典与中世, en: Classical and Medieval India }
+culture: indic
+era: { start_year: 320, end_year: 1200 }
+summary:
+  zh: 自笈多王朝至德里苏丹国前夜，南亚在数学、天文、医学、冶金与教育制度上的持续创造期。零与位值制在此成形并经阿拉伯世界西传，改写了整个欧亚的计算方式；阿耶波多与婆罗摩笈多推进天文与代数；那烂陀等寺院大学以数千僧徒的规模运作，吸引东亚与中亚求法者；乌兹钢经海路输往地中海。这一带提醒人们：欧亚知识网络从来不是「东西两极」，南亚长期是其中最重要的节点之一。
+  en: "From the Gupta era to the eve of the Delhi Sultanate, a sustained period of South Asian creation in mathematics, astronomy, medicine, metallurgy, and educational institutions. Zero and place-value notation took shape here and traveled west through the Arab world, rewriting how all Eurasia calculated; Aryabhata and Brahmagupta advanced astronomy and algebra; monastic universities such as Nalanda operated at the scale of thousands of resident monks and drew seekers from East and Central Asia; wootz steel went by sea to the Mediterranean. This band is a reminder that the Eurasian knowledge network was never bipolar: South Asia was long one of its principal nodes."
+refs:
+  - { title: "The Crest of the Peacock: Non-European Roots of Mathematics", author: "George Gheverghese Joseph" }
+  - { title: "Nalanda: Situating the Great Monastery", author: "Frederick M. Asher" }
