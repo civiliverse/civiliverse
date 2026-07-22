@@ -1,0 +1,12 @@
+schema_version: 1
+id: africa-metallurgy-trade
+title: { zh: 非洲的冶金与商路, en: "Africa: Metallurgy and the Trade Roads" }
+culture: africa
+era: { start_year: -800, end_year: 1600 }
+summary:
+  zh: "本背景不是「非洲史」——那片大陆太大、内部差异太深，无法作一个技术单元来写。它取的是撒哈拉以南在技术史上最连贯的一条线：冶铁的早期发展，与把内陆产物接入跨撒哈拉及印度洋两大网络的商路。麦罗埃自公元前一千纪起冶铁，其独立起源与否至今仍是学界的活问题；西非的诺克与后来的马里、桑海诸国以黄金、盐与奴隶接入跨撒哈拉贸易，廷巴克图因之成为抄本与学术之城；东南非的绍纳人以干砌石构筑城，经索法拉、基尔瓦把黄金输入印度洋。这条线的共同特征是：技术能力的证据充分，而书面自述稀少——本带的历史大半须由冶炼遗址、贸易品与建筑本身来读，这一材料条件本身就构成了它长期被低估的原因之一。"
+  en: "This background is not a history of Africa—the continent is too large and too various within itself to be treated as one technical unit. It takes instead the most continuous line in the technical history of its sub-Saharan part: the early development of ironworking, and the roads that connected inland production to the two great networks of the trans-Saharan and the Indian Ocean trade. Meroë was working iron from the first millennium BCE, and whether that origin was independent remains a live question in scholarship; in West Africa the Nok culture and later the states of Mali and Songhai entered the trans-Saharan trade with gold, salt, and slaves, and Timbuktu became in consequence a city of manuscripts and learning; in the southeast, Shona builders raised dry-stone cities and sent gold to the Indian Ocean by way of Sofala and Kilwa. What these share is a condition of evidence: ample testimony of technical capacity and little written self-account. Most of this band's history must be read from smelting sites, trade goods, and the buildings themselves—and that material condition is itself among the reasons it was long underrated."
+refs:
+  - { title: "Africa and Africans in the Making of the Atlantic World, 1400–1800", author: "John K. Thornton" }
+  - { title: "Ironworking remains in the Royal City of Meroe: new insights on the Nile corridor and the Kingdom of Kush", author: "Carey, Stremke & Humphris, Antiquity (2019)" }
+  - { title: "Great Zimbabwe: An Archaeological Investigation of an Ancient African City", author: "Innocent Pikirayi" }

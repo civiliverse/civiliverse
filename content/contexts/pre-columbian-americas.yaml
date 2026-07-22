@@ -1,0 +1,12 @@
+schema_version: 1
+id: pre-columbian-americas
+title: { zh: 前哥伦布的美洲, en: "The Pre-Columbian Americas" }
+culture: americas
+era: { start_year: -7000, end_year: 1521 }
+summary:
+  zh: "自玉米在巴尔萨斯河谷开始驯化，至特诺奇蒂特兰陷落。本背景把中美洲与安第斯两个几乎不相往来的文明区合为一带，是分带的权宜而非史实的主张——二者的作物、文字、金属与国家形态各自独立发生。其技术史的共同特征有三：其一，农业极为发达而畜力几乎缺席（美洲无可供驮挽的大型家畜，羊驼载重有限），故一切运输依赖人力与水路；其二，天文与历算精密到令人吃惊的程度，玛雅长纪历与金星表的推算精度不逊于同期旧大陆任何体系；其三，「知轮而不用轮」——中美洲的陶制小像装有轮轴，却从未把轮用于运输，这是本图谱中最有力的反目的论案例：技术的采用取决于它能否在既有的生态与社会条件中兑现，而非取决于它是否「先进」。1492 年后，这一整套条件在数十年间被疫病、征服与哥伦布交换所改写。"
+  en: "From the beginning of maize domestication in the Balsas valley to the fall of Tenochtitlan. This background joins Mesoamerica and the Andes—two civilizational regions with almost no traffic between them—into a single band as a convenience of division, not a claim about history: their crops, writing, metals, and forms of state arose independently of one another. Their technical history shares three features. First, agriculture was highly developed while animal power was virtually absent—the Americas had no large draught animal, and the llama carries little—so that all transport depended on human backs and on water. Second, astronomy and calendrical calculation were precise to a startling degree: the Maya Long Count and the Venus tables are no less accurate than any Old World system of the same centuries. Third, the wheel was known and not used—Mesoamerican ceramic figurines were made with wheels and axles, yet the wheel was never applied to transport. This is the graph's strongest case against teleology: whether a technique is adopted depends on whether it pays within the existing ecology and society, not on whether it is advanced. After 1492 the whole of these conditions was rewritten within decades by disease, conquest, and the Columbian exchange."
+refs:
+  - { title: "1491: New Revelations of the Americas Before Columbus", author: "Charles C. Mann" }
+  - { title: "The Inka Empire and Its Andean Origins", author: "Craig Morris & Adriana von Hagen" }
+  - { title: "A single domestication for maize shown by multilocus microsatellite genotyping", author: "Matsuoka et al., PNAS (2002)" }

@@ -252,11 +252,22 @@ const badSamples: BadSample[] = [
     code: "graph.illegal-endpoints",
     lineNeedle: "type:",
   },
+  {
+    name: "person cannot point to disaster",
+    kind: "edge",
+    content: edgeWith((value) => {
+      value.source = "source-person";
+      value.target = "target-disaster";
+      value.type = "enables";
+    }),
+    code: "graph.person-to-disaster",
+    lineNeedle: "source:",
+  },
 ];
 
 describe("validator bad-sample acceptance suite", () => {
-  it("contains exactly 21 deliberately bad samples", () => {
-    expect(badSamples).toHaveLength(21);
+  it("contains exactly 22 deliberately bad samples", () => {
+    expect(badSamples).toHaveLength(22);
   });
 
   it.each(badSamples)("reports $name at the correct line with a fix", async (sample) => {
@@ -265,9 +276,11 @@ describe("validator bad-sample acceptance suite", () => {
       const nodesDirectory = resolve(root, "content/nodes");
       const techDirectory = resolve(nodesDirectory, "tech");
       const personDirectory = resolve(nodesDirectory, "person");
+      const disasterDirectory = resolve(nodesDirectory, "disaster");
       const edgesDirectory = resolve(root, "content/edges");
       await mkdir(techDirectory, { recursive: true });
       await mkdir(personDirectory, { recursive: true });
+      await mkdir(disasterDirectory, { recursive: true });
       await mkdir(edgesDirectory, { recursive: true });
       await writeFile(resolve(techDirectory, "source-tech.md"), nodeMarkdown(baseNode()), "utf8");
       await writeFile(
@@ -278,6 +291,11 @@ describe("validator bad-sample acceptance suite", () => {
       await writeFile(
         resolve(personDirectory, "source-person.md"),
         nodeMarkdown(baseNode("source-person", "person")),
+        "utf8",
+      );
+      await writeFile(
+        resolve(disasterDirectory, "target-disaster.md"),
+        nodeMarkdown(baseNode("target-disaster", "disaster")),
         "utf8",
       );
 

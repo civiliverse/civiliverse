@@ -181,7 +181,7 @@ describe("machine-readable controlled vocabularies", () => {
   it("loads every frozen strict and check-level glossary entry", () => {
     expect(GLOSSARY.version).toBe(1);
     expect(GLOSSARY.strict).toHaveLength(18);
-    expect(GLOSSARY.check).toHaveLength(67);
+    expect(GLOSSARY.check).toHaveLength(250);
     expect(GLOSSARY.strict).toContainEqual({ zh: "引发", en: "causes" });
     expect(GLOSSARY.strict).toContainEqual({ zh: "管制", en: "regulates" });
     expect(GLOSSARY.check).toContainEqual({
@@ -197,7 +197,7 @@ describe("frozen endpoint table", () => {
     expect(ENDPOINT_RULES).toEqual({
       enables: {
         source: ["tech", "idea", "person", "wonder"],
-        target: ["tech", "idea", "wonder"],
+        target: ["tech", "idea", "wonder", "disaster"],
         directed: true,
       },
       derives: {
@@ -206,7 +206,11 @@ describe("frozen endpoint table", () => {
         directed: true,
       },
       applies: { source: ["idea"], target: ["tech", "wonder"], directed: true },
-      informs: { source: ["tech", "wonder"], target: ["idea"], directed: true },
+      informs: {
+        source: ["tech", "idea", "wonder"],
+        target: ["idea", "disaster"],
+        directed: true,
+      },
       inspires: {
         source: NODE_TYPES,
         target: ["idea", "person", "wonder"],
@@ -367,6 +371,18 @@ describe("context and repository validation", () => {
     expect(glossaryMismatches({ zh: "生铁路线", en: "cast-iron route" })).toHaveLength(0);
     expect(
       glossaryMismatches({ zh: "尺规作图", en: "compass-and-straightedge construction" }),
+    ).toHaveLength(0);
+    expect(
+      glossaryMismatches({
+        zh: "吉尔布雷斯夫妇改进了动作研究。",
+        en: "The Gilbreths refined motion study.",
+      }),
+    ).toHaveLength(0);
+    expect(
+      glossaryMismatches({
+        zh: "巴克诉贝尔案维持了强制绝育。",
+        en: "Buck v. Bell upheld compulsory sterilization.",
+      }),
     ).toHaveLength(0);
   });
 

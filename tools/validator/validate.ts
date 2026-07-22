@@ -424,6 +424,19 @@ function graphDiagnostics(
     }
     if (!source || !target) continue;
 
+    if (source.value.type === "person" && target.value.type === "disaster") {
+      diagnostics.push({
+        file: edge.file,
+        ...edge.locate(["source"]),
+        severity: "error",
+        code: "graph.person-to-disaster",
+        message: "Person nodes cannot be the source of an edge targeting a disaster.",
+        suggestion:
+          "Model the institutional, technical, or ideological precondition instead of attributing a disaster to one person.",
+        path: ["source"],
+      });
+    }
+
     if (!isEndpointCombinationAllowed(edge.value.type, source.value.type, target.value.type)) {
       diagnostics.push({
         file: edge.file,

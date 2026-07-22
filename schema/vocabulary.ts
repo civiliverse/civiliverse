@@ -103,7 +103,9 @@ function isRuleBasedTransliterationEntry(entry: { zh: string; en: string }): boo
   const emperor = /帝$/.test(entry.zh) && /^Emperor\b.+\bof\b/i.test(entry.en);
   const era = /(?:元年|年间)$/.test(entry.zh) && /\bera\b/i.test(entry.en);
   const sexagenary = /^[甲乙丙丁戊己庚辛壬癸][子丑寅卯辰巳午未申酉戌亥](?:年)?$/.test(entry.zh);
-  return emperor || era || sexagenary;
+  const surnamePlural = /夫妇$/.test(entry.zh) && /^the\s+[\p{L}'’.-]+s$/iu.test(entry.en);
+  const legalCase = /案$/.test(entry.zh) && /\bv\.\s+\S+/i.test(entry.en);
+  return emperor || era || sexagenary || surnamePlural || legalCase;
 }
 
 export function glossaryMismatches(value: BilingualValue): GlossaryMismatch[] {

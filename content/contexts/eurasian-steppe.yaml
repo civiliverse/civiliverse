@@ -1,0 +1,12 @@
+schema_version: 1
+id: eurasian-steppe
+title: { zh: 欧亚草原, en: "The Eurasian Steppe" }
+culture: steppe
+era: { start_year: -3500, end_year: 1500 }
+summary:
+  zh: "自马进入人类畜养，至火器使骑射失去优势。这条横贯大陆的草原带在技术史上不是「落后地区」，而是欧亚最重要的传输通道与若干关键技术的发生地：马的驯化与骑乘、辐条轮战车、复合弓、马镫、乳制品加工与毡帐，均出于此或经此西行东往。它的历史节奏由生态而非王朝决定——牧群的轮转、草场的丰歉与气候的干湿，比任何一个可汗的即位更能解释这一带的动向。农耕文明的史书把这里写成边患的来源，是因为写史的人在墙的另一边；从技术传播的角度看，正是这条草原带把中国的丝与铁、伊朗的作物与工艺、欧洲的金属器持续地送到彼此手上。1500 年前后，火器与筑城技术的成熟使定居国家第一次在军事上稳定压倒骑射，这条通道的历史角色随之改变。"
+  en: "From the entry of the horse into human keeping to the point at which firearms cost mounted archery its advantage. The grass belt running across the continent is no backward region in the history of technology but Eurasia's most important corridor of transmission and the birthplace of several key techniques: the domestication and riding of the horse, the spoked-wheel chariot, the composite bow, the stirrup, the processing of milk, and the felt tent arose here or passed through on their way east and west. Its historical rhythm was set by ecology rather than by dynasty—the rotation of herds, the state of the pasture, and the wet and dry of the climate explain more of this band's movements than the accession of any khan. That the chronicles of settled civilizations write it up as a source of raids reflects which side of the wall the chroniclers sat on; from the standpoint of transmission it was this belt that carried Chinese silk and iron, Iranian crops and craft, and European metalwork continuously into one another's hands. Around 1500 the maturing of firearms and fortification gave settled states, for the first time, a stable military advantage over mounted archery, and the corridor's historical role changed with it."
+refs:
+  - { title: "The Horse, the Wheel, and Language", author: "David W. Anthony" }
+  - { title: "Empires of the Silk Road: A History of Central Eurasia from the Bronze Age to the Present", author: "Christopher I. Beckwith" }
+  - { title: "The origins and spread of domestic horses from the Western Eurasian steppes", author: "Librado, Orlando et al., Nature 598 (2021)" }
