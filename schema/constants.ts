@@ -80,7 +80,7 @@ const all = NODE_TYPES;
 export const ENDPOINT_RULES: Readonly<Record<EdgeType, EndpointRule>> = {
   enables: {
     source: ["tech", "idea", "person", "wonder"],
-    target: ["tech", "idea", "wonder"],
+    target: ["tech", "idea", "wonder", "disaster"],
     directed: true,
   },
   derives: {
@@ -94,8 +94,8 @@ export const ENDPOINT_RULES: Readonly<Record<EdgeType, EndpointRule>> = {
     directed: true,
   },
   informs: {
-    source: ["tech", "wonder"],
-    target: ["idea"],
+    source: ["tech", "idea", "wonder"],
+    target: ["idea", "disaster"],
     directed: true,
   },
   inspires: {

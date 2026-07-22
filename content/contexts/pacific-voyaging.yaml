@@ -1,0 +1,12 @@
+schema_version: 1
+id: pacific-voyaging
+title: { zh: 太平洋航海世界, en: "The Pacific Voyaging World" }
+culture: sea-oceania
+era: { start_year: -1500, end_year: 1300 }
+summary:
+  zh: "南岛语族自东南亚岛屿向太平洋深处扩散的三千年。以拉皮塔陶器为标志的一支约公元前 1500 年抵达俾斯麦群岛以东，其后数百年内散布至斐济、汤加、萨摩亚；约公元 1000 至 1300 年间，波利尼西亚航海者完成了人类史上最后一次、也是最远的一次无文字远洋扩张，抵达夏威夷、拉帕努伊与新西兰。支撑这一切的是一整套航海技术：双体舟与舷外浮杆、斜桁帆、以星辰升落点为方位基准的星罗盘、对涌浪折射与云色鸟迹的判读，以及把这些知识以歌诀与实地带教代代相传的教学制度。本带的特殊之处在于：**它没有留下任何文字，而它所解决的是当时全世界最难的导航问题。** 20 世纪的复原航行（如「霍库雷亚号」1976 年不用仪器自夏威夷至塔希提）证明这套方法确实可行，也把此前「靠漂流偶然到达」的旧说彻底推翻。"
+  en: "Three thousand years of Austronesian expansion from island Southeast Asia into the deep Pacific. The line marked by Lapita pottery reached east of the Bismarcks by about 1500 BCE and spread within a few centuries to Fiji, Tonga, and Samoa; and between roughly 1000 and 1300 CE Polynesian navigators completed the last and longest oceanic expansion undertaken without writing, reaching Hawai'i, Rapa Nui, and New Zealand. It rested on a whole body of technique: the double canoe and the outrigger, the oceanic lateen, the star compass reckoned from the rising and setting points of named stars, the reading of swell refraction, cloud colour, and the flight of birds, and an institution of teaching that carried this knowledge by chant and by apprenticeship at sea. What distinguishes the band is that it left no writing while solving what were then the hardest navigational problems on earth. The reconstructed voyages of the twentieth century—Hōkūle'a sailing from Hawai'i to Tahiti without instruments in 1976—showed the methods to work, and disposed of the old view that the islands were reached by accidental drift."
+refs:
+  - { title: "We, the Navigators: The Ancient Art of Landfinding in the Pacific", author: "David Lewis" }
+  - { title: "Vaka Moana: Voyages of the Ancestors", author: "K. R. Howe (ed.)" }
+  - { title: "On the Road of the Winds: An Archaeological History of the Pacific Islands", author: "Patrick Vinton Kirch" }

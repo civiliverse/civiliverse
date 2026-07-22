@@ -1,0 +1,156 @@
+edges:
+  - schema_version: 1
+    source: efficiency-ideology
+    target: assembly-line
+    type: applies
+    importance: major
+    note:
+      zh: "福特的流水线是效率理念在生产组织上的具体实施；二者同源而不同层——泰勒制分解动作，流水线固定节拍"
+      en: "Ford's moving line was the ideology of efficiency realized in the organization of production; the two share a root but not a level—Taylorism decomposed the motions, the line fixed the tempo"
+  - schema_version: 1
+    source: interchangeable-parts
+    target: assembly-line
+    type: enables
+    importance: major
+    note:
+      zh: "零件若须现场锉配，流水线一步也走不动；互换性是连续总装的硬前提"
+      en: "If parts must be filed to fit, the line cannot move a step: interchangeability is the hard precondition of continuous assembly"
+  - schema_version: 1
+    source: holocaust
+    target: research-ethics
+    type: inspires
+    importance: major
+    note:
+      zh: "1947 年纽伦堡医生审判的判决附列十条准则，知情同意自此成为人体研究的绝对要求；本边为灾祸→矫正回路，不主张此代价换来此规范之说"
+      en: "The judgment of the 1947 Doctors' Trial appended ten points, making informed consent an absolute requirement of research on human subjects; this edge marks the disaster-to-correction loop and asserts no exchange of that cost for these norms"
+  - schema_version: 1
+    source: pyramids-giza
+    target: grand-canal
+    type: parallels
+    importance: major
+    note:
+      zh: "两处相隔三千余年的国家动员巨工：其技术遗产均在测量、调度、后勤与记账的组织能力，而非成品本身"
+      en: "Two state mobilizations more than three thousand years apart: in both, the technical legacy lies in the organizational capacity for survey, scheduling, logistics, and accounting rather than in the monument itself"
+  - schema_version: 1
+    source: mechanical-clock
+    target: scientific-revolution
+    type: enables
+    importance: minor
+    disputed: true
+    note:
+      zh: "兰德斯论题——钟点公共化与「宇宙如钟表」的机械论隐喻为近代科学之助；其批评者指出此说以后果倒推动机，且中国有更复杂计时机械而无同类后果"
+      en: "Landes's thesis: the public hour and the clockwork metaphor of the cosmos assisted the new science; critics reply that this reads motive off consequence, and that China had more complex timekeeping and no comparable outcome"
+  - schema_version: 1
+    source: electricity
+    target: telegraph
+    type: enables
+    importance: major
+    note:
+      zh: "稳定持续电流（伏打电堆及其后继）为有线电报的物质前提；电报是电的第一项大规模实用"
+      en: "A steady continuous current, from the voltaic pile onward, is the material precondition of the electric telegraph, which was electricity's first large-scale application"
+  - schema_version: 1
+    source: vaccination
+    target: germ-theory
+    type: informs
+    importance: major
+    note:
+      zh: "接种有效在先、致病机理在后约百年——实践为理论提出问题而非应用理论；巴斯德以减毒法制备疫苗时明言其名承自詹纳"
+      en: "The practice worked roughly a century before the mechanism was known: it posed the theory's question rather than applying it, and Pasteur named his attenuated preparations after Jenner's"
+  - schema_version: 1
+    source: great-zimbabwe
+    target: timbuktu-manuscripts
+    type: parallels
+    importance: minor
+    note:
+      zh: "同期撒哈拉以南非洲的两处高度组织化成就：一以石构与黄金贸易、一以书写与学术抄藏；二者的共同点不在形态而在其被殖民史学同样长期否认或贬低"
+      en: "Two highly organized achievements of the same centuries in sub-Saharan Africa: one in stone and the gold trade, the other in writing and the keeping of manuscripts. What they share is not their form but a common history of denial or belittlement by colonial scholarship"
+  - schema_version: 1
+    source: horse-domestication
+    target: stirrup
+    type: enables
+    importance: major
+    note:
+      zh: "骑乘之有无为马镫之有无的前提；本边只主张此一层，马镫的社会效果之争见其词条史论"
+      en: "Riding is the precondition of the stirrup; this edge asserts that alone, the dispute over the stirrup's social effects belonging to that entry's discussion"
+  - schema_version: 1
+    source: railway
+    target: standard-time
+    type: informs
+    importance: major
+    note:
+      zh: "单线铁路以时刻错车，两端对时不一即为相撞之险；时刻表的编排使统一参照时成为必需，铁路公司先于立法自行改钟"
+      en: "Single-track lines pass by the timetable, so clocks that disagree at the two ends are a risk of collision; composing timetables made a common reference time necessary, and the companies changed their clocks in advance of any legislation"
+  - schema_version: 1
+    source: telegraph
+    target: standard-time
+    type: informs
+    importance: minor
+    note:
+      zh: "电报使远距离校时成为可能——格林尼治的报时信号经电缆送达各地，统一时间自此可实施而不止于可主张"
+      en: "The telegraph made time signals transmissible at a distance—Greenwich's signal reached distant places by cable—so that a common time could be enforced and not merely proposed"
+  - schema_version: 1
+    source: forging
+    target: ironworking
+    type: enables
+    importance: major
+    note:
+      zh: "块炼铁出炉为渣铁混合的海绵块，须反复加热捶打排渣方得熟铁，锻造为西亚—欧洲冶铁路线的成器前提"
+      en: "Bloomery iron leaves the furnace as a slag-riddled sponge; only repeated hot hammering expels the slag to yield wrought iron, making forging the shaping precondition of the West Asian and European iron route"
+  - schema_version: 1
+    source: forging
+    target: wootz-steel
+    type: enables
+    importance: minor
+    note:
+      zh: "坩埚所得钢饼须经长时低温锻打成刃，其花纹亦于此步显现；本边只主张成刃工序，不主张坩埚熔炼"
+      en: "The crucible cake was forged into a blade by long, low-temperature working, in which the pattern also emerges; this edge asserts the blade-making step only, not the crucible melt"
+  - schema_version: 1
+    source: casting
+    target: bronze-metallurgy
+    type: enables
+    importance: major
+    note:
+      zh: "青铜的价值大半在于可熔铸成形——合金降低熔点、改善流动性，范铸使复杂器形与批量复制成为可能"
+      en: "Much of bronze's value lay in being castable: alloying lowered the melting point and improved flow, and moulding made complex forms and repeatable copies possible"
+  - schema_version: 1
+    source: casting
+    target: ironworking
+    type: enables
+    importance: major
+    note:
+      zh: "中国竖炉温度足以得到液态生铁并直接浇铸，与西亚—欧洲的块炼锻打路线并行；本边表达冶铁的铸造一支，不否认锻造一支"
+      en: "Chinese shaft furnaces ran hot enough to tap and pour liquid iron, a road parallel to the West Asian and European bloomery-and-forge route; this edge represents the casting branch of ironworking without denying the forging branch"
+  - schema_version: 1
+    source: casting
+    target: wootz-steel
+    type: enables
+    importance: major
+    note:
+      zh: "乌兹钢以坩埚熔炼得钢饼，属液态成形一路；其后成刃则赖锻打"
+      en: "Wootz was won as a cake from a crucible melt, a liquid-state route; the blade that followed was made by forging"
+  - schema_version: 1
+    source: efficiency-ideology
+    target: holocaust
+    type: informs
+    importance: minor
+    disputed: true
+    note:
+      zh: "效率至上主义为屠杀的组织逻辑提供了思想语汇（鲍曼论题）；其批评者指出官僚距离无法解释东线的面对面枪杀，且此说会淡化具体的反犹意识形态。本边为弱因果的思想线索，不主张效率理念导致屠杀"
+      en: "The ideology of efficiency supplied part of the organizational vocabulary of the killing (Bauman's thesis); critics reply that bureaucratic distance cannot account for the face-to-face shootings in the East, and that the account dilutes the specific antisemitic ideology. This edge marks a weak line of intellectual descent, not a claim that efficiency produced the killing"
+  - schema_version: 1
+    source: assembly-line
+    target: holocaust
+    type: informs
+    importance: minor
+    disputed: true
+    note:
+      zh: "流水线作为「连续流程处理」的组织范型，是「工业化屠杀」之喻的现实所指；该喻的限度亦须并陈——约一百五十万人死于枪杀，非流程化杀害。本边不主张流水线导致屠杀"
+      en: "The assembly line, as the paradigm of continuous-flow processing, is what the metaphor of industrialized killing actually points to; the metaphor's limits must be stated with it—some one and a half million people were shot, not processed. This edge does not claim the assembly line produced the killing"
+  - schema_version: 1
+    source: eugenics
+    target: holocaust
+    type: informs
+    importance: major
+    note:
+      zh: "优生学话语为「不值得活的生命」提供了医学语言，T4 计划的鉴定表格、人员与毒气技术其后直接移用于灭绝营；但优生学不等于灭绝政策，二者之间有决定性的政治跳跃，本边为思想线索非因果断言"
+      en: "Eugenic discourse supplied the medical language of 'life unworthy of life,' and the assessment forms, personnel, and gassing technique of Aktion T4 passed directly to the extermination camps; eugenics is nevertheless not extermination policy, and a decisive political leap lies between them. This edge marks a line of intellectual descent, not a causal claim"

@@ -214,6 +214,17 @@ const badSamples: BadSample[] = [
     lineNeedle: "type: causes",
   },
   {
+    name: "embedded trailing YAML field residue",
+    kind: "edge",
+    content: edgeWith(
+      (value) =>
+        (value.note.en =
+          "Whether sub-Saharan ironworking was transmitted or independent remains unsettled; juxtaposed without direction}, disputed: tru"),
+    ),
+    code: "content.embedded-yaml-field-residue",
+    lineNeedle: "en:",
+  },
+  {
     name: "unknown edge type",
     kind: "edge",
     content: edgeWith((value) => (value.type = "blocks")),
@@ -244,8 +255,8 @@ const badSamples: BadSample[] = [
 ];
 
 describe("validator bad-sample acceptance suite", () => {
-  it("contains exactly 20 deliberately bad samples", () => {
-    expect(badSamples).toHaveLength(20);
+  it("contains exactly 21 deliberately bad samples", () => {
+    expect(badSamples).toHaveLength(21);
   });
 
   it.each(badSamples)("reports $name at the correct line with a fix", async (sample) => {
@@ -254,9 +265,11 @@ describe("validator bad-sample acceptance suite", () => {
       const nodesDirectory = resolve(root, "content/nodes");
       const techDirectory = resolve(nodesDirectory, "tech");
       const personDirectory = resolve(nodesDirectory, "person");
+      const disasterDirectory = resolve(nodesDirectory, "disaster");
       const edgesDirectory = resolve(root, "content/edges");
       await mkdir(techDirectory, { recursive: true });
       await mkdir(personDirectory, { recursive: true });
+      await mkdir(disasterDirectory, { recursive: true });
       await mkdir(edgesDirectory, { recursive: true });
       await writeFile(resolve(techDirectory, "source-tech.md"), nodeMarkdown(baseNode()), "utf8");
       await writeFile(
@@ -267,6 +280,11 @@ describe("validator bad-sample acceptance suite", () => {
       await writeFile(
         resolve(personDirectory, "source-person.md"),
         nodeMarkdown(baseNode("source-person", "person")),
+        "utf8",
+      );
+      await writeFile(
+        resolve(disasterDirectory, "target-disaster.md"),
+        nodeMarkdown(baseNode("target-disaster", "disaster")),
         "utf8",
       );
 

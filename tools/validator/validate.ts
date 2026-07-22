@@ -27,6 +27,14 @@ interface LocatedBilingualValue {
   path: Array<string | number>;
 }
 
+interface LocatedStringValue {
+  value: string;
+  path: Array<string | number>;
+}
+
+const EMBEDDED_YAML_FIELD_RESIDUE =
+  /[}\]]\s*,?\s*(schema_version|source|target|type|importance|note|refs|disputed)\s*:\s*\S[^,}\]]*$/i;
+
 function bilingualValues(value: unknown, path: Array<string | number> = []): LocatedBilingualValue[] {
   if (Array.isArray(value)) {
     return value.flatMap((item, index) => bilingualValues(item, [...path, index]));
@@ -39,6 +47,39 @@ function bilingualValues(value: unknown, path: Array<string | number> = []): Loc
   }
 
   return Object.entries(record).flatMap(([key, item]) => bilingualValues(item, [...path, key]));
+}
+
+function stringValues(value: unknown, path: Array<string | number> = []): LocatedStringValue[] {
+  if (typeof value === "string") return [{ value, path }];
+  if (Array.isArray(value)) {
+    return value.flatMap((item, index) => stringValues(item, [...path, index]));
+  }
+  if (typeof value !== "object" || value === null) return [];
+
+  return Object.entries(value).flatMap(([key, item]) => stringValues(item, [...path, key]));
+}
+
+function embeddedFieldResidueDiagnostics(records: LocatedRecord[]): Diagnostic[] {
+  return records.flatMap((record) =>
+    stringValues(record.value).flatMap(({ value, path }) => {
+      const match = EMBEDDED_YAML_FIELD_RESIDUE.exec(value);
+      if (!match) return [];
+
+      const field = match[1];
+      return [
+        {
+          file: record.file,
+          ...record.locate(path),
+          severity: "error",
+          code: "content.embedded-yaml-field-residue",
+          message: `String ends with text resembling a serialized \`${field}\` YAML field.`,
+          suggestion:
+            "Remove the residual serialized text from the string and restore the field as a sibling YAML key.",
+          path,
+        } satisfies Diagnostic,
+      ];
+    }),
+  );
 }
 
 function glossaryDiagnostics(records: LocatedRecord[]): Diagnostic[] {
@@ -427,6 +468,7 @@ export async function validateRepository(options: {
   }
 
   diagnostics.push(...graphDiagnostics(nodes, edges, contexts));
+  diagnostics.push(...embeddedFieldResidueDiagnostics([...nodes, ...edges, ...contexts]));
   diagnostics.push(...glossaryDiagnostics([...nodes, ...edges, ...contexts]));
   diagnostics.sort(
     (left, right) =>
