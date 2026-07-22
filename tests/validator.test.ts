@@ -214,6 +214,17 @@ const badSamples: BadSample[] = [
     lineNeedle: "type: causes",
   },
   {
+    name: "embedded trailing YAML field residue",
+    kind: "edge",
+    content: edgeWith(
+      (value) =>
+        (value.note.en =
+          "Whether sub-Saharan ironworking was transmitted or independent remains unsettled; juxtaposed without direction}, disputed: tru"),
+    ),
+    code: "content.embedded-yaml-field-residue",
+    lineNeedle: "en:",
+  },
+  {
     name: "unknown edge type",
     kind: "edge",
     content: edgeWith((value) => (value.type = "blocks")),
@@ -244,8 +255,8 @@ const badSamples: BadSample[] = [
 ];
 
 describe("validator bad-sample acceptance suite", () => {
-  it("contains exactly 20 deliberately bad samples", () => {
-    expect(badSamples).toHaveLength(20);
+  it("contains exactly 21 deliberately bad samples", () => {
+    expect(badSamples).toHaveLength(21);
   });
 
   it.each(badSamples)("reports $name at the correct line with a fix", async (sample) => {
