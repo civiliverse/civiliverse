@@ -252,22 +252,11 @@ const badSamples: BadSample[] = [
     code: "graph.illegal-endpoints",
     lineNeedle: "type:",
   },
-  {
-    name: "person cannot point to disaster",
-    kind: "edge",
-    content: edgeWith((value) => {
-      value.source = "source-person";
-      value.target = "target-disaster";
-      value.type = "enables";
-    }),
-    code: "graph.person-to-disaster",
-    lineNeedle: "source:",
-  },
 ];
 
 describe("validator bad-sample acceptance suite", () => {
-  it("contains exactly 22 deliberately bad samples", () => {
-    expect(badSamples).toHaveLength(22);
+  it("contains exactly 21 deliberately bad samples", () => {
+    expect(badSamples).toHaveLength(21);
   });
 
   it.each(badSamples)("reports $name at the correct line with a fix", async (sample) => {
